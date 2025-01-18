@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   
+<string name="facebook_app_id">825624585201999</string>
+<string name="facebook_client_token">aa97f66a44eb0c503a8bd25e47097b1e</string>
+<string name= "app_name">SafeCart</string>
+
+
+</resources>
