@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:safecart/helpers/settings_helper.dart';
 import 'package:safecart/services/internet_checker_service.dart';
 import 'package:safecart/services/location/city_dropdown_service.dart';
 import 'package:safecart/services/location/country_dropdown_service.dart';
 import 'package:safecart/services/location/state_dropdown_service.dart';
+import 'package:safecart/services/settings_services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/intro_helper.dart';
@@ -120,7 +124,13 @@ void main() async {
   };
 
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  SharedPrefs.prefs = await SharedPreferences.getInstance();
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => SettingsProvider()..init(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -128,60 +138,104 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingProvider = Provider.of<SettingsProvider>(context);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => AppStringService()),
-        ChangeNotifierProvider(create: (context) => IntroHelper()),
-        ChangeNotifierProvider(create: (context) => CommonServices()),
-        ChangeNotifierProvider(create: (context) => NavigationHelper()),
-        ChangeNotifierProvider(create: (context) => SearchService()),
-        ChangeNotifierProvider(create: (context) => CategoryService()),
-        ChangeNotifierProvider(create: (context) => RTLService()),
-        ChangeNotifierProvider(create: (context) => SliderOneService()),
-        ChangeNotifierProvider(create: (context) => ProductDetailsService()),
-        ChangeNotifierProvider(create: (context) => ProfileInfoService()),
-        ChangeNotifierProvider(create: (context) => WishlistDataService()),
-        ChangeNotifierProvider(create: (context) => CartDataService()),
-        ChangeNotifierProvider(create: (context) => SearchProductService()),
-        ChangeNotifierProvider(create: (context) => TicketListService()),
-        ChangeNotifierProvider(create: (context) => ChatService()),
-        ChangeNotifierProvider(create: (context) => CheckoutService()),
-        ChangeNotifierProvider(create: (context) => PaymentGatewayService()),
-        ChangeNotifierProvider(create: (context) => ShippingAddressService()),
-        ChangeNotifierProvider(create: (context) => OrderListService()),
-        ChangeNotifierProvider(create: (context) => OrderDetailsService()),
-        ChangeNotifierProvider(create: (context) => TermsAndCondition()),
-        ChangeNotifierProvider(create: (context) => FiltersService()),
-        ChangeNotifierProvider(create: (context) => NewTicketService()),
-        ChangeNotifierProvider(create: (context) => ProfileInfoService()),
-        ChangeNotifierProvider(create: (context) => CountryDropdownService()),
-        ChangeNotifierProvider(create: (context) => CityDropdownService()),
-        ChangeNotifierProvider(create: (context) => StatesDropdownService()),
-        ChangeNotifierProvider(create: (context) => SaveSignInInfoService()),
-        ChangeNotifierProvider(create: (context) => SignInService()),
-        ChangeNotifierProvider(create: (context) => SignUpService()),
-        ChangeNotifierProvider(create: (context) => OtpService()),
-        ChangeNotifierProvider(create: (context) => ResetPasswordService()),
-        ChangeNotifierProvider(create: (context) => HomeCategoriesService()),
-        ChangeNotifierProvider(create: (context) => SliderService()),
-        ChangeNotifierProvider(create: (context) => FeatureProductsService()),
-        ChangeNotifierProvider(create: (context) => HomeCampaignsService()),
-        ChangeNotifierProvider(create: (context) => IntroService()),
-        ChangeNotifierProvider(create: (context) => SearchFilterDataService()),
-        ChangeNotifierProvider(create: (context) => SubmitReviewService()),
-        ChangeNotifierProvider(create: (context) => TicketChatService()),
-        ChangeNotifierProvider(create: (context) => CalculateTaxService()),
-        ChangeNotifierProvider(create: (context) => SignOutService()),
-        ChangeNotifierProvider(create: (context) => AccountDeleteService()),
-        ChangeNotifierProvider(create: (context) => ChangePasswordService()),
-        ChangeNotifierProvider(create: (context) => PushNotificationService()),
-        ChangeNotifierProvider(create: (context) => AllProductsService()),
-        ChangeNotifierProvider(create: (context) => InternetCheckerService()),
-        ChangeNotifierProvider(
+        ChangeNotifierProvider<AppStringService>(
+            create: (context) => AppStringService()),
+        ChangeNotifierProvider<IntroHelper>(create: (context) => IntroHelper()),
+        ChangeNotifierProvider<CommonServices>(
+            create: (context) => CommonServices()),
+        ChangeNotifierProvider<NavigationHelper>(
+            create: (context) => NavigationHelper()),
+        ChangeNotifierProvider<SearchService>(
+            create: (context) => SearchService()),
+        ChangeNotifierProvider<CategoryService>(
+            create: (context) => CategoryService()),
+        ChangeNotifierProvider<RTLService>(create: (context) => RTLService()),
+        ChangeNotifierProvider<SliderOneService>(
+            create: (context) => SliderOneService()),
+        ChangeNotifierProvider<ProductDetailsService>(
+            create: (context) => ProductDetailsService()),
+        ChangeNotifierProvider<ProfileInfoService>(
+            create: (context) => ProfileInfoService()),
+        ChangeNotifierProvider<WishlistDataService>(
+            create: (context) => WishlistDataService()),
+        ChangeNotifierProvider<CartDataService>(
+            create: (context) => CartDataService()),
+        ChangeNotifierProvider<SearchProductService>(
+            create: (context) => SearchProductService()),
+        ChangeNotifierProvider<TicketListService>(
+            create: (context) => TicketListService()),
+        ChangeNotifierProvider<ChatService>(create: (context) => ChatService()),
+        ChangeNotifierProvider<CheckoutService>(
+            create: (context) => CheckoutService()),
+        ChangeNotifierProvider<PaymentGatewayService>(
+            create: (context) => PaymentGatewayService()),
+        ChangeNotifierProvider<ShippingAddressService>(
+            create: (context) => ShippingAddressService()),
+        ChangeNotifierProvider<OrderListService>(
+            create: (context) => OrderListService()),
+        ChangeNotifierProvider<OrderDetailsService>(
+            create: (context) => OrderDetailsService()),
+        ChangeNotifierProvider<TermsAndCondition>(
+            create: (context) => TermsAndCondition()),
+        ChangeNotifierProvider<FiltersService>(
+            create: (context) => FiltersService()),
+        ChangeNotifierProvider<NewTicketService>(
+            create: (context) => NewTicketService()),
+        ChangeNotifierProvider<ProfileInfoService>(
+            create: (context) => ProfileInfoService()),
+        ChangeNotifierProvider<CountryDropdownService>(
+            create: (context) => CountryDropdownService()),
+        ChangeNotifierProvider<CityDropdownService>(
+            create: (context) => CityDropdownService()),
+        ChangeNotifierProvider<StatesDropdownService>(
+            create: (context) => StatesDropdownService()),
+        ChangeNotifierProvider<SaveSignInInfoService>(
+            create: (context) => SaveSignInInfoService()),
+        ChangeNotifierProvider<SignInService>(
+            create: (context) => SignInService()),
+        ChangeNotifierProvider<SignUpService>(
+            create: (context) => SignUpService()),
+        ChangeNotifierProvider<OtpService>(create: (context) => OtpService()),
+        ChangeNotifierProvider<ResetPasswordService>(
+            create: (context) => ResetPasswordService()),
+        ChangeNotifierProvider<HomeCategoriesService>(
+            create: (context) => HomeCategoriesService()),
+        ChangeNotifierProvider<SliderService>(
+            create: (context) => SliderService()),
+        ChangeNotifierProvider<FeatureProductsService>(
+            create: (context) => FeatureProductsService()),
+        ChangeNotifierProvider<HomeCampaignsService>(
+            create: (context) => HomeCampaignsService()),
+        ChangeNotifierProvider<IntroService>(
+            create: (context) => IntroService()),
+        ChangeNotifierProvider<SearchFilterDataService>(
+            create: (context) => SearchFilterDataService()),
+        ChangeNotifierProvider<SubmitReviewService>(
+            create: (context) => SubmitReviewService()),
+        ChangeNotifierProvider<TicketChatService>(
+            create: (context) => TicketChatService()),
+        ChangeNotifierProvider<CalculateTaxService>(
+            create: (context) => CalculateTaxService()),
+        ChangeNotifierProvider<SignOutService>(
+            create: (context) => SignOutService()),
+        ChangeNotifierProvider<AccountDeleteService>(
+            create: (context) => AccountDeleteService()),
+        ChangeNotifierProvider<ChangePasswordService>(
+            create: (context) => ChangePasswordService()),
+        ChangeNotifierProvider<PushNotificationService>(
+            create: (context) => PushNotificationService()),
+        ChangeNotifierProvider<AllProductsService>(
+            create: (context) => AllProductsService()),
+        ChangeNotifierProvider<InternetCheckerService>(
+            create: (context) => InternetCheckerService()),
+        ChangeNotifierProvider<ProductByCampaignsService>(
             create: (context) => ProductByCampaignsService()),
-        ChangeNotifierProvider(
+        ChangeNotifierProvider<HomeCampaignProductsService>(
             create: (context) => HomeCampaignProductsService()),
-        ChangeNotifierProvider(
+        ChangeNotifierProvider<SocialSignInSignUpService>(
             create: (context) => SocialSignInSignUpService()),
       ],
       child: Consumer<RTLService>(builder: (context, rtlProvider, child) {
@@ -197,14 +251,13 @@ class MyApp extends StatelessWidget {
           },
           debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
+            AppLocalizations.delegate, // Add this line
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: [
-            Locale(rtlProvider.slug?.substring(0, 2) ?? "en",
-                rtlProvider.slug?.substring(3, 4) ?? "GB")
-          ],
+          supportedLocales: const [Locale('en'), Locale('ar')],
+          locale: settingProvider.myLocal,
           theme: ThemeData(
             primarySwatch: Colors.blue,
             textTheme: TextTheme(
