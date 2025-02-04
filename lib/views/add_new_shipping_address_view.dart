@@ -1,19 +1,17 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/shipping_address_service.dart';
-import 'package:safecart/services/country_state_service.dart';
 import 'package:safecart/utils/city_dropdown.dart';
 import 'package:safecart/utils/country_dropdown.dart';
 import 'package:safecart/utils/state_dropdown.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/empty_space_helper.dart';
-import '../utils/custom_preloader.dart';
 import '../utils/responsive.dart';
 import '../widgets/common/boxed_back_button.dart';
 import '../widgets/common/custom_common_button.dart';
-import '../widgets/common/custom_dropdown.dart';
 import '../widgets/common/field_title.dart';
 
 class AddNewShippingAddressView extends StatelessWidget {
@@ -38,11 +36,13 @@ class AddNewShippingAddressView extends StatelessWidget {
         Provider.of<ShippingAddressService>(context, listen: false);
     debugPrint(saProvider.selectedCountry.toString());
     if (saProvider.selectedCountry == null) {
-      showToast(asProvider.getString('You have to select a country'), cc.red);
+      showToast(
+          AppLocalizations.of(context)!.you_have_to_select_a_country, cc.red);
       return;
     }
     if (saProvider.selectedState == null) {
-      showToast(asProvider.getString('You have to select a state'), cc.red);
+      showToast(
+          AppLocalizations.of(context)!.you_have_to_select_a_state, cc.red);
       return;
     }
 
@@ -85,7 +85,7 @@ class AddNewShippingAddressView extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Center(
                       child: Text(
-                        asProvider.getString('Add new address'),
+                        AppLocalizations.of(context)!.add_new_address,
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!

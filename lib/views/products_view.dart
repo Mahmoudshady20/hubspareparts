@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutterzilla_fixed_grid/flutterzilla_fixed_grid.dart';
 import 'package:safecart/helpers/empty_space_helper.dart';
 import 'package:safecart/services/all_product_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../utils/responsive.dart';
 import '../../widgets/common/product_card.dart';
@@ -56,7 +57,7 @@ class ProductsView extends StatelessWidget {
                   : apProvider.allProducts != null &&
                           apProvider.allProducts!.isEmpty
                       ? Center(
-                          child: Text(asProvider.getString('No product found')),
+                          child: Text(AppLocalizations.of(context)!.no_more_product_found),
                         )
                       : Column(
                           children: [
@@ -142,7 +143,7 @@ class ProductsView extends StatelessWidget {
       // apProvider.setNextLoading(false);
 
       if (apProvider.nextPage == null) {
-        showToast(asProvider.getString('No more product found'), cc.blackColor);
+        showToast(AppLocalizations.of(context)!.no_more_product_found, cc.blackColor);
       }
     }
   }

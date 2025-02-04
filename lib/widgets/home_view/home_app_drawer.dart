@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +10,6 @@ import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
 import '../../helpers/logout_helper.dart';
 import '../../services/auth_service/sign_in_service.dart';
-import '../../services/country_state_service.dart';
 import '../../services/profile_info_service.dart';
 import '../../services/rtl_service.dart';
 import '../../utils/responsive.dart';
@@ -63,7 +63,7 @@ class HomeAppDrawer extends StatelessWidget {
                         child: Column(children: [
                           profileItem(
                             context,
-                            asProvider.getString('My orders'),
+                            AppLocalizations.of(context)!.my_orders,
                             'assets/icons/orders.svg',
                             onTap: () {
                               Navigator.of(context)
@@ -73,7 +73,7 @@ class HomeAppDrawer extends StatelessWidget {
                           EmptySpaceHelper.emptyHight(10),
                           profileItem(
                             context,
-                            asProvider.getString('Shipping address'),
+                            AppLocalizations.of(context)!.shipping_address,
                             'assets/icons/menu_shipping_address.svg',
                             onTap: () {
                               Navigator.of(context)
@@ -83,7 +83,7 @@ class HomeAppDrawer extends StatelessWidget {
                           EmptySpaceHelper.emptyHight(10),
                           profileItem(
                             context,
-                            asProvider.getString('Support Ticket'),
+                            AppLocalizations.of(context)!.support_Ticket,
                             'assets/icons/support_ticket.svg',
                             onTap: () {
                               Navigator.of(context)
@@ -93,7 +93,7 @@ class HomeAppDrawer extends StatelessWidget {
                           EmptySpaceHelper.emptyHight(10),
                           profileItem(
                             context,
-                            asProvider.getString('Edit profile'),
+                            AppLocalizations.of(context)!.edit_profile,
                             'assets/icons/edit_profile.svg',
                             onTap: () {
                               // final pProvider = Provider.of<ProfileInfoService>(
@@ -122,7 +122,7 @@ class HomeAppDrawer extends StatelessWidget {
                           EmptySpaceHelper.emptyHight(10),
                           profileItem(
                             context,
-                            asProvider.getString('Change password'),
+                            AppLocalizations.of(context)!.change_Password,
                             'assets/icons/change_pass.svg',
                             onTap: () {
                               Navigator.of(context)
@@ -148,7 +148,7 @@ class HomeAppDrawer extends StatelessWidget {
                           EmptySpaceHelper.emptyHight(10),
                           profileItem(
                             context,
-                            asProvider.getString('Sign out'),
+                            AppLocalizations.of(context)!.sign_out,
                             'assets/icons/sign_out.svg',
                             divider: false,
                             onTap: () async {
@@ -203,15 +203,16 @@ class HomeAppDrawer extends StatelessWidget {
                         Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
                             child: Text(
-                                asProvider.getString(
-                                    "You'll have to login/register to edit or see your profile info."),
+                                AppLocalizations.of(context)!
+                                    .you_ll_have_to_Sign_in_Sign_up_to_edit_or_see_your_profile_info,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   fontSize: 16,
                                 ))),
                         const SizedBox(height: 20),
                         CustomCommonButton(
-                            btText: asProvider.getString('Sign in/Sign up'),
+                            btText:
+                                AppLocalizations.of(context)!.sign_in_Sign_up,
                             isLoading: false,
                             onPressed: () async {
                               // final continueLogin =

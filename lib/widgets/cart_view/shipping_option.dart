@@ -1,5 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../helpers/common_helper.dart';
@@ -23,7 +24,7 @@ class ShippingOption extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  asProvider.getString('Apply shipping'),
+                  AppLocalizations.of(context)!.apply_shipping,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context)

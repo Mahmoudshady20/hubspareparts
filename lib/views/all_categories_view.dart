@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutterzilla_fixed_grid/flutterzilla_fixed_grid.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/utils/custom_preloader.dart';
+
 import '../helpers/common_helper.dart';
 import '../services/home_categories_service.dart';
 import '../services/search_product_service.dart';
@@ -49,7 +51,7 @@ class AllCategoriesView extends StatelessWidget {
                         // snackBar(context, 'Timeout!');
                         return Center(
                           child: Text(
-                            asProvider.getString('Something went wrong!'),
+                            AppLocalizations.of(context)!.something_went_wrong,
                             style: TextStyle(color: cc.greyHint),
                           ),
                         );

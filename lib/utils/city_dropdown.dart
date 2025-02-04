@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:safecart/helpers/common_helper.dart';
 import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/common/field_title.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/empty_space_helper.dart';
 import '../services/location/city_dropdown_service.dart';
@@ -117,8 +118,7 @@ class CityDropdown extends StatelessWidget {
                                           width: screenWidth - 60,
                                           child: Center(
                                             child: Text(
-                                              asProvider.getString(
-                                                  "No results found"),
+                                              AppLocalizations.of(context)!.no_results_found,
                                               style: textStyle,
                                             ),
                                           ),

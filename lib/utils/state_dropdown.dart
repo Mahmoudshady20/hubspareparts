@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:safecart/helpers/common_helper.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/utils/responsive.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/empty_space_helper.dart';
 import '../services/location/state_dropdown_service.dart';
@@ -120,8 +121,7 @@ class StateDropdown extends StatelessWidget {
                                           height: 64,
                                           child: Center(
                                             child: Text(
-                                              asProvider.getString(
-                                                  "No results found"),
+                                              AppLocalizations.of(context)!.no_results_found,
                                               style: textStyle,
                                             ),
                                           ),
@@ -191,7 +191,7 @@ class StateDropdown extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        selectedValue ?? asProvider.getString("Select state"),
+                        selectedValue ?? AppLocalizations.of(context)!.select_state,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: cc.blackColor.withOpacity(.40),
                             fontWeight: FontWeight.w600),

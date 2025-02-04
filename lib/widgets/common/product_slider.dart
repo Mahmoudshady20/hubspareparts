@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/common/product_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/empty_space_helper.dart';
 

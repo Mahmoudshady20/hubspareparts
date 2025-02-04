@@ -18,7 +18,7 @@ class AuthrizeNetPay {
     if (!haveConnection) {
       return;
     }
-    print('sending otpCode');
+    debugPrint('sending otpCode');
     try {
       final cProvider = Provider.of<CheckoutService>(context, listen: false);
       var headers = {'Content-Type': 'application/json'};

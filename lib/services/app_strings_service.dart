@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:safecart/helpers/app_strings_helper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
+import 'package:safecart/helpers/app_strings_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/common_helper.dart';
@@ -47,13 +48,14 @@ class AppStringService with ChangeNotifier {
           // print(data);
         } else {
           print('error fetching translations ');
-          showToast('Something went wrong', Colors.black);
+          showToast(
+              AppLocalizations.of(context)!.something_went_wrong, Colors.black);
           notifyListeners();
         }
       } on TimeoutException {
-        showToast(asProvider.getString('Request timeout'), cc.red);
+        showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       } catch (err) {
-        showToast(asProvider.getString('Something went wrong'), cc.red);
+        showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
         print(err);
       }
     }

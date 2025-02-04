@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/helpers/empty_space_helper.dart';
 import 'package:safecart/services/product_details_service.dart';
 import 'package:safecart/services/rtl_service.dart';
+import 'package:safecart/utils/responsive.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../services/cart_data_service.dart';
-import 'package:safecart/utils/responsive.dart';
 import '../common/custom_common_button.dart';
 
 class ProductDetailsCartButton extends StatefulWidget {
@@ -103,14 +104,15 @@ class _ProductDetailsCartButtonState extends State<ProductDetailsCartButton> {
           Consumer<ProductDetailsService>(
               builder: (context, pdProvider, child) {
             return CustomCommonButton(
-              btText: asProvider.getString('Add to cart') +
+              btText: AppLocalizations.of(context)!.add_to_cart +
                   (rtlProvider.curRtl
                       ? ' ${(pdProvider.productSalePrice * widget.itemCount).toStringAsFixed(2)}${rtlProvider.currency}'
                       : ' ${rtlProvider.currency}${(pdProvider.productSalePrice * widget.itemCount).toStringAsFixed(2)}'),
               onPressed: () {
                 if (!pdProvider.cartAble) {
                   showToast(
-                      asProvider.getString('Please select an attribute set'),
+                      AppLocalizations.of(context)!
+                          .please_select_an_attribute_set,
                       cc.red);
                   return;
                 }

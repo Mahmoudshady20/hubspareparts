@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -81,7 +82,7 @@ class TicketChatService with ChangeNotifier {
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     }
     // catch (err) {
     //   showToast(asProvider.getString('Something went wrong'), cc.red);
@@ -117,7 +118,7 @@ class TicketChatService with ChangeNotifier {
         print(jsonDecode(data)['attachment']);
         // await fetchOnlyMessages(context, id);
         messagesList.insert(0, AllMessage.fromJson(jsonDecode(data)));
-        showToast(asProvider.getString('Message sent.'), cc.green);
+        showToast(AppLocalizations.of(context)!.message_sent, cc.green);
         message = '';
         pickedImage = null;
         notifyViaMail = false;
@@ -128,7 +129,7 @@ class TicketChatService with ChangeNotifier {
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
       print(err);
@@ -166,7 +167,7 @@ class TicketChatService with ChangeNotifier {
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
       print(err);

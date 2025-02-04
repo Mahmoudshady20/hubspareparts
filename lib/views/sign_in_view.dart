@@ -6,6 +6,7 @@ import 'package:safecart/services/auth_service/sign_up_service.dart';
 import 'package:safecart/services/auth_service/social_signin_signup_service.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/utils/responsive.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/empty_space_helper.dart';
@@ -82,7 +83,7 @@ class SignInView extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Center(
                       child: Text(
-                        asProvider.getString('Welcome Back'),
+                        AppLocalizations.of(context)!.welcome_Back,
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!
@@ -131,14 +132,13 @@ class SignInView extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        FieldTitle(asProvider
-                                            .getString('Email/Username')),
+                                        FieldTitle(AppLocalizations.of(context)!.email_Username),
                                         TextFormField(
                                           controller: _emailUsernameController,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: asProvider.getString(
-                                                'Enter your email or username'),
+                                            hintText:
+                                              AppLocalizations.of(context)!.enter_your_email_or_username,
                                             prefixIcon: Padding(
                                               padding: const EdgeInsets.all(12),
                                               child: SvgPicture.asset(
@@ -149,15 +149,14 @@ class SignInView extends StatelessWidget {
                                             if (value == null ||
                                                 value.isEmpty ||
                                                 value.trim().isEmpty) {
-                                              return asProvider.getString(
-                                                  'Enter your email or username');
+                                              return AppLocalizations.of(context)!.enter_your_email_or_username;
                                             }
                                             return null;
                                           },
                                         ),
                                         EmptySpaceHelper.emptyHight(10),
                                         FieldTitle(
-                                            asProvider.getString('Password')),
+                                            AppLocalizations.of(context)!.password),
                                         Consumer<SignInService>(builder:
                                             (context, siProvider, child) {
                                           return TextFormField(
@@ -165,8 +164,7 @@ class SignInView extends StatelessWidget {
                                             obscureText:
                                                 siProvider.obscurePassword,
                                             decoration: InputDecoration(
-                                              hintText: asProvider.getString(
-                                                  'Enter your Password'),
+                                              hintText: AppLocalizations.of(context)!.enter_your_Password,
                                               prefixIcon: Padding(
                                                 padding:
                                                     const EdgeInsets.all(12),
@@ -192,8 +190,7 @@ class SignInView extends StatelessWidget {
                                                   value.isEmpty ||
                                                   value.trim().isEmpty ||
                                                   value.length < 6) {
-                                                return asProvider.getString(
-                                                    'Password must be more then 6 character');
+                                                return AppLocalizations.of(context)!.password_must_be_more_then_character;
                                               }
                                               return null;
                                             },
@@ -227,8 +224,7 @@ class SignInView extends StatelessWidget {
                                               // width: screenWidth / 3,
                                               child: FittedBox(
                                                 child: Text(
-                                                  asProvider
-                                                      .getString('Remember me'),
+                                                  AppLocalizations.of(context)!.remember_me,
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .titleSmall!
@@ -285,8 +281,7 @@ class SignInView extends StatelessWidget {
                                                   //     overlayColor: MaterialStateColor.resolveWith(
                                                   //         (states) => Colors.transparent)),
                                                   child: Text(
-                                                    asProvider.getString(
-                                                        'Forgot password?'),
+                                                    AppLocalizations.of(context)!.forgot_password,
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .titleSmall!
@@ -304,8 +299,7 @@ class SignInView extends StatelessWidget {
                                         Consumer<SignInService>(builder:
                                             (context, siProvider, child) {
                                           return CustomCommonButton(
-                                              btText: asProvider
-                                                  .getString('Sign In'),
+                                              btText: AppLocalizations.of(context)!.sign_In,
                                               isLoading:
                                                   siProvider.loadingSignIn,
                                               onPressed: () {
@@ -319,8 +313,7 @@ class SignInView extends StatelessWidget {
                                           child: RichText(
                                             softWrap: true,
                                             text: TextSpan(
-                                                text: asProvider.getString(
-                                                    "Don't have an account?"),
+                                                text: AppLocalizations.of(context)!.don_have_an_account,
                                                 style: TextStyle(
                                                   color: cc.greyHint,
                                                   fontWeight: FontWeight.w600,
@@ -388,8 +381,7 @@ class SignInView extends StatelessWidget {
                                                                 }
                                                               });
                                                             },
-                                                      text: asProvider
-                                                          .getString('Sign up'),
+                                                      text: AppLocalizations.of(context)!.sign_Up,
                                                       style: TextStyle(
                                                           color: cc
                                                               .secondaryColor)),
@@ -416,7 +408,7 @@ class SignInView extends StatelessWidget {
                                                   socialProvider
                                                       .googleSignInSignUp(
                                                           context,
-                                                          'Sign in failed');
+                                                      AppLocalizations.of(context)!.sign_in_failed);
                                                 },
                                                 icon: SvgPicture.asset(
                                                     'assets/icons/google.svg'),
@@ -426,8 +418,7 @@ class SignInView extends StatelessWidget {
                                                         child:
                                                             CustomPreloader(),
                                                       )
-                                                    : Text(asProvider.getString(
-                                                        'Sign in with Google'))),
+                                                    : Text(AppLocalizations.of(context)!.sign_in_with_Google)),
                                           );
                                         }),
                                         EmptySpaceHelper.emptyHight(10),
@@ -448,7 +439,7 @@ class SignInView extends StatelessWidget {
                                                   socialProvider
                                                       .facebookSignInSignUp(
                                                           context,
-                                                          'Sign in failed');
+                                                      AppLocalizations.of(context)!.sign_in_failed);
                                                 },
                                                 icon: SvgPicture.asset(
                                                     'assets/icons/facebook.svg'),
@@ -458,8 +449,7 @@ class SignInView extends StatelessWidget {
                                                         child:
                                                             CustomPreloader(),
                                                       )
-                                                    : Text(asProvider.getString(
-                                                        'Sign in with Facebook'))),
+                                                    : Text(AppLocalizations.of(context)!.sign_in_with_Facebook)),
                                           );
                                         }),
                                         EmptySpaceHelper.emptyHight(20),

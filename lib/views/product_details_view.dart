@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:safecart/services/wishlist_data_service.dart';
 import 'package:safecart/widgets/common/internet_checker_widget.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/product_details_view/product_details_images.dart';
 import '../widgets/common/boxed_back_button.dart';
@@ -85,7 +86,7 @@ class ProductDetailsView extends StatelessWidget {
                             EmptySpaceHelper.emptyHight(15),
                             Center(
                               child: Text(
-                                asProvider.getString('Loading failed'),
+                                AppLocalizations.of(context)!.loading_failed,
                                 style: TextStyle(color: cc.greyParagraph),
                               ),
                             )
@@ -286,9 +287,9 @@ class ProductDetailsView extends StatelessWidget {
                                             .summary!,
                                     maxLines: 4,
                                     expandText:
-                                        asProvider.getString('Show more'),
+                                    AppLocalizations.of(context)!.show_more,
                                     collapseText:
-                                        asProvider.getString('Show less'),
+                                    AppLocalizations.of(context)!.show_less,
                                     linkColor: cc.primaryColor,
                                     style: Theme.of(context)
                                         .textTheme
@@ -307,7 +308,7 @@ class ProductDetailsView extends StatelessWidget {
                                 //sub info
                                 subInfo(
                                     context,
-                                    asProvider.getString('Category'),
+                                    AppLocalizations.of(context)!.categories,
                                     Provider.of<ProductDetailsService>(context,
                                                     listen: false)
                                                 .productDetails!
@@ -319,11 +320,11 @@ class ProductDetailsView extends StatelessWidget {
                                             .productDetails!
                                             .category!
                                             .name
-                                        : asProvider.getString('None')),
+                                        : AppLocalizations.of(context)!.none),
                                 EmptySpaceHelper.emptyHight(8),
                                 subInfo(
                                     context,
-                                    asProvider.getString('Sub Category'),
+                                    AppLocalizations.of(context)!.sub_Category,
                                     Provider.of<ProductDetailsService>(context,
                                                     listen: false)
                                                 .productDetails!
@@ -335,11 +336,11 @@ class ProductDetailsView extends StatelessWidget {
                                             .productDetails!
                                             .subCategory!
                                             .name
-                                        : asProvider.getString('None')),
+                                        : AppLocalizations.of(context)!.none),
                                 EmptySpaceHelper.emptyHight(8),
                                 subInfo(
                                     context,
-                                    asProvider.getString('Child Category'),
+                                    AppLocalizations.of(context)!.child_Category,
                                     Provider.of<ProductDetailsService>(context,
                                                         listen: false)
                                                     .productDetails!
@@ -362,21 +363,21 @@ class ProductDetailsView extends StatelessWidget {
                                 EmptySpaceHelper.emptyHight(8),
                                 subInfo(
                                     context,
-                                    asProvider.getString('Brand'),
+                                    AppLocalizations.of(context)!.brand,
                                     Provider.of<ProductDetailsService>(context,
                                                 listen: false)
                                             .productDetails!
                                             .brand ??
-                                        asProvider.getString('None')),
+                                        AppLocalizations.of(context)!.none),
                                 EmptySpaceHelper.emptyHight(8),
                                 subInfo(
                                     context,
-                                    asProvider.getString('SKU'),
+                                    AppLocalizations.of(context)!.sKU,
                                     Provider.of<ProductDetailsService>(context,
                                                 listen: false)
                                             .productDetails
                                             ?.inventory?['sku'] ??
-                                        asProvider.getString('None')),
+                                        AppLocalizations.of(context)!.none),
                                 EmptySpaceHelper.emptyHight(8),
                                 subInfo(
                                     context,
@@ -408,7 +409,7 @@ class ProductDetailsView extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            asProvider.getString('Tags') + ' :',
+                                            '${AppLocalizations.of(context)!.tags} :',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyLarge!
@@ -512,7 +513,7 @@ class ProductDetailsView extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20),
                                     child: Text(
-                                      asProvider.getString("Seller's Products"),
+                                      AppLocalizations.of(context)!.seller_s_Products,
                                       style: const TextStyle(
                                           fontSize: 19,
                                           fontWeight: FontWeight.w600),
@@ -551,7 +552,7 @@ class ProductDetailsView extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20),
                                     child: Text(
-                                      asProvider.getString("Related Products"),
+                                      AppLocalizations.of(context)!.related_Products,
                                       style: const TextStyle(
                                           fontSize: 19,
                                           fontWeight: FontWeight.w600),

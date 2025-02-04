@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/helpers/common_helper.dart';
+import 'package:safecart/utils/responsive.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../services/common_services.dart';
 import '../../services/rtl_service.dart';
-import 'package:safecart/utils/responsive.dart';
 
 class TicketTileSkeleton extends StatelessWidget {
   const TicketTileSkeleton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +84,7 @@ class TicketTileSkeleton extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Text(
-                                    'priority',
+                                    AppLocalizations.of(context)!.priority,
                                     style: TextStyle(
                                         color: cc.pureWhite,
                                         fontSize: 13,
@@ -131,7 +132,7 @@ class TicketTileSkeleton extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                'open'.capitalize(),
+                                AppLocalizations.of(context)!.open,
                                 style: TextStyle(
                                     color: cc.pureWhite,
                                     fontSize: 13,

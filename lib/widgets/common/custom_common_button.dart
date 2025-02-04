@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 
 class CustomCommonButton extends StatelessWidget {
-  void Function()? onPressed;
+  final void Function()? onPressed;
   final String btText;
-  bool isLoading;
-  double? height;
-  double? width;
-  Color? color;
-  CustomCommonButton(
+  final bool isLoading;
+  final double? height;
+  final double? width;
+  final Color? color;
+  const CustomCommonButton(
       {super.key,
       required this.onPressed,
       required this.btText,

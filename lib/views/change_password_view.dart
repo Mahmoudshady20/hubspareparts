@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/auth_service/change_password_service.dart';
 
@@ -57,7 +58,7 @@ class ChangePasswordView extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Center(
                   child: Text(
-                    asProvider.getString('Change password'),
+                    AppLocalizations.of(context)!.change_Password,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge!

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomInkWell extends StatelessWidget {
-  void Function()? onTap;
-  Widget? child;
-  bool rounded;
-  CustomInkWell(this.onTap, this.child, {this.rounded = true, super.key});
+  final void Function()? onTap;
+  final Widget? child;
+  final bool rounded;
+  const CustomInkWell(this.onTap, this.child, {this.rounded = true, super.key});
 
   @override
   Widget build(BuildContext context) {

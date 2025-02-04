@@ -72,6 +72,7 @@
   "invalid_developer_keys": "Invalid developer keys",
   "connection_failed": "Connection failed",
   "payment_has_been_failed": "Payment has been failed.",
+  "payment_failed": "Payment has been failed.",
   "item_added_to_cart": "Item added to cart",
   "item_subtracted_from_cart": "Item subtracted from cart",
   "item_added_to_wishlist": "Item added to wishlist",
@@ -315,5 +316,7 @@
   "search_country": "Search country",
   "search_city": "Search city",
   "no_result_found": "No result found",
-  "product_stock_is_insufficient": "Product stock is insufficient"
+  "product_stock_is_insufficient": "Product stock is insufficient",
+  "ship_to_a_different_location": "Ship to a different location?",
+  "payment": "Payment"
 }

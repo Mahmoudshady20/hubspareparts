@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/cart_data_service.dart';
 
@@ -80,7 +81,7 @@ class VendorBox extends StatelessWidget {
               ),
               child: DropdownButton(
                 hint: Text(
-                  asProvider.getString("select a shipping method"),
+                  AppLocalizations.of(context)!.select_a_shipping_method,
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                         color: cc.greyHint,
                         fontSize: 14,
@@ -136,7 +137,7 @@ class VendorBox extends StatelessWidget {
             EmptySpaceHelper.emptyHight(15),
             moneyRow(
                 context,
-                asProvider.getString('Subtotal'),
+                AppLocalizations.of(context)!.subtotal,
                 rtlProvider.taxSystem != "advance_tax_system"
                     ? cdProvider.calculateVendorSubtotal(mapKey).toDouble()
                     : (cProvider.advanceTaxData[mapKey]?.subTotal ?? 0)
@@ -145,7 +146,7 @@ class VendorBox extends StatelessWidget {
             Consumer<CheckoutService>(builder: (context, cProvider, child) {
               return moneyRow(
                   context,
-                  asProvider.getString('Tax'),
+                  AppLocalizations.of(context)!.tax,
                   rtlProvider.taxSystem != "advance_tax_system"
                       ? tax?.toDouble() ?? 100 * cProvider.taxPercent
                       : (cProvider.advanceTaxData[mapKey]?.taxAmount ?? 0)
@@ -155,7 +156,7 @@ class VendorBox extends StatelessWidget {
             EmptySpaceHelper.emptyHight(5),
             moneyRow(
                 context,
-                asProvider.getString('Shipping cost'),
+                AppLocalizations.of(context)!.shipping_cost,
                 cProvider
                         .isShippingMethodSelected(mapKey, shippingMethods)
                         ?.cost ??
@@ -163,7 +164,7 @@ class VendorBox extends StatelessWidget {
             EmptySpaceHelper.emptyHight(5),
             moneyRow(
                 context,
-                asProvider.getString('Total'),
+                AppLocalizations.of(context)!.total,
                 (rtlProvider.taxSystem != "advance_tax_system"
                         ? ((subTotal) + (subTotal * cProvider.taxPercent))
                         : ((cProvider.advanceTaxData[mapKey]?.subTotal ?? 0) +

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/views/products_view.dart';
 import 'package:safecart/views/wishlist_view.dart';
@@ -46,8 +47,8 @@ class HomeFrontView extends StatelessWidget {
               now.difference(currentBackPressTime!) >
                   const Duration(seconds: 2)) {
             currentBackPressTime = now;
-            showToast(
-                asProvider.getString('Press again to exit'), cc.blackColor);
+            showToast(AppLocalizations.of(context)!.press_again_to_exit,
+                cc.blackColor);
             return false;
           }
           return true;

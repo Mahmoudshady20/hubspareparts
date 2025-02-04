@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 
@@ -23,7 +24,7 @@ class TitleCommon extends StatelessWidget {
           if (seeAll)
             TextButton(
               onPressed: onPressed,
-              child: Text(asProvider.getString('See All'),
+              child: Text(AppLocalizations.of(context)!.see_All,
                   textAlign: TextAlign.end,
                   style: TextStyle(color: cc.primaryColor, fontSize: 14)),
             ),

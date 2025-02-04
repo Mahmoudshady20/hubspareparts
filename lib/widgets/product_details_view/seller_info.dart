@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/product_details_service.dart';
 import 'package:safecart/utils/responsive.dart';
@@ -137,12 +138,12 @@ class SellerInfo extends StatelessWidget {
                         children: [
                           infoColumn(
                               context,
-                              asProvider.getString('From'),
+                              AppLocalizations.of(context)!.from,
                               pdProvider.productDetails!.vendor?.vendorAddress!
                                   .country.name),
                           infoColumn(
                               context,
-                              asProvider.getString('About Since'),
+                              AppLocalizations.of(context)!.about_Since,
                               pdProvider.productDetails!.vendor?.createdAt?.year
                                   .toString())
                         ],
@@ -159,8 +160,8 @@ class SellerInfo extends StatelessWidget {
                       EmptySpaceHelper.emptyHight(10),
                       ExpandableText(
                         pdProvider.productDetails!.vendor?.description ?? '',
-                        expandText: asProvider.getString('Show more'),
-                        collapseText: asProvider.getString('Show less'),
+                        expandText: AppLocalizations.of(context)!.show_more,
+                        collapseText: AppLocalizations.of(context)!.show_less,
                         linkColor: cc.primaryColor,
                         maxLines: 3,
                         style:

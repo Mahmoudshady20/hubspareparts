@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/shipping_address_service.dart';
 import 'package:safecart/services/payment_gateway_service.dart';
@@ -34,7 +35,7 @@ class CartView extends StatelessWidget {
                 TextButton.icon(
                   onPressed: cProvider.cartList.isEmpty
                       ? () {
-                          showToast(asProvider.getString('No item found'),
+                          showToast(AppLocalizations.of(context)!.no_item_found,
                               cc.blackColor);
                         }
                       : () {
@@ -47,7 +48,7 @@ class CartView extends StatelessWidget {
                         },
                   icon: const Icon(Icons.cancel_outlined),
                   label: Text(
-                    asProvider.getString('Clear cart'),
+                    AppLocalizations.of(context)!.clear_cart,
                     style: TextStyle(
                       decoration: TextDecoration.underline,
                       decorationColor: cc.red,
@@ -70,10 +71,11 @@ class CartView extends StatelessWidget {
                       child: Image.asset('assets/images/empty_cart.png'),
                     ),
                     Center(
-                        child: Text(asProvider.getString('Add item to cart!'),
-                            style: TextStyle(
-                              color: cc.greyHint,
-                            ))),
+                        child:
+                            Text(AppLocalizations.of(context)!.add_item_to_cart,
+                                style: TextStyle(
+                                  color: cc.greyHint,
+                                ))),
                   ],
                 )),
               if (!(cProvider.cartList.isEmpty))
@@ -182,16 +184,16 @@ class CartView extends StatelessWidget {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text(asProvider.getString('Are you sure?')),
-              content:
-                  Text(asProvider.getString('These Items will be Deleted.')),
+              title: Text(AppLocalizations.of(context)!.are_you_sure),
+              content: Text(
+                  AppLocalizations.of(context)!.these_Items_will_be_Deleted),
               actions: [
                 TextButton(
                     onPressed: (() {
                       Navigator.pop(context);
                     }),
                     child: Text(
-                      asProvider.getString('No'),
+                      AppLocalizations.of(context)!.no,
                       style: TextStyle(color: cc.green),
                     )),
                 TextButton(
@@ -200,7 +202,7 @@ class CartView extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      asProvider.getString('Yes'),
+                      AppLocalizations.of(context)!.yes,
                       style: TextStyle(color: cc.pink),
                     ))
               ],

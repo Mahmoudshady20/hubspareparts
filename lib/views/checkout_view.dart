@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/checkout_service.dart';
@@ -67,7 +68,7 @@ class CheckoutView extends StatelessWidget {
               const Divider(height: 2),
               EmptySpaceHelper.emptyHight(10),
               Text(
-                asProvider.getString('Products'),
+                AppLocalizations.of(context)!.products,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -103,7 +104,7 @@ class CheckoutView extends StatelessWidget {
               const Divider(height: 2),
               EmptySpaceHelper.emptyHight(10),
               Text(
-                asProvider.getString('Order summery'),
+                AppLocalizations.of(context)!.order_summery,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -142,7 +143,7 @@ class CheckoutView extends StatelessWidget {
               }),
               EmptySpaceHelper.emptyHight(20),
               Text(
-                asProvider.getString('Chose a payment method'),
+                AppLocalizations.of(context)!.chose_a_payment_method,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -155,8 +156,8 @@ class CheckoutView extends StatelessWidget {
                       return const SizedBox();
                     }
                     if (snapshot.hasError) {
-                      snackBar(
-                          context, asProvider.getString('An error occurred'),
+                      snackBar(context,
+                          AppLocalizations.of(context)!.an_error_occurred,
                           backgroundColor: cc.red);
                       return Text(snapshot.error.toString());
                     }
@@ -271,7 +272,7 @@ class CheckoutView extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       text: TextSpan(
                           text:
-                              '${asProvider.getString('I Have Read And Agree To The Website')} ',
+                              '${AppLocalizations.of(context)!.i_Have_Read_And_Agree_To_The_Website} ',
                           style: TextStyle(
                             color: cc.greyHint,
                             fontWeight: FontWeight.w600,
@@ -330,8 +331,8 @@ class CheckoutView extends StatelessWidget {
                         _authCardController.text.trim().length < 3 &&
                         pgProvider.authPayED == null) {
                       showToast(
-                          asProvider
-                              .getString('Please enter all the information'),
+                          AppLocalizations.of(context)!
+                              .please_enter_all_the_information,
                           cc.red);
                       return;
                     }
@@ -340,15 +341,15 @@ class CheckoutView extends StatelessWidget {
                             listen: false)
                         .allDataGiven) {
                       showToast(
-                          asProvider
-                              .getString('Please enter all the shipping info'),
+                          AppLocalizations.of(context)!
+                              .please_enter_all_the_shipping_info,
                           cc.red);
                       return;
                     }
                     if (!pgProvider.doAgree) {
                       showToast(
-                          asProvider.getString(
-                              'You have agree to our Terms & Conditions.'),
+                          AppLocalizations.of(context)!
+                              .you_have_agree_to_our_Terms_Conditions,
                           cc.red);
                       return;
                     }

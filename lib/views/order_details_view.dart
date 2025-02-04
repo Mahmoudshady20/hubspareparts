@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/widgets/orders_view/order_vendor_box.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/empty_space_helper.dart';
@@ -65,7 +66,7 @@ class OrderDetailsView extends StatelessWidget {
                         alignment: Alignment.topCenter,
                         child: Center(
                           child: Text(
-                            asProvider.getString('Order') + ' $tracker',
+                            '${AppLocalizations.of(context)!.order} $tracker',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge!
@@ -130,8 +131,7 @@ class OrderDetailsView extends StatelessWidget {
                                       ? SizedBox(
                                           height: screenHeight / 2.5,
                                           child: Center(
-                                            child: Text(asProvider.getString(
-                                                'Something went wrong')),
+                                            child: Text(AppLocalizations.of(context)!.something_went_wrong),
                                           ),
                                         )
                                       : Column(

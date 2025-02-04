@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -22,13 +23,13 @@ class ShippingAddressTileSkeleton extends StatelessWidget {
             border: Border.all(color: cc.lightPrimary10, width: .5)),
         child: Stack(children: [
           ListTile(
-            title: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: Text('title'),
+            title: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              child: Text(AppLocalizations.of(context)!.title),
             ),
-            subtitle: const Padding(
+            subtitle: Padding(
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: Text('address'),
+              child: Text(AppLocalizations.of(context)!.address),
             ),
             trailing: GestureDetector(
                 child: SvgPicture.asset(

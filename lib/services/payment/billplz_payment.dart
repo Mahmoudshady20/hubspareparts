@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -62,9 +63,10 @@ class BillplzPayment extends StatelessWidget {
                     context: context,
                     builder: (ctx) {
                       return AlertDialog(
-                        title: Text(asProvider.getString('Loading failed!')),
-                        content: Text(asProvider
-                            .getString('Failed to load payment page.')),
+                        title:
+                            Text(AppLocalizations.of(context)!.loading_failed),
+                        content: Text(AppLocalizations.of(context)!
+                            .failed_to_load_payment_page),
                         actions: [
                           const Spacer(),
                           TextButton(
@@ -75,7 +77,7 @@ class BillplzPayment extends StatelessWidget {
                                             PaymentStatusView(true)),
                                     (Route<dynamic> route) => false),
                             child: Text(
-                              asProvider.getString('Return'),
+                              AppLocalizations.of(context)!.return_button,
                               style: TextStyle(color: cc.primaryColor),
                             ),
                           )
@@ -87,10 +89,10 @@ class BillplzPayment extends StatelessWidget {
                         context: context,
                         builder: (ctx) {
                           return AlertDialog(
-                            title:
-                                Text(asProvider.getString('Loading failed!')),
-                            content: Text(asProvider
-                                .getString('Failed to load payment page.')),
+                            title: Text(
+                                AppLocalizations.of(context)!.loading_failed),
+                            content: Text(AppLocalizations.of(context)!
+                                .failed_to_load_payment_page),
                             actions: [
                               const Spacer(),
                               TextButton(
@@ -101,7 +103,7 @@ class BillplzPayment extends StatelessWidget {
                                                 PaymentStatusView(true)),
                                         (Route<dynamic> route) => false),
                                 child: Text(
-                                  asProvider.getString('Return'),
+                                  AppLocalizations.of(context)!.return_button,
                                   style: TextStyle(color: cc.primaryColor),
                                 ),
                               )
@@ -178,8 +180,9 @@ Future verifyPayment(String url, BuildContext context) async {
         context: context,
         builder: (ctx) {
           return AlertDialog(
-            title: const Text('Payment failed!'),
-            content: const Text('Payment has been failed.'),
+            title: Text(AppLocalizations.of(context)!.payment_failed),
+            content:
+                Text(AppLocalizations.of(context)!.payment_has_been_failed),
             actions: [
               const Spacer(),
               TextButton(
@@ -188,7 +191,7 @@ Future verifyPayment(String url, BuildContext context) async {
                         builder: (context) => PaymentStatusView(true)),
                     (Route<dynamic> route) => false),
                 child: Text(
-                  'Ok',
+                  AppLocalizations.of(context)!.ok,
                   style: TextStyle(color: cc.primaryColor),
                 ),
               )

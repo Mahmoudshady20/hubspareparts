@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/widgets/common/custom_app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 
 class ImageView extends StatelessWidget {
-  String imageUrl;
-  ImageView(this.imageUrl, {Key? key}) : super(key: key);
+  final String imageUrl;
+  const ImageView(this.imageUrl, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class ImageView extends StatelessWidget {
               );
             },
             errorBuilder: (context, exception, stackTrace) {
-              return Text(asProvider.getString('Connection failed!'));
+              return Text(AppLocalizations.of(context)!.connection_failed);
             },
             imageProvider: imageUrl.contains('http')
                 ? NetworkImage(imageUrl) as ImageProvider<Object>?

@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
 
 import '../widgets/common/custom_common_button.dart';
@@ -21,7 +23,7 @@ class NetworkConnectivity {
     var result = await _networkConnectivity.checkConnectivity();
     _checkStatus(result);
     _networkConnectivity.onConnectivityChanged.listen((result) {
-      print(result);
+      log(result.toString());
       _checkStatus(result);
     });
   }
@@ -51,13 +53,12 @@ class NetworkConnectivity {
   void disposeStream() => _controller.close();
 
   listenToConnectionChange(BuildContext context) {
-    Map source = {ConnectivityResult.none: false};
     String string = '';
     initialise();
     bool isOffline = false;
     streamSubscription ??= myStream.listen((source) {
       source = source;
-      print('source $source');
+      log('source $source');
       // 1.
       switch (source.keys.toList()[0]) {
         case ConnectivityResult.mobile:
@@ -92,7 +93,7 @@ class NetworkConnectivity {
                       height: 240,
                     ),
                     Text(
-                      asProvider.getString('Oops!'),
+                      AppLocalizations.of(context)!.oops,
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
@@ -100,7 +101,8 @@ class NetworkConnectivity {
                     ),
                     EmptySpaceHelper.emptyHight(8),
                     Text(
-                      asProvider.getString('No wifi or cellular data found'),
+                      AppLocalizations.of(context)!
+                          .no_wifi_or_cellular_data_found,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     EmptySpaceHelper.emptyHight(16),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/product_details_service.dart';
 import 'package:safecart/services/rtl_service.dart';
@@ -79,7 +80,7 @@ class ProductTitleRow extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          asProvider.getString('Sold count') + ' :',
+                          '${AppLocalizations.of(context)!.sold_count} :',
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall!

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/product_details_service.dart';
+import 'package:safecart/views/all_reviews_view.dart';
 import 'package:safecart/widgets/all_reviews_view/review_tile.dart';
 import 'package:safecart/widgets/all_reviews_view/write_review.dart';
 
 import '../../helpers/common_helper.dart';
-import 'package:safecart/views/all_reviews_view.dart';
 
 class Reviews extends StatelessWidget {
   Reviews({super.key});

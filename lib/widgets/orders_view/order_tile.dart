@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/orders_service/order_details_service.dart';
+import 'package:safecart/utils/responsive.dart';
+import 'package:safecart/views/order_details_view.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
 import '../../services/rtl_service.dart';
-import 'package:safecart/utils/responsive.dart';
-import 'package:safecart/views/order_details_view.dart';
 
 class OrderTile extends StatelessWidget {
   final double totalAmount;
@@ -65,7 +66,7 @@ class OrderTile extends StatelessWidget {
             EmptySpaceHelper.emptyHight(4),
             Row(
               children: [
-                Text(asProvider.getString('Payment') + ' : ',
+                Text('${AppLocalizations.of(context)!.payment} : ',
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall!
@@ -75,7 +76,7 @@ class OrderTile extends StatelessWidget {
                         color: odProvider.statusColor(order ?? ''),
                         fontSize: 14)),
                 EmptySpaceHelper.emptywidth(8),
-                Text(asProvider.getString('Order') + ' : ',
+                Text('${AppLocalizations.of(context)!.order} : ',
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall!
@@ -116,16 +117,16 @@ class OrderTile extends StatelessWidget {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text(asProvider.getString('Are you sure?')),
-              content:
-                  Text(asProvider.getString('This order will be canceled.')),
+              title: Text(AppLocalizations.of(context)!.are_you_sure),
+              content: Text(
+                  AppLocalizations.of(context)!.this_order_will_be_canceled),
               actions: [
                 TextButton(
                     onPressed: (() {
                       Navigator.pop(context);
                     }),
                     child: Text(
-                      asProvider.getString('No'),
+                      AppLocalizations.of(context)!.no,
                       style: TextStyle(color: cc.green),
                     )),
                 TextButton(
@@ -134,7 +135,7 @@ class OrderTile extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      asProvider.getString('Yes'),
+                      AppLocalizations.of(context)!.yes,
                       style: TextStyle(color: cc.pink),
                     ))
               ],

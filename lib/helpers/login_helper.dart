@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -13,7 +14,7 @@ class LogInHelper {
         context: context,
         style: AlertStyle(
             alertElevation: 0,
-            overlayColor: cc.blackColor.withOpacity(.6),
+            overlayColor: cc.blackColor.withValues(alpha: .6),
             alertPadding: const EdgeInsets.all(25),
             isButtonVisible: false,
             alertBorder: RoundedRectangleBorder(
@@ -32,7 +33,7 @@ class LogInHelper {
             borderRadius: BorderRadius.circular(7),
             boxShadow: [
               BoxShadow(
-                  color: cc.blackColor.withOpacity(0.01),
+                  color: cc.blackColor.withValues(alpha: 0.01),
                   spreadRadius: -2,
                   blurRadius: 13,
                   offset: const Offset(0, 13)),
@@ -41,7 +42,7 @@ class LogInHelper {
           child: Column(
             children: [
               Text(
-                title ?? asProvider.getString("Login to checkout?"),
+                title ?? AppLocalizations.of(context)!.login_to_checkout,
                 style: TextStyle(color: cc.greytitle, fontSize: 17),
               ),
               const SizedBox(
@@ -49,8 +50,8 @@ class LogInHelper {
               ),
               Text(
                 description ??
-                    asProvider.getString(
-                        "You have to  login to proceed the checkout."),
+                    AppLocalizations.of(context)!
+                        .you_have_to_login_to_proceed_the_checkout,
                 style: TextStyle(color: cc.greyParagraph, fontSize: 13),
               ),
               const SizedBox(

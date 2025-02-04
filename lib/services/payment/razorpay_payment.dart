@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/shipping_address_service.dart';
@@ -129,7 +130,7 @@ class RazorpayPayment extends StatelessWidget {
       print(url);
       return;
     }
-    showToast(asProvider.getString('Connection failed'), cc.red);
+    showToast(AppLocalizations.of(context)!.connection_failed, cc.red);
     return 'failed';
   }
 

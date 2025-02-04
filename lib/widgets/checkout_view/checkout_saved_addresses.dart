@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/shipping_address_service.dart';
 import 'package:safecart/utils/custom_preloader.dart';
@@ -38,7 +39,8 @@ class CheckoutSavedAddresses extends StatelessWidget {
                       : saProvider.shippingAddressList!.isEmpty
                           ? CustomOutlinedButton(
                               onPressed: () {},
-                              btText: asProvider.getString('Add new address'),
+                              btText:
+                                  AppLocalizations.of(context)!.add_new_Address,
                               isLoading: false)
                           : ListView.separated(
                               scrollDirection: Axis.horizontal,

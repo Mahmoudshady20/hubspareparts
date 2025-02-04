@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/db_helper.dart';
@@ -121,12 +122,14 @@ class CartDataService with ChangeNotifier {
       debugPrint(
           "stock is ${(_cartItems[rowId]["qty"] + (extraQuantity ?? 1))} and quantity is ${_cartItems[rowId]["stock"]}"
               .toString());
-      showToast("Product stock is insufficient", cc.blackColor);
+      showToast(AppLocalizations.of(context)!.product_stock_is_insufficient,
+          cc.blackColor);
       return;
     }
     _cartItems[rowId].update('qty', (value) {
       int sum = (value as int) + (extraQuantity ?? 1);
-      showToast(asProvider.getString('Item added to cart'), cc.blackColor);
+      showToast(
+          AppLocalizations.of(context)!.item_added_to_cart, cc.blackColor);
       return sum;
     });
     _cartItems[rowId].update('subtotal', (value) {
@@ -170,7 +173,7 @@ class CartDataService with ChangeNotifier {
         'data': jsonEncode(_cartItems[rowId]),
       },
     );
-    showToast(asProvider.getString('Item subtracted from cart'), cc.red);
+    showToast(AppLocalizations.of(context)!.item_subtracted_from_cart, cc.red);
 
     notifyListeners();
   }
@@ -233,7 +236,8 @@ class CartDataService with ChangeNotifier {
     if (!_cartItems.containsKey(rowId)) {
       if (stock < quantity) {
         debugPrint("stock is $stock and quantity is $quantity".toString());
-        showToast("Product stock is insufficient", cc.blackColor);
+        showToast(AppLocalizations.of(context)!.product_stock_is_insufficient,
+            cc.blackColor);
         return;
       }
       _cartItems[rowId] = map[rowId];
@@ -242,7 +246,8 @@ class CartDataService with ChangeNotifier {
         'data': jsonEncode(map[rowId]),
       });
 
-      showToast(asProvider.getString('Item added to cart'), cc.blackColor);
+      showToast(
+          AppLocalizations.of(context)!.item_added_to_cart, cc.blackColor);
       notifyListeners();
       return;
     }

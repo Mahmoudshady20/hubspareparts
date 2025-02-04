@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/db_helper.dart';
@@ -84,7 +85,7 @@ class WishlistDataService with ChangeNotifier {
         id.toString(),
         () => WishlistItem(id, vendorId, title, price, originalPrice, imgUrl,
             isCartable, prodCatData, rating, randomKey, randomSecret, stock));
-    showToast(asProvider.getString('Item added to wishlist'), cc.blackColor);
+    showToast(AppLocalizations.of(context)!.item_added_to_wishlist, cc.blackColor);
     notifyListeners();
   }
 
@@ -125,7 +126,7 @@ class WishlistDataService with ChangeNotifier {
       return value.id.toString() == id.toString();
     });
     showToast(
-        asProvider.getString('Item removed from wishlist'), cc.blackColor);
+        AppLocalizations.of(context)!.item_removed_from_wishlist, cc.blackColor);
     notifyListeners();
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../helpers/common_helper.dart';
@@ -23,7 +24,7 @@ class DifferentSLChecker extends StatelessWidget {
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             Text(
-              asProvider.getString('Ship to a different location?'),
+              AppLocalizations.of(context)!.ship_to_a_different_location,
               style: Theme.of(context)
                   .textTheme
                   .titleSmall!

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/shipping_address_service.dart';
@@ -117,7 +118,8 @@ class PaystackPayment extends StatelessWidget {
       print(url);
       return;
     }
-    snackBar(context, 'Loading failed', backgroundColor: cc.red);
+    snackBar(context, AppLocalizations.of(context)!.payment_failed,
+        backgroundColor: cc.red);
     return jsonDecode(response.body)['message'];
     // print(response.statusCode);
     // if (response.statusCode == 201) {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -62,9 +63,10 @@ class ToyyibPayPayment extends StatelessWidget {
                     context: context,
                     builder: (ctx) {
                       return AlertDialog(
-                        title: Text(asProvider.getString('Loading failed!')),
-                        content: Text(asProvider
-                            .getString('Failed to load payment page.')),
+                        title:
+                            Text(AppLocalizations.of(context)!.loading_failed),
+                        content: Text(AppLocalizations.of(context)!
+                            .failed_to_load_payment_page),
                         actions: [
                           const Spacer(),
                           TextButton(
@@ -75,7 +77,7 @@ class ToyyibPayPayment extends StatelessWidget {
                                             PaymentStatusView(true)),
                                     (Route<dynamic> route) => false),
                             child: Text(
-                              asProvider.getString('Return'),
+                              AppLocalizations.of(context)!.return_button,
                               style: TextStyle(color: cc.primaryColor),
                             ),
                           )
@@ -87,10 +89,10 @@ class ToyyibPayPayment extends StatelessWidget {
                         context: context,
                         builder: (ctx) {
                           return AlertDialog(
-                            title:
-                                Text(asProvider.getString('Loading failed!')),
-                            content: Text(asProvider
-                                .getString('Failed to load payment page.')),
+                            title: Text(
+                                AppLocalizations.of(context)!.loading_failed),
+                            content: Text(AppLocalizations.of(context)!
+                                .failed_to_load_payment_page),
                             actions: [
                               const Spacer(),
                               TextButton(
@@ -101,7 +103,7 @@ class ToyyibPayPayment extends StatelessWidget {
                                                 PaymentStatusView(true)),
                                         (Route<dynamic> route) => false),
                                 child: Text(
-                                  asProvider.getString('Return'),
+                                  AppLocalizations.of(context)!.return_button,
                                   style: TextStyle(color: cc.primaryColor),
                                 ),
                               )

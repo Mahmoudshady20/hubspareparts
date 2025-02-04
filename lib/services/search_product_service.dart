@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:safecart/models/search_product_model.dart';
@@ -118,7 +119,7 @@ class SearchProductService with ChangeNotifier {
     } on TimeoutException {
       setLoading(false);
       searchedProduct ??= [];
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       setLoading(false);
       searchedProduct ??= [];
@@ -163,7 +164,7 @@ class SearchProductService with ChangeNotifier {
     } on TimeoutException {
       setNextLoading(false);
       searchedProduct ??= [];
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       setNextLoading(false);
       searchedProduct ??= [];

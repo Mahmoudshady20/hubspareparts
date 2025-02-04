@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,7 +63,7 @@ class RTLService with ChangeNotifier {
           print(response.body);
         }
       } on TimeoutException {
-        showToast(asProvider.getString('Request timeout'), cc.red);
+        showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       } catch (err) {
         print(err);
       }
@@ -105,7 +106,7 @@ class RTLService with ChangeNotifier {
         }
       } on TimeoutException {
         initiateAppStringProvider(context);
-        showToast(asProvider.getString('Request timeout'), cc.red);
+        showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       } catch (err) {
         initiateAppStringProvider(context);
         print(err);

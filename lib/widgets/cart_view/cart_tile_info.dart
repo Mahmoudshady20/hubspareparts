@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
@@ -92,7 +93,7 @@ class CartTileInfo extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  asProvider.getString('Attributes') + ':',
+                  '${AppLocalizations.of(context)!.attributes}:',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -102,7 +103,7 @@ class CartTileInfo extends StatelessWidget {
                 ),
                 Text(
                   inventorySet.toString() == '{}'
-                      ? ' ${asProvider.getString('None')}'
+                      ? ' ${AppLocalizations.of(context)!.none}'
                       : ' ${attributes3.toString().replaceAll('()', '')}',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

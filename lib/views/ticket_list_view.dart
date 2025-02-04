@@ -5,6 +5,7 @@ import 'package:safecart/services/ticket_list_service.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/views/new_ticket_view.dart';
 import 'package:safecart/widgets/common/custom_common_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../utils/responsive.dart';
@@ -50,7 +51,7 @@ class TicketListView extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   child: Center(
                     child: Text(
-                      asProvider.getString('My Tickets'),
+                      AppLocalizations.of(context)!.my_Tickets,
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge!
@@ -114,7 +115,7 @@ class TicketListView extends StatelessWidget {
                               if (snapshot.hasData) {
                                 return Center(
                                   child: Text(
-                                      asProvider.getString('No ticket found.')),
+                                      AppLocalizations.of(context)!.no_ticket_found),
                                 );
                               }
 
@@ -150,7 +151,7 @@ class TicketListView extends StatelessWidget {
                   .fetchDepartments(context);
               Navigator.pushNamed(context, NewTicketView.routeName);
             },
-            btText: asProvider.getString('Add new ticket'),
+            btText: AppLocalizations.of(context)!.add_new_ticket,
             isLoading: false),
       ),
     );
@@ -167,7 +168,7 @@ class TicketListView extends StatelessWidget {
               height: screenHeight / 2.5,
               child: Center(
                 child: Text(
-                  asProvider.getString('No data has been found!'),
+                  AppLocalizations.of(context)!.no_data_has_been_found,
                   style: TextStyle(color: cc.greyHint),
                 ),
               ),
@@ -194,7 +195,7 @@ class TicketListView extends StatelessWidget {
     if (controller.offset >= controller.position.maxScrollExtent &&
         !controller.position.outOfRange) {
       if (tProvider.nextPage == null) {
-        showToast('No more ticket found', cc.blackColor);
+        showToast(AppLocalizations.of(context)!.no_more_ticket_found, cc.blackColor);
         return;
       }
       if (tProvider.nextPage != null && !tProvider.isLoadingNextPage) {

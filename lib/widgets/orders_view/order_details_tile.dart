@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../helpers/common_helper.dart';
@@ -95,7 +96,7 @@ class OrderDetailsTile extends StatelessWidget {
                     child: moneyRow(
                   context,
                   salePrice.toStringAsFixed(2),
-                  asProvider.getString('Price'),
+                  AppLocalizations.of(context)!.price,
                 )),
                 EmptySpaceHelper.emptyHight(5),
                 FittedBox(
@@ -107,7 +108,7 @@ class OrderDetailsTile extends StatelessWidget {
                     child: moneyRow(
                   context,
                   (salePrice * quantity).toDouble().toStringAsFixed(2),
-                  asProvider.getString('Subtotal'),
+                  AppLocalizations.of(context)!.subtotal,
                 )),
                 EmptySpaceHelper.emptyHight(5),
               ],

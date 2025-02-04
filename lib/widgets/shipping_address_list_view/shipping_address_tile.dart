@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/shipping_address_service.dart';
@@ -52,9 +53,10 @@ class ShippingAddressTile extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                          title: Text(asProvider.getString('Are you sure?')),
-                          content: Text(asProvider.getString(
-                              'This address will be deleted permanently.')),
+                          title:
+                              Text(AppLocalizations.of(context)!.are_you_sure),
+                          content: Text(AppLocalizations.of(context)!
+                              .this_address_will_be_deleted_permanently),
                           actions: [
                             TextButton(
                               style: ButtonStyle(
@@ -65,7 +67,7 @@ class ShippingAddressTile extends StatelessWidget {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text(asProvider.getString('No')),
+                              child: Text(AppLocalizations.of(context)!.no),
                             ),
                             Consumer<ShippingAddressService>(
                                 builder: (context, saProvider, child) {
@@ -98,7 +100,7 @@ class ShippingAddressTile extends StatelessWidget {
                                         child:
                                             FittedBox(child: CustomPreloader()))
                                     : Text(
-                                        asProvider.getString('Yes'),
+                                        AppLocalizations.of(context)!.yes,
                                         style: TextStyle(color: cc.pink),
                                       ),
                               );

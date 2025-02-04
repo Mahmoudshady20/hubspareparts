@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/home_campaign_products_service.dart';
 import 'package:safecart/utils/responsive.dart';
@@ -42,8 +43,8 @@ class HomeCampaignProducts extends StatelessWidget {
                                     width: (screenWidth - 40) / 2,
                                     child: Text(
                                       hcpProvider.campaignInfo!.title ??
-                                          asProvider
-                                              .getString('Campaign Products'),
+                                          AppLocalizations.of(context)!
+                                              .campaign_Products,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:safecart/models/slider_model.dart';
@@ -64,7 +65,7 @@ class SliderService with ChangeNotifier {
     } on TimeoutException {
       sliderOneList = [];
       setSliderOneLoading(value: false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       sliderOneList = [];
       setSliderOneLoading(value: false);
@@ -105,7 +106,7 @@ class SliderService with ChangeNotifier {
     } on TimeoutException {
       sliderOneList = [];
       setSliderTwoLoading(value: false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       sliderOneList = [];
       setSliderTwoLoading(value: false);
@@ -145,7 +146,7 @@ class SliderService with ChangeNotifier {
     } on TimeoutException {
       sliderOneList = [];
       setSliderThreeLoading(value: false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       sliderOneList = [];
       setSliderThreeLoading(value: false);

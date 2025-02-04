@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'dart:isolate';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:safecart/models/categories_model.dart';
 
@@ -76,7 +77,7 @@ class CategoryService with ChangeNotifier {
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       print(err);
     }
@@ -134,11 +135,6 @@ class CategoryService with ChangeNotifier {
   }
 }
 
-
-
-
-
 // To parse this JSON data, do
 //
 //     final categoryModel = categoryModelFromJson(jsonString);
-

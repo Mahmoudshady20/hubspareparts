@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../../helpers/common_helper.dart';
 
 class CustomIconButton extends StatefulWidget {
-  Widget icon;
-  void Function() onPressed;
-  double? width;
-  double? height;
-  Color? color;
-  CustomIconButton(this.icon,
+  final Widget icon;
+  final void Function() onPressed;
+  final double? width;
+  final double? height;
+  final Color? color;
+  const CustomIconButton(this.icon,
       {required this.onPressed,
       this.height,
       this.width,

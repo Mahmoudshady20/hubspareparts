@@ -8,7 +8,7 @@ import 'custom_app_bar.dart';
 
 class WebViewScreen extends StatelessWidget {
   static const String routeName = 'web view screen';
-  const WebViewScreen({Key? key}) : super(key: key);
+  const WebViewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,6 +6,7 @@ import 'package:safecart/services/cart_data_service.dart';
 import 'package:safecart/services/wishlist_data_service.dart';
 import 'package:safecart/utils/responsive.dart';
 import 'package:slide_countdown/slide_countdown.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
@@ -311,7 +312,7 @@ class ProductCard extends StatelessWidget {
                                 ),
                           onPressed: () {
                             if (stock <= 0) {
-                              showToast("Product stock is insufficient",
+                              showToast(AppLocalizations.of(context)!.product_stock_is_insufficient,
                                   cc.blackColor);
                             }
                             if (cartable) {

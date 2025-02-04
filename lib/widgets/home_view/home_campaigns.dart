@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/feature_products_service.dart';
 import 'package:safecart/services/product_by_campaigns_service.dart';
@@ -6,7 +7,6 @@ import 'package:safecart/views/home_campaigns_view.dart';
 import 'package:safecart/views/product_by_campaign_view.dart';
 import 'package:safecart/widgets/home_view/campaign_card.dart';
 
-import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
 import '../../services/home_campaigns_service.dart';
 import '../common/title_common.dart';
@@ -29,7 +29,7 @@ class HomeCampaigns extends StatelessWidget {
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TitleCommon(
-                          asProvider.getString('Campaigns'),
+                          AppLocalizations.of(context)!.campaigns,
                           () {
                             Navigator.of(context)
                                 .pushNamed(HomeCampaignsView.routeName);

@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../../helpers/common_helper.dart';
@@ -23,7 +24,7 @@ class StripePayment {
                 .selectedGateway!
                 .credentials['secret_key'] ==
             null) {
-      snackBar(context, 'Invalid developer keys');
+      snackBar(context, AppLocalizations.of(context)!.invalid_developer_keys);
       return;
     }
     // Stripe.publishableKey =

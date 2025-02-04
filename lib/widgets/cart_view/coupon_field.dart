@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/checkout_service.dart';
 
-import '../../helpers/common_helper.dart';
 import '../../utils/responsive.dart';
 import '../common/custom_common_button.dart';
 
@@ -17,7 +17,7 @@ class CouponField extends StatelessWidget {
       focusNode: _focusNode,
       controller: _couponTextController,
       decoration: InputDecoration(
-        hintText: asProvider.getString('Coupon Text'),
+        hintText: AppLocalizations.of(context)!.coupon_Text,
         suffixIcon: Container(
           width: screenWidth / 4 + 14,
           alignment: Alignment.centerRight,
@@ -25,7 +25,7 @@ class CouponField extends StatelessWidget {
           child:
               Consumer<CheckoutService>(builder: (context, cProvider, child) {
             return CustomCommonButton(
-              btText: asProvider.getString('Submit'),
+              btText: AppLocalizations.of(context)!.submit,
               onPressed: () {
                 _focusNode.unfocus();
                 cProvider.getCouponDiscountAmount(

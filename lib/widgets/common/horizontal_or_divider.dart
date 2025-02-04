@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safecart/helpers/common_helper.dart';
 
 class HorizontalOrDivider extends StatelessWidget {
-  const HorizontalOrDivider({Key? key}) : super(key: key);
+  const HorizontalOrDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

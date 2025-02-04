@@ -1,8 +1,8 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
 import '../../services/rtl_service.dart';
 
@@ -19,7 +19,7 @@ class OrderInfo extends StatelessWidget {
           header: Container(
             padding: const EdgeInsets.only(bottom: 2),
             child: Text(
-              asProvider.getString('Order Summery'),
+              AppLocalizations.of(context)!.order_summery,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context)
@@ -35,17 +35,19 @@ class OrderInfo extends StatelessWidget {
               child: Column(
                 children: [
                   EmptySpaceHelper.emptyHight(20),
-                  moneyRow(context, asProvider.getString('Subtotal'), 27),
+                  moneyRow(context, AppLocalizations.of(context)!.subtotal, 27),
                   EmptySpaceHelper.emptyHight(10),
-                  moneyRow(context, asProvider.getString('Coupon discount'), 0),
+                  moneyRow(context,
+                      AppLocalizations.of(context)!.coupon_discount, 0),
                   EmptySpaceHelper.emptyHight(10),
-                  moneyRow(context, asProvider.getString('Tax'), 0),
+                  moneyRow(context, AppLocalizations.of(context)!.tax, 0),
                   EmptySpaceHelper.emptyHight(10),
-                  moneyRow(context, asProvider.getString('Shipping cost'), 0),
+                  moneyRow(
+                      context, AppLocalizations.of(context)!.shipping_cost, 0),
                   EmptySpaceHelper.emptyHight(10),
                   const Divider(),
                   EmptySpaceHelper.emptyHight(10),
-                  moneyRow(context, asProvider.getString('Total'), 27),
+                  moneyRow(context, AppLocalizations.of(context)!.total, 27),
                   EmptySpaceHelper.emptyHight(20),
                 ],
               ))),

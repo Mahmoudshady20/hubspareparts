@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/empty_space_helper.dart';
@@ -28,7 +29,7 @@ class WishlistView extends StatelessWidget {
                   TextButton.icon(
                     onPressed: fProvider.wishlistItems.isEmpty
                         ? () {
-                            showToast(asProvider.getString('No item found'),
+                            showToast(AppLocalizations.of(context)!.no_item_found,
                                 cc.blackColor);
                           }
                         : () {
@@ -37,15 +38,14 @@ class WishlistView extends StatelessWidget {
                               onPressed: () {
                                 fProvider.emptyWishlist();
                                 showToast(
-                                    asProvider.getString(
-                                        'Items removed from wishlist'),
+                                    AppLocalizations.of(context)!.items_removed_from_wishlist,
                                     cc.blackColor);
                               },
                             );
                           },
                     icon: const Icon(Icons.cancel_outlined),
                     label: Text(
-                      asProvider.getString('Clear cart'),
+                      AppLocalizations.of(context)!.clear_cart,
                       style: TextStyle(
                         decoration: TextDecoration.underline,
                         decorationColor: cc.red,
@@ -69,7 +69,7 @@ class WishlistView extends StatelessWidget {
                       ),
                       Center(
                         child: Text(
-                          asProvider.getString('Add items to wishlist'),
+                          AppLocalizations.of(context)!.add_items_to_wishlist,
                           style: TextStyle(color: cc.greyHint),
                         ),
                       ),
@@ -126,16 +126,16 @@ class WishlistView extends StatelessWidget {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text(asProvider.getString('Are you sure?')),
+              title: Text(AppLocalizations.of(context)!.are_you_sure),
               content:
-                  Text(asProvider.getString('These Items will be Deleted.')),
+                  Text(AppLocalizations.of(context)!.these_Items_will_be_Deleted),
               actions: [
                 TextButton(
                     onPressed: (() {
                       Navigator.pop(context);
                     }),
                     child: Text(
-                      asProvider.getString('No'),
+                      AppLocalizations.of(context)!.no,
                       style: TextStyle(color: cc.green),
                     )),
                 TextButton(
@@ -144,7 +144,7 @@ class WishlistView extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      asProvider.getString('Yes'),
+                      AppLocalizations.of(context)!.yes,
                       style: TextStyle(color: cc.pink),
                     ))
               ],

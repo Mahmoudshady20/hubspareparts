@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
@@ -26,7 +27,7 @@ class WriteReview extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            Text(asProvider.getString('Your rating'),
+            Text(AppLocalizations.of(context)!.your_rating,
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall
@@ -51,7 +52,7 @@ class WriteReview extends StatelessWidget {
               },
             ),
             const SizedBox(height: 10),
-            Text(asProvider.getString('Your review'),
+            Text(AppLocalizations.of(context)!.your_review,
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall
@@ -64,19 +65,19 @@ class WriteReview extends StatelessWidget {
                 initialValue: srProvider.reviewText,
                 decoration: InputDecoration(
                   isDense: true,
-                  hintText: asProvider.getString('Write your feedback.'),
+                  hintText:AppLocalizations.of(context)!.write_your_feedback,
                 ),
                 onChanged: (value) => srProvider.setReviewText(value),
               ),
             ),
             const SizedBox(height: 30),
             CustomCommonButton(
-              btText: asProvider.getString('Submit'),
+              btText: AppLocalizations.of(context)!.submit,
               isLoading: srProvider.loadingSubmitReview,
               onPressed: () async {
                 FocusScope.of(context).unfocus();
                 if (srProvider.reviewText.trim().isEmpty) {
-                  showToast(asProvider.getString('Please write your feedback'),
+                  showToast(AppLocalizations.of(context)!.write_your_feedback,
                       cc.red);
                   return;
                 }

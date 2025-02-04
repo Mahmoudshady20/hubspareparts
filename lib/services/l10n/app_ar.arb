@@ -72,6 +72,7 @@
 "invalid_developer_keys": "مفاتيح المطور غير صالحة",
 "connection_failed": "فشل الاتصال",
 "payment_has_been_failed": "فشل الدفع.",
+"payment_failed": "فشل الدفع.",
 "item_added_to_cart": "تمت إضافة العنصر إلى عربة التسوق",
 "item_subtracted_from_cart": "تم خصم العنصر من عربة التسوق",
 "item_added_to_wishlist": "تمت إضافة العنصر إلى قائمة الرغبات",
@@ -315,5 +316,7 @@
   "search_country": "ابحث عن بلد",
   "search_city": "ابحث عن مدينة",
   "no_result_found": "لم يتم العثور على نتائج",
-  "product_stock_is_insufficient": "مخزون المنتج غير كافٍ"
+  "product_stock_is_insufficient": "مخزون المنتج غير كافٍ",
+  "ship_to_a_different_location": "توصيل إلى موقع مختلف؟",
+  "payment": "الدفع"
 }

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../helpers/common_helper.dart';
 
 class FieldTitle extends StatelessWidget {
-  String title;
-  FieldTitle(this.title, {super.key});
+  final String title;
+  const FieldTitle(this.title, {super.key});
   @override
   Widget build(BuildContext context) {
     return Padding(

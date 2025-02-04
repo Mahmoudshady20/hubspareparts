@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
-import '../../services/country_state_service.dart';
 import '../../services/profile_info_service.dart';
 import '../../utils/responsive.dart';
 import '../../views/edit_profile_view.dart';
@@ -179,7 +179,7 @@ class ProfileInfo extends StatelessWidget {
                       color: cc.pureWhite,
                     ),
                     label: Text(
-                      asProvider.getString('Edit profile'),
+                      AppLocalizations.of(context)!.edit_profile,
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             color: cc.pureWhite,
                           ),

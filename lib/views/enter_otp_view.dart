@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/auth_service/otp_service.dart';
@@ -49,7 +50,7 @@ class EnterOtpView extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Center(
                       child: Text(
-                        asProvider.getString('Verification Code'),
+                        AppLocalizations.of(context)!.verification_Code,
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!
@@ -110,9 +111,9 @@ class EnterOtpView extends StatelessWidget {
                                             RichText(
                                               softWrap: true,
                                               text: TextSpan(
-                                                text: asProvider.getString(
-                                                        "Didn't received?") +
-                                                    "",
+                                                text: AppLocalizations.of(
+                                                        context)!
+                                                    .didn_t_received,
                                                 style: TextStyle(
                                                   color: cc.greyHint,
                                                   fontWeight: FontWeight.w600,
@@ -154,8 +155,9 @@ class EnterOtpView extends StatelessWidget {
                                                                     context,
                                                                     null);
                                                           },
-                                                    text: asProvider.getString(
-                                                        'Send again.'),
+                                                    text: AppLocalizations.of(
+                                                            context)!
+                                                        .send_again,
                                                     style: TextStyle(
                                                         color: cc.primaryColor,
                                                         fontWeight:
@@ -229,9 +231,9 @@ class EnterOtpView extends StatelessWidget {
         if (s != otp &&
             s != Provider.of<OtpService>(context, listen: false).otpCode) {
           controller!.clear();
-          snackBar(context, asProvider.getString('Wrong OTP Code'),
+          snackBar(context, AppLocalizations.of(context)!.wrong_OTP_Code,
               backgroundColor: cc.red,
-              buttonText: asProvider.getString('Resend code'), onTap: () {
+              buttonText: AppLocalizations.of(context)!.resend_code, onTap: () {
             controller!.clear();
             Provider.of<OtpService>(context, listen: false)
                 .sendOTP(context, null);

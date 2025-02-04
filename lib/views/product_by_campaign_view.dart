@@ -6,6 +6,7 @@ import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/common/product_card.dart';
 import 'package:safecart/widgets/skelletons/product_card_skeleton.dart';
 import 'package:slide_countdown/slide_countdown.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/product_details_service.dart';
@@ -144,8 +145,7 @@ class ProductByCampaignView extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              Text(asProvider
-                                                  .getString('No item found')),
+                                              Text(AppLocalizations.of(context)!.no_item_found),
                                             ],
                                           ),
                                         )
@@ -220,7 +220,7 @@ class ProductByCampaignView extends StatelessWidget {
           .setNextLoading(true);
       Provider.of<SearchProductService>(context, listen: false)
           .setNextLoading(false);
-      showToast(asProvider.getString('No more product found'), cc.blackColor);
+      showToast(AppLocalizations.of(context)!.no_more_order_found, cc.blackColor);
     }
   }
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/services/ticket_list_service.dart';
@@ -113,15 +114,15 @@ class NewTicketService with ChangeNotifier {
         return;
       } else {
         setIsLoading(false);
-        showToast(asProvider.getString('Something went wrong'), cc.red);
+        showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
         print(response.reasonPhrase);
       }
     } on TimeoutException {
       setIsLoading(false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       setIsLoading(false);
-      showToast(asProvider.getString('Something went wrong'), cc.red);
+      showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
       print(err);
     }
   }
@@ -165,13 +166,13 @@ class NewTicketService with ChangeNotifier {
       } else {
         allDepartment = [];
         notifyListeners();
-        showToast(asProvider.getString('Something went wrong'), cc.red);
+        showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
         print(response.reasonPhrase);
       }
     } on TimeoutException {
       allDepartment = [];
       notifyListeners();
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       allDepartment = [];
       notifyListeners();

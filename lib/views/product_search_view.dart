@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart'
     as stgv;
 import 'package:safecart/services/search_filter_data_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/empty_space_helper.dart';
 import '../utils/custom_preloader.dart';
@@ -155,7 +156,7 @@ class ProductSearchView extends StatelessWidget {
                     initialValue: saProvider.selectedName,
                     textAlign: TextAlign.justify,
                     decoration: InputDecoration(
-                      hintText: asProvider.getString('Search your need here'),
+                      hintText: AppLocalizations.of(context)!.search_your_need_here,
                       prefixIcon: Padding(
                         padding: const EdgeInsets.all(12),
                         child: SvgPicture.asset(
@@ -217,7 +218,7 @@ class ProductSearchView extends StatelessWidget {
                                   saProvider.searchedProduct!.isEmpty
                               ? Center(
                                   child: Text(
-                                      asProvider.getString('No product found')),
+                                      AppLocalizations.of(context)!.no_more_product_found),
                                 )
                               : stgv.StaggeredGridView.countBuilder(
                                   crossAxisCount: 2, controller: controller,
@@ -302,7 +303,7 @@ class ProductSearchView extends StatelessWidget {
       // saProvider.setNextLoading(false);
 
       if (saProvider.nextPage == null) {
-        showToast(asProvider.getString('No more product found'), cc.blackColor);
+        showToast(AppLocalizations.of(context)!.no_more_product_found, cc.blackColor);
       }
     }
   }

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutterzilla_fixed_grid/flutterzilla_fixed_grid.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/widgets/common/product_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/product_details_service.dart';
@@ -61,7 +62,7 @@ class ProductByCategoryView extends StatelessWidget {
                             saProvider.searchedProduct!.isEmpty
                         ? Center(
                             child:
-                                Text(asProvider.getString('No product found')),
+                                Text(AppLocalizations.of(context)!.no_more_product_found),
                           )
                         : StaggeredGridView.countBuilder(
                             crossAxisCount: 2,
@@ -142,7 +143,7 @@ class ProductByCategoryView extends StatelessWidget {
       // saProvider.setNextLoading(false);
 
       if (saProvider.nextPage == null) {
-        showToast(asProvider.getString('No more product found'), cc.blackColor);
+        showToast(AppLocalizations.of(context)!.no_more_product_found, cc.blackColor);
       }
     }
   }

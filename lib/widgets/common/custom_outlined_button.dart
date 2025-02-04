@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
-  void Function()? onPressed;
+  final void Function()? onPressed;
   final String btText;
-  bool isLoading;
-  double? height;
-  double? width;
-  Color? color;
-  CustomOutlinedButton({
+  final bool isLoading;
+  final double? height;
+  final double? width;
+  final Color? color;
+  const CustomOutlinedButton({
     super.key,
     required this.onPressed,
     required this.btText,

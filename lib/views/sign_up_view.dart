@@ -6,6 +6,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:safecart/services/auth_service/sign_in_service.dart';
 import 'package:safecart/utils/country_dropdown.dart';
 import 'package:safecart/utils/state_dropdown.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../services/auth_service/sign_up_service.dart';
 import '../../services/country_state_service.dart';
@@ -40,16 +41,16 @@ class SignUpView extends StatelessWidget {
 
     final suProvider = Provider.of<SignUpService>(context, listen: false);
     if (suProvider.selectedCountry == null) {
-      showToast(asProvider.getString('You have to select a country'), cc.red);
+      showToast(AppLocalizations.of(context)!.you_have_to_select_a_country, cc.red);
       return;
     }
     if (suProvider.selectedState == null) {
-      showToast(asProvider.getString('You have to select a state'), cc.red);
+      showToast(AppLocalizations.of(context)!.you_have_to_select_a_state, cc.red);
       return;
     }
     if (suProvider.acceptTPP != true) {
       showToast(
-          asProvider.getString('You have to agree our terms and conditions'),
+          AppLocalizations.of(context)!.you_have_to_agree_our_terms_and_conditions,
           cc.red);
       return;
     }
@@ -92,7 +93,7 @@ class SignUpView extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Center(
                       child: Text(
-                        asProvider.getString('Welcome'),
+                        AppLocalizations.of(context)!.welcome,
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!
@@ -141,13 +142,12 @@ class SignUpView extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         FieldTitle(
-                                            asProvider.getString('Name')),
+                                            AppLocalizations.of(context)!.name),
                                         TextFormField(
                                           controller: _nameController,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                              hintText: asProvider
-                                                  .getString('Enter your name'),
+                                              hintText: AppLocalizations.of(context)!.enter_your_name,
                                               prefixIcon: Padding(
                                                   padding:
                                                       const EdgeInsets.all(12),
@@ -157,21 +157,19 @@ class SignUpView extends StatelessWidget {
                                             if (value == null ||
                                                 value.trim().isEmpty ||
                                                 value.length < 3) {
-                                              return asProvider.getString(
-                                                  'Enter a valid name');
+                                              return AppLocalizations.of(context)!.enter_a_valid_name;
                                             }
                                             return null;
                                           },
                                         ),
                                         EmptySpaceHelper.emptyHight(10),
                                         FieldTitle(
-                                            asProvider.getString('Username')),
+                                            AppLocalizations.of(context)!.username),
                                         TextFormField(
                                           controller: _userNameController,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: asProvider.getString(
-                                                'Enter your username'),
+                                            hintText: AppLocalizations.of(context)!.enter_your_username,
                                             prefixIcon: Padding(
                                               padding: const EdgeInsets.all(12),
                                               child: SvgPicture.asset(
@@ -182,23 +180,21 @@ class SignUpView extends StatelessWidget {
                                             if (value == null ||
                                                 value.trim().isEmpty ||
                                                 value.length < 3) {
-                                              return asProvider.getString(
-                                                  'Enter a valid username');
+                                              return AppLocalizations.of(context)!.enter_a_valid_username;
                                             }
                                             return null;
                                           },
                                         ),
                                         EmptySpaceHelper.emptyHight(10),
                                         FieldTitle(
-                                            asProvider.getString('Email')),
+                                            AppLocalizations.of(context)!.email),
                                         TextFormField(
                                           controller: _emailController,
                                           textInputAction: TextInputAction.next,
                                           keyboardType:
                                               TextInputType.emailAddress,
                                           decoration: InputDecoration(
-                                            hintText: asProvider
-                                                .getString('Enter your email'),
+                                            hintText: AppLocalizations.of(context)!.enter_your_email,
                                             prefixIcon: Padding(
                                               padding: const EdgeInsets.all(12),
                                               child: SvgPicture.asset(
@@ -208,8 +204,7 @@ class SignUpView extends StatelessWidget {
                                           validator: (value) {
                                             if (!EmailValidator.validate(
                                                 value ?? '')) {
-                                              return asProvider.getString(
-                                                  'Enter a valid email address');
+                                              return AppLocalizations.of(context)!.enter_a_valid_email_address;
                                             }
                                             return null;
                                           },
@@ -294,14 +289,13 @@ class SignUpView extends StatelessWidget {
                                         //       : EmptySpaceHelper.emptyHight(10);
                                         // }),
                                         FieldTitle(
-                                            asProvider.getString('Phone')),
+                                            AppLocalizations.of(context)!.phone),
                                         TextFormField(
                                           controller: _phoneController,
                                           textInputAction: TextInputAction.next,
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
-                                            hintText: asProvider.getString(
-                                                'Enter your phone number'),
+                                            hintText:AppLocalizations.of(context)!.enter_your_phone_number,
                                             prefixIcon: Padding(
                                               padding: const EdgeInsets.all(12),
                                               child: SvgPicture.asset(
@@ -311,15 +305,14 @@ class SignUpView extends StatelessWidget {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty) {
-                                              return asProvider.getString(
-                                                  'Enter your phone number');
+                                              return AppLocalizations.of(context)!.enter_your_phone_number;
                                             }
                                             return null;
                                           },
                                         ),
                                         EmptySpaceHelper.emptyHight(10),
                                         FieldTitle(
-                                            asProvider.getString('Password')),
+                                            AppLocalizations.of(context)!.password),
                                         Consumer<SignUpService>(builder:
                                             (context, suProvider, child) {
                                           return TextFormField(
@@ -329,8 +322,7 @@ class SignUpView extends StatelessWidget {
                                             obscureText:
                                                 suProvider.obscurePasswordOne,
                                             decoration: InputDecoration(
-                                              hintText: asProvider.getString(
-                                                  'Enter your Password'),
+                                              hintText: AppLocalizations.of(context)!.enter_your_Password,
                                               prefixIcon: Padding(
                                                 padding:
                                                     const EdgeInsets.all(12),
@@ -356,24 +348,21 @@ class SignUpView extends StatelessWidget {
                                               if (value == null ||
                                                   value.trim().isEmpty ||
                                                   value.length < 6) {
-                                                return asProvider.getString(
-                                                    'Password must be at least 6 character');
+                                                return AppLocalizations.of(context)!.password_must_be_more_then_character;
                                               }
                                               return null;
                                             },
                                           );
                                         }),
                                         EmptySpaceHelper.emptyHight(10),
-                                        FieldTitle(asProvider
-                                            .getString('Confirm Password')),
+                                        FieldTitle(AppLocalizations.of(context)!.confirm_new_password),
                                         Consumer<SignUpService>(builder:
                                             (context, suProvider, child) {
                                           return TextFormField(
                                             obscureText:
                                                 suProvider.obscurePasswordTwo,
                                             decoration: InputDecoration(
-                                              hintText: asProvider.getString(
-                                                  'Re-enter your Password'),
+                                              hintText: AppLocalizations.of(context)!.re_enter_your_Password,
                                               prefixIcon: Padding(
                                                 padding:
                                                     const EdgeInsets.all(12),
@@ -398,8 +387,7 @@ class SignUpView extends StatelessWidget {
                                             validator: (value) {
                                               if (_newPassController.text !=
                                                   value) {
-                                                return asProvider.getString(
-                                                    "Password didn't match");
+                                                return AppLocalizations.of(context)!.password_didn_match;
                                               }
                                               return null;
                                             },
@@ -429,7 +417,7 @@ class SignUpView extends StatelessWidget {
                                                 overflow: TextOverflow.ellipsis,
                                                 text: TextSpan(
                                                     text:
-                                                        '${asProvider.getString('By creating an account,you agree to the')} ',
+                                                        '${AppLocalizations.of(context)!.by_creating_an_account_you_agree_to_the} ',
                                                     style: TextStyle(
                                                       color: cc.greyHint,
                                                       fontWeight:
@@ -454,15 +442,13 @@ class SignUpView extends StatelessWidget {
                                                                         '$baseApi/terms-and-condition-page'
                                                                       ]);
                                                                 },
-                                                          text: asProvider
-                                                              .getString(
-                                                                  'terms of service and Conditions'),
+                                                          text: AppLocalizations.of(context)!.terms_of_service_and_Conditions,
                                                           style: TextStyle(
                                                               color: cc
                                                                   .secondaryColor)),
                                                       TextSpan(
                                                           text:
-                                                              ', ${asProvider.getString('and')} ',
+                                                              ', ${AppLocalizations.of(context)!.and} ',
                                                           style: TextStyle(
                                                               color:
                                                                   cc.greyHint)),
@@ -484,9 +470,7 @@ class SignUpView extends StatelessWidget {
                                                                         '$baseApi/privacy-policy-page'
                                                                       ]);
                                                                 },
-                                                          text: asProvider
-                                                              .getString(
-                                                                  'privacy policy.'),
+                                                          text:AppLocalizations.of(context)!.privacy_Policy,
                                                           style: TextStyle(
                                                               color: cc
                                                                   .secondaryColor)),
@@ -499,8 +483,7 @@ class SignUpView extends StatelessWidget {
                                         Consumer<SignUpService>(builder:
                                             (context, suProvider, child) {
                                           return CustomCommonButton(
-                                              btText: asProvider
-                                                  .getString('Sign Up'),
+                                              btText:AppLocalizations.of(context)!.sign_up,
                                               isLoading:
                                                   suProvider.loadingSignUp,
                                               onPressed: () {
@@ -548,8 +531,7 @@ class SignUpView extends StatelessWidget {
                                           child: RichText(
                                             softWrap: true,
                                             text: TextSpan(
-                                                text: asProvider.getString(
-                                                    'Already have an account?'),
+                                                text: AppLocalizations.of(context)!.already_have_an_account,
                                                 style: TextStyle(
                                                   color: cc.greyHint,
                                                   fontWeight: FontWeight.w600,
@@ -575,8 +557,7 @@ class SignUpView extends StatelessWidget {
                                                               Navigator.pop(
                                                                   context);
                                                             },
-                                                      text: asProvider
-                                                          .getString('Sign In'),
+                                                      text: AppLocalizations.of(context)!.sign_In,
                                                       style: TextStyle(
                                                           color: cc
                                                               .secondaryColor)),
@@ -613,8 +594,7 @@ class SignUpView extends StatelessWidget {
                                                         child:
                                                             CustomPreloader(),
                                                       )
-                                                    : Text(asProvider.getString(
-                                                        'Sign up with Google'))),
+                                                    : Text(AppLocalizations.of(context)!.sign_up_with_Google)),
                                           );
                                         }),
                                         EmptySpaceHelper.emptyHight(10),
@@ -645,8 +625,7 @@ class SignUpView extends StatelessWidget {
                                                         child:
                                                             CustomPreloader(),
                                                       )
-                                                    : Text(asProvider.getString(
-                                                        'Sign up with Facebook'))),
+                                                    : Text(AppLocalizations.of(context)!.sign_up_with_Facebook)),
                                           );
                                         }),
                                         EmptySpaceHelper.emptyHight(30),

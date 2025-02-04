@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/utils/custom_preloader.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/orders_service/order_list_service.dart';
@@ -51,7 +52,7 @@ class OrdersListView extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Center(
                       child: Text(
-                        asProvider.getString('My orders'),
+                        AppLocalizations.of(context)!.my_orders,
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!
@@ -130,8 +131,7 @@ class OrdersListView extends StatelessWidget {
                                     : SizedBox(
                                         height: screenHeight / 2.5,
                                         child: Center(
-                                          child: Text(asProvider
-                                              .getString('No order found.')),
+                                          child: Text(AppLocalizations.of(context)!.no_order_found),
                                         ),
                                       );
                               });
@@ -165,7 +165,7 @@ class OrdersListView extends StatelessWidget {
     if (controller.offset >= controller.position.maxScrollExtent &&
         !controller.position.outOfRange) {
       if (oService.orderListModel?.nextPageUrl == null) {
-        showToast('No more order found', cc.blackColor);
+        showToast(AppLocalizations.of(context)!.no_more_order_found, cc.blackColor);
         return;
       }
       if (orderListData?.nextPageUrl != null && !oService.loadingNextPage) {

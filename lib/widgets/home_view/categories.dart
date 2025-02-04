@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/home_categories_service.dart';
 import 'package:safecart/services/search_product_service.dart';
 import 'package:safecart/views/product_by_category_view.dart';
 import 'package:safecart/widgets/home_view/category_card.dart';
 
-import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
 import '../common/title_common.dart';
 import '../skelletons/category_card_skeleton.dart';
@@ -29,7 +29,7 @@ class Categories extends StatelessWidget {
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TitleCommon(
-                          asProvider.getString('Find Your Style'),
+                          AppLocalizations.of(context)!.find_Your_Style,
                           () {},
                           seeAll: false,
                         ),

@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/payment_gateway_service.dart';
@@ -90,10 +91,10 @@ void showToast(String msg, Color? color, {int timeInSecForIosWeb = 1}) {
 }
 
 Future<bool> checkConnection(BuildContext context) async {
-  final asProvider = Provider.of<AppStringService>(context, listen: false);
   var connectivityResult = await (Connectivity().checkConnectivity());
-  if (connectivityResult == ConnectivityResult.none) {
-    showToast(asProvider.getString("Please turn on your internet connection"),
+  if (ConnectivityResult.none == connectivityResult) {
+    showToast(
+        AppLocalizations.of(context)!.please_turn_on_your_internet_connection,
         cc.blackColor);
     return false;
   } else {
@@ -162,9 +163,7 @@ extension StringExtension on String {
 errorWidget() {
   return Column(
     children: [
-      Container(
-        child: Image.asset('assets/images/error.png'),
-      ),
+      Image.asset('assets/images/error.png'),
       EmptySpaceHelper.emptyHight(15),
       Center(
         child: Text(

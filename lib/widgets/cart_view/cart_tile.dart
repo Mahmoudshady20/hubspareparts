@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/widgets/common/image_loading_failed.dart';
@@ -258,7 +259,8 @@ class CartTile extends StatelessWidget {
                             Provider.of<CartDataService>(context, listen: false)
                                 .deleteCartItem(id, rowId);
                             showToast(
-                                asProvider.getString('Item removed from cart'),
+                                AppLocalizations.of(context)!
+                                    .item_removed_from_cart,
                                 cc.blackColor);
                           },
                         );
@@ -281,15 +283,16 @@ class CartTile extends StatelessWidget {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text(asProvider.getString('Are you sure?')),
-              content: Text(asProvider.getString('This Item will be Deleted.')),
+              title: Text(AppLocalizations.of(context)!.are_you_sure),
+              content:
+                  Text(AppLocalizations.of(context)!.this_Item_will_be_Deleted),
               actions: [
                 TextButton(
                     onPressed: (() {
                       Navigator.pop(context);
                     }),
                     child: Text(
-                      asProvider.getString('No'),
+                      AppLocalizations.of(context)!.no,
                       style: TextStyle(color: cc.green),
                     )),
                 TextButton(
@@ -298,7 +301,7 @@ class CartTile extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      asProvider.getString('Yes'),
+                      AppLocalizations.of(context)!.yes,
                       style: TextStyle(color: cc.pink),
                     ))
               ],

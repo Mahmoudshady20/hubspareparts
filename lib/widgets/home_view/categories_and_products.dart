@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:safecart/views/all_categories_view.dart';
 import 'package:safecart/widgets/common/product_slider.dart';
+
+import '../../helpers/empty_space_helper.dart';
 import '../../services/home_categories_service.dart';
 import '../../widgets/skelletons/homepage_title_skeleton.dart';
-
-import '../../helpers/common_helper.dart';
-import '../../helpers/empty_space_helper.dart';
-import 'package:safecart/views/all_categories_view.dart';
 import '../common/title_common.dart';
 import '../skelletons/category_chip_skeleton.dart';
 import '../skelletons/product_card_skeleton.dart';
@@ -27,7 +27,7 @@ class CategoriesAndProducts extends StatelessWidget {
                   ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: TitleCommon(
-                        asProvider.getString('Hot Items'),
+                        AppLocalizations.of(context)!.hot_Items,
                         () {
                           Navigator.of(context)
                               .pushNamed(AllCategoriesView.routeName);

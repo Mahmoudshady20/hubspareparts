@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/utils/custom_preloader.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/new_ticket_service.dart';
@@ -21,7 +22,7 @@ class NewTicketView extends StatelessWidget {
     final validated = _formKey.currentState!.validate();
     if (!validated) {
       snackBar(context,
-          asProvider.getString("Please give all the information properly"),
+          AppLocalizations.of(context)!.please_give_all_the_information_properly,
           backgroundColor: cc.red);
       return;
     }
@@ -60,7 +61,7 @@ class NewTicketView extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Center(
                       child: Text(
-                        asProvider.getString('Add new ticket'),
+                        AppLocalizations.of(context)!.add_new_ticket,
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!

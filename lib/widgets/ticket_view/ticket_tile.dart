@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/ticket_chat_service.dart';
 import 'package:safecart/services/ticket_list_service.dart';
+import 'package:safecart/utils/responsive.dart';
+import 'package:safecart/views/ticket_chat_view.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../services/rtl_service.dart';
-import 'package:safecart/utils/responsive.dart';
-import 'package:safecart/views/ticket_chat_view.dart';
 
 class TicketTile extends StatelessWidget {
   final String title;
@@ -19,8 +20,8 @@ class TicketTile extends StatelessWidget {
     this.ticketId,
     this.priority,
     this.status, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,7 @@ class TicketTile extends StatelessWidget {
                       child: FittedBox(
                         child: Row(
                           children: [
-                            Text(asProvider.getString('Priority') + ':'),
+                            Text('${AppLocalizations.of(context)!.priority}:'),
                             const SizedBox(width: 5),
                             Consumer<TicketListService>(
                                 builder: (context, tlProviderm, child) {

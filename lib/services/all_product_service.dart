@@ -2,10 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:http/http.dart' as http;
 import 'package:safecart/models/search_product_model.dart';
 
 import '../helpers/common_helper.dart';
-import 'package:http/http.dart' as http;
 
 class AllProductsService with ChangeNotifier {
   List<Datum>? allProducts;
@@ -56,7 +57,7 @@ class AllProductsService with ChangeNotifier {
         print(response.reasonPhrase);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       print(err);
     } finally {
@@ -94,7 +95,7 @@ class AllProductsService with ChangeNotifier {
         print(response.reasonPhrase);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       print(err);
     } finally {

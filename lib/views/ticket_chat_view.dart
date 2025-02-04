@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/ticket_chat_service.dart';
 import 'package:safecart/widgets/common/boxed_back_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/rtl_service.dart';
@@ -14,13 +15,31 @@ import '../utils/responsive.dart';
 import '../widgets/common/custom_common_button.dart';
 import '../widgets/common/image_view.dart';
 
-class TicketChatView extends StatelessWidget {
-  String title;
+class TicketChatView extends StatefulWidget {
+  final String title;
   final id;
-  TicketChatView(this.title, this.id, {Key? key}) : super(key: key);
-  Key textFieldKey = const Key('key');
-  final TextEditingController _controller = TextEditingController();
+  const TicketChatView(this.title, this.id, {super.key});
 
+  @override
+  State<TicketChatView> createState() => _TicketChatViewState();
+}
+
+class _TicketChatViewState extends State<TicketChatView> {
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    textFieldKey = const Key('key');
+    super.initState();
+  }
+  late Key textFieldKey;
+
+  late TextEditingController _controller;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
   Future<void> imageSelector(
     BuildContext context,
   ) async {
@@ -54,14 +73,14 @@ class TicketChatView extends StatelessWidget {
             title: RichText(
               softWrap: true,
               text: TextSpan(
-                  text: '#$id',
+                  text: '#${widget.id}',
                   style: TextStyle(
                       color: cc.primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 19),
                   children: [
                     TextSpan(
-                        text: ' $title',
+                        text: ' ${widget.title}',
                         style: TextStyle(color: cc.blackColor)),
                   ]),
             ),
@@ -105,7 +124,7 @@ class TicketChatView extends StatelessWidget {
                         controller: _controller,
                         decoration: InputDecoration(
                           isDense: true,
-                          hintText: asProvider.getString('Write message'),
+                          hintText: AppLocalizations.of(context)!.write_message,
                           hintStyle:
                               TextStyle(color: cc.greyHint, fontSize: 14),
                           enabledBorder: OutlineInputBorder(
@@ -131,7 +150,7 @@ class TicketChatView extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          asProvider.getString('File'),
+                          AppLocalizations.of(context)!.file,
                           style: TextStyle(
                               color: cc.greyHint, fontWeight: FontWeight.w600),
                         ),
@@ -146,7 +165,7 @@ class TicketChatView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(color: cc.greyBorder2)),
                             child: Text(
-                              asProvider.getString('Choose file'),
+                              AppLocalizations.of(context)!.choose_file,
                               style: TextStyle(color: cc.greyHint),
                             ),
                           ),
@@ -156,7 +175,7 @@ class TicketChatView extends StatelessWidget {
                           width: screenWidth / 3,
                           child: Text(
                             tcProvider.pickedImage == null
-                                ? asProvider.getString('No file chosen')
+                                ? AppLocalizations.of(context)!.no_file_chosen
                                 : tcProvider.pickedImage!.path.split('/').last,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
@@ -196,7 +215,7 @@ class TicketChatView extends StatelessWidget {
                         RichText(
                           softWrap: true,
                           text: TextSpan(
-                            text: asProvider.getString('Notify via mail'),
+                            text:AppLocalizations.of(context)!.notify_via_mail,
                             style: TextStyle(color: cc.greyHint, fontSize: 13
                                 // fontWeight: FontWeight.w600,
                                 ),
@@ -213,7 +232,7 @@ class TicketChatView extends StatelessWidget {
                       child: Stack(
                         children: [
                           CustomCommonButton(
-                            btText: asProvider.getString('Send'),
+                            btText: AppLocalizations.of(context)!.send,
                             isLoading: tcProvider.isLoading,
                             onPressed: tcProvider.message == '' &&
                                     tcProvider.pickedImage == null
@@ -273,7 +292,7 @@ class TicketChatView extends StatelessWidget {
     } else if (tcProvider.noMessage) {
       return Center(
         child: Text(
-          asProvider.getString('No Message has been found!'),
+          AppLocalizations.of(context)!.no_Message_has_been_found,
           style: TextStyle(color: cc.greyHint),
         ),
       );

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:safecart/models/ticket_list_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 
@@ -119,7 +120,7 @@ class TicketListService with ChangeNotifier {
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
       print(err);
@@ -158,10 +159,10 @@ class TicketListService with ChangeNotifier {
       }
     } on TimeoutException {
       setLoadingNextPage(false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       setLoadingNextPage(false);
-      showToast(asProvider.getString('Something went wrong'), cc.red);
+      showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
       print(err);
     }
   }
@@ -192,15 +193,15 @@ class TicketListService with ChangeNotifier {
         final data = jsonDecode(await response.stream.bytesToString());
         ticketsList.firstWhere((element) => element.id == id).status =
             status.toLowerCase();
-        showToast(asProvider.getString('Status Change successful'), cc.green);
+        showToast(AppLocalizations.of(context)!.status_Change_successful, cc.green);
         notifyListeners();
         return;
       } else {
-        showToast(asProvider.getString('Status Change failed'), cc.red);
+        showToast(AppLocalizations.of(context)!.status_Change_failed, cc.red);
         print(response.reasonPhrase);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
       print(err);
@@ -233,16 +234,16 @@ class TicketListService with ChangeNotifier {
         final data = jsonDecode(await response.stream.bytesToString());
         ticketsList.firstWhere((element) => element.id == id).priority =
             value.toLowerCase();
-        showToast(asProvider.getString('Priority Change successful'), cc.green);
+        showToast(AppLocalizations.of(context)!.priority_Change_successful, cc.green);
         print(data);
         notifyListeners();
         return;
       } else {
-        showToast(asProvider.getString('Priority Change failed'), cc.red);
+        showToast(AppLocalizations.of(context)!.priority_Change_failed, cc.red);
         print(response.reasonPhrase);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
       print(err);

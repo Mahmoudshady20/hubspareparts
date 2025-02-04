@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 // import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/cart_data_service.dart';
+import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/wishlist_view/wishlist_to_cart.dart';
 
 import '../../helpers/common_helper.dart';
@@ -11,7 +13,6 @@ import '../../helpers/empty_space_helper.dart';
 import '../../services/product_details_service.dart';
 import '../../services/rtl_service.dart';
 import '../../services/wishlist_data_service.dart';
-import 'package:safecart/utils/responsive.dart';
 import '../common/custom_icon_button.dart';
 import '../common/image_loading_failed.dart';
 
@@ -241,8 +242,8 @@ class WishlistTile extends StatelessWidget {
                                       listen: false)
                                   .deleteWishlistItem(id, context);
                               showToast(
-                                  asProvider
-                                      .getString('Item removed from wishlist'),
+                                  AppLocalizations.of(context)!
+                                      .items_removed_from_wishlist,
                                   cc.blackColor);
                             },
                           );
@@ -293,15 +294,16 @@ class WishlistTile extends StatelessWidget {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text(asProvider.getString('Are you sure?')),
-              content: Text(asProvider.getString('This Item will be Deleted.')),
+              title: Text(AppLocalizations.of(context)!.are_you_sure),
+              content:
+                  Text(AppLocalizations.of(context)!.this_Item_will_be_Deleted),
               actions: [
                 TextButton(
                     onPressed: (() {
                       Navigator.pop(context);
                     }),
                     child: Text(
-                      asProvider.getString('No'),
+                      AppLocalizations.of(context)!.no,
                       style: TextStyle(color: cc.green),
                     )),
                 TextButton(
@@ -310,7 +312,7 @@ class WishlistTile extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      asProvider.getString('Yes'),
+                      AppLocalizations.of(context)!.yes,
                       style: TextStyle(color: cc.pink),
                     ))
               ],

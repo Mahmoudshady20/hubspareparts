@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/auth_service/otp_service.dart';
 import 'package:safecart/services/auth_service/reset_password_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/empty_space_helper.dart';
@@ -82,7 +83,7 @@ class ResetPasswordView extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Center(
                       child: Text(
-                        asProvider.getString('Enter your password'),
+                        AppLocalizations.of(context)!.enter_your_Password,
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!
@@ -131,12 +132,11 @@ class ResetPasswordView extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         FieldTitle(
-                                            asProvider.getString('Email')),
+                                            AppLocalizations.of(context)!.email),
                                         TextFormField(
                                           controller: _emailController,
                                           decoration: InputDecoration(
-                                            hintText: asProvider
-                                                .getString('Enter your email'),
+                                            hintText: AppLocalizations.of(context)!.enter_your_email,
                                             prefixIcon: Padding(
                                               padding: const EdgeInsets.all(12),
                                               child: SvgPicture.asset(
@@ -146,8 +146,7 @@ class ResetPasswordView extends StatelessWidget {
                                           validator: (value) {
                                             if (!EmailValidator.validate(
                                                 value ?? '')) {
-                                              return asProvider.getString(
-                                                  'Enter a valid email address');
+                                              return AppLocalizations.of(context)!.enter_a_valid_email_address;
                                             }
                                             return null;
                                           },
@@ -159,8 +158,7 @@ class ResetPasswordView extends StatelessWidget {
                                         Consumer<OtpService>(builder:
                                             (context, otpProvider, child) {
                                           return CustomCommonButton(
-                                              btText: asProvider.getString(
-                                                  'Send verification code'),
+                                              btText: AppLocalizations.of(context)!.send_verification_code,
                                               isLoading:
                                                   otpProvider.loadingSendOTP,
                                               onPressed: () async {

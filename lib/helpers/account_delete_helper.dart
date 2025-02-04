@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:safecart/services/auth_service/account_delete_service.dart';
 
-import '../services/app_strings_service.dart';
 import '../utils/custom_preloader.dart';
 import '../widgets/common/custom_outlined_button.dart';
 import 'common_helper.dart';
 
 class AccountDelete {
   delete(BuildContext context, {title, description}) async {
-    final asProvider = Provider.of<AppStringService>(context, listen: false);
     bool deleteAccount = false;
     await Alert(
         context: context,
         style: AlertStyle(
             alertElevation: 0,
-            overlayColor: cc.blackColor.withOpacity(.6),
+            overlayColor: cc.blackColor.withValues(alpha: .6),
             alertPadding: const EdgeInsets.all(25),
             isButtonVisible: false,
             alertBorder: RoundedRectangleBorder(
@@ -35,7 +34,7 @@ class AccountDelete {
             borderRadius: BorderRadius.circular(7),
             boxShadow: [
               BoxShadow(
-                  color: cc.blackColor.withOpacity(0.01),
+                  color: cc.blackColor.withValues(alpha: 0.01),
                   spreadRadius: -2,
                   blurRadius: 13,
                   offset: const Offset(0, 13)),
@@ -44,7 +43,7 @@ class AccountDelete {
           child: Column(
             children: [
               Text(
-                title ?? asProvider.getString("Are you sure?"),
+                title ?? AppLocalizations.of(context)!.are_you_sure,
                 style: TextStyle(color: cc.greytitle, fontSize: 17),
               ),
               const SizedBox(
@@ -55,7 +54,7 @@ class AccountDelete {
                   CustomOutlinedButton(
                     isLoading: false,
                     width: 100,
-                    btText: asProvider.getString("Cancel"),
+                    btText: AppLocalizations.of(context)!.cancel,
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -96,8 +95,8 @@ class AccountDelete {
                               },
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.resolveWith((states) {
-                            if (states.contains(MaterialState.pressed)) {
+                              WidgetStateProperty.resolveWith((states) {
+                            if (states.contains(WidgetState.pressed)) {
                               return cc.blackColor;
                             }
                             return cc.red;
@@ -111,7 +110,7 @@ class AccountDelete {
                                   ),
                                 ),
                               )
-                            : Text(asProvider.getString("Delete")),
+                            : Text(AppLocalizations.of(context)!.delete),
                       );
                     }),
                   ),

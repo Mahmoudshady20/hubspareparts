@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/helpers/empty_space_helper.dart';
 
 import '../../helpers/common_helper.dart';
+import '../../services/cart_data_service.dart';
+import '../../services/product_details_service.dart';
 import '../../services/rtl_service.dart';
 import '../../utils/custom_preloader.dart';
 import '../../utils/responsive.dart';
 import '../../widgets/common/custom_common_button.dart';
 import '../../widgets/product_details_view/product_attributes.dart';
-import '../../services/cart_data_service.dart';
-import '../../services/product_details_service.dart';
 
 class WishlistToCart extends StatelessWidget {
   final dynamic id;
@@ -98,9 +99,7 @@ class WishlistToCart extends StatelessWidget {
                                     margin: const EdgeInsets.symmetric(
                                         vertical: 15),
                                     child: Text(
-                                      asProvider
-                                              .getString('Select attributes') +
-                                          ':',
+                                      '${AppLocalizations.of(context)!.select_attributes}:',
                                       style: const TextStyle(
                                           fontSize: 19,
                                           fontWeight: FontWeight.w600),
@@ -120,17 +119,17 @@ class WishlistToCart extends StatelessWidget {
                             child: CustomCommonButton(
                               btText: pdService.cartAble
                                   ? rtlProvider.curRtl
-                                      ? '${asProvider.getString('Add to cart')} ${rtlProvider.currency}${pdService.productSalePrice} '
-                                      : '${rtlProvider.currency}${pdService.productSalePrice} ${asProvider.getString('Add to cart')}'
-                                  : asProvider.getString(
-                                      'Select all attribute to proceed'),
+                                      ? '${AppLocalizations.of(context)!.add_to_cart} ${rtlProvider.currency}${pdService.productSalePrice} '
+                                      : '${rtlProvider.currency}${pdService.productSalePrice} ${AppLocalizations.of(context)!.add_to_cart}'
+                                  : AppLocalizations.of(context)!
+                                      .select_all_attribute_to_proceed,
                               isLoading: false,
                               width: double.infinity,
                               onPressed: () {
                                 if (!pdService.cartAble) {
                                   showToast(
-                                      asProvider.getString(
-                                          'Please select an attribute set'),
+                                      AppLocalizations.of(context)!
+                                          .please_select_an_attribute_set,
                                       cc.red);
                                   return;
                                 }

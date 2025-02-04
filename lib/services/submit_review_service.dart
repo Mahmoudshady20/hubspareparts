@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/services/product_details_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 
@@ -58,17 +59,17 @@ class SubmitReviewService with ChangeNotifier {
       if (response.statusCode == 200) {
         await Provider.of<ProductDetailsService>(context, listen: false)
             .fetchProductDetails(id);
-        showToast(asProvider.getString('Review submitted'), cc.primaryColor);
+        showToast(AppLocalizations.of(context)!.review_submitted, cc.primaryColor);
         setLoadingSubmitReview(false);
         print(data);
         return;
       } else {
-        showToast(asProvider.getString('Review submission failed'), cc.red);
+        showToast(AppLocalizations.of(context)!.review_submission_failed, cc.red);
         setLoadingSubmitReview(false);
         print(data);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       setLoadingSubmitReview(false);
     } catch (err) {
       showToast(err.toString(), cc.red);

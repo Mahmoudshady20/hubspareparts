@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/internet_checker_service.dart';
 import 'package:safecart/utils/responsive.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
@@ -53,7 +54,7 @@ class InternetCheckerWidget extends StatelessWidget {
                     ),
                     EmptySpaceHelper.emptyHight(16),
                     Text(
-                      asProvider.getString('Oops!'),
+                      AppLocalizations.of(context)!.oops,
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
@@ -61,7 +62,7 @@ class InternetCheckerWidget extends StatelessWidget {
                     ),
                     EmptySpaceHelper.emptyHight(8),
                     Text(
-                      asProvider.getString('No wifi or cellular data found'),
+                      AppLocalizations.of(context)!.no_wifi_or_cellular_data_found,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     EmptySpaceHelper.emptyHight(24),

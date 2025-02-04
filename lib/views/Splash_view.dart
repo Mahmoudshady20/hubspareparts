@@ -5,7 +5,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/auth_service/save_sign_in_info_service.dart';
-import 'package:safecart/services/country_state_service.dart';
 import 'package:safecart/services/intro_service.dart';
 import 'package:safecart/services/profile_info_service.dart';
 import 'package:safecart/services/rtl_service.dart';

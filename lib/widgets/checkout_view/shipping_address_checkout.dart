@@ -1,5 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/calculate_tax_service.dart';
 import 'package:safecart/utils/city_dropdown.dart';
@@ -7,18 +8,15 @@ import 'package:safecart/utils/country_dropdown.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/utils/state_dropdown.dart';
 
-import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
 import '../../models/city_dropdown_model.dart';
 import '../../models/country_model.dart';
 import '../../models/state_model.dart';
 import '../../services/auth_service/sign_in_service.dart';
 import '../../services/checkout_service/shipping_address_service.dart';
-import '../../services/country_state_service.dart';
 import '../../services/profile_info_service.dart';
 import '../../views/add_new_shipping_address_view.dart';
 import '../../views/sign_in_view.dart';
-import '../common/custom_dropdown.dart';
 import '../common/custom_outlined_button.dart';
 import '../common/field_title.dart';
 import 'shipping_address_chip.dart';
@@ -77,7 +75,7 @@ class SippingAddressCheckout extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            asProvider.getString('Saved Addresses'),
+            AppLocalizations.of(context)!.saved_Addresses,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -102,7 +100,7 @@ class SippingAddressCheckout extends StatelessWidget {
                               setInfoFromProfile(context);
                             });
                           }),
-                          btText: asProvider.getString('Sign In'),
+                          btText: AppLocalizations.of(context)!.sign_In,
                           isLoading: false),
                     )
                   : Consumer<ShippingAddressService>(
@@ -128,8 +126,8 @@ class SippingAddressCheckout extends StatelessWidget {
                                         },
                                       ));
                                     },
-                                    btText:
-                                        asProvider.getString('Add new address'),
+                                    btText: AppLocalizations.of(context)!
+                                        .add_new_Address,
                                     isLoading: false)
                                 : ListView.separated(
                                     scrollDirection: Axis.horizontal,
@@ -192,7 +190,7 @@ class SippingAddressCheckout extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      asProvider.getString('Shipping information'),
+                      AppLocalizations.of(context)!.shipping_information,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
@@ -210,38 +208,40 @@ class SippingAddressCheckout extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      FieldTitle(asProvider.getString('Title')),
+                      FieldTitle(AppLocalizations.of(context)!.title),
                       TextFormField(
                         controller: _titleController,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                            hintText: asProvider.getString('Enter a title')),
+                            hintText:
+                                AppLocalizations.of(context)!.enter_a_title),
                         onChanged: (value) {
                           saProvider.setTitle(value);
                           saProvider.setSelectedShippingAddress(null, context);
                         },
                       ),
                       EmptySpaceHelper.emptyHight(10),
-                      FieldTitle(asProvider.getString('Email')),
+                      FieldTitle(AppLocalizations.of(context)!.email),
                       TextFormField(
                         controller: _emailController,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                            hintText: asProvider.getString('Enter an email')),
+                            hintText:
+                                AppLocalizations.of(context)!.enter_an_email),
                         onChanged: (value) {
                           saProvider.setEmail(value);
                           saProvider.setSelectedShippingAddress(null, context);
                         },
                       ),
                       EmptySpaceHelper.emptyHight(10),
-                      FieldTitle(asProvider.getString('Phone')),
+                      FieldTitle(AppLocalizations.of(context)!.phone),
                       TextFormField(
                         controller: _phoneController,
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
-                            hintText:
-                                asProvider.getString('Enter a phone number')),
+                            hintText: AppLocalizations.of(context)!
+                                .enter_a_phone_number),
                         onChanged: (value) {
                           saProvider.setPhone(value);
                           saProvider.setSelectedShippingAddress(null, context);
@@ -312,24 +312,25 @@ class SippingAddressCheckout extends StatelessWidget {
                           );
                         });
                       }),
-                      FieldTitle(asProvider.getString('Address')),
+                      FieldTitle(AppLocalizations.of(context)!.address),
                       TextFormField(
                         controller: _addressController,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                            hintText: asProvider.getString('Enter an address')),
+                            hintText:
+                                AppLocalizations.of(context)!.enter_an_address),
                         onChanged: (value) {
                           saProvider.setStreetAddress(value);
                           saProvider.setSelectedShippingAddress(null, context);
                         },
                       ),
                       EmptySpaceHelper.emptyHight(10),
-                      FieldTitle(asProvider.getString('Zipcode')),
+                      FieldTitle(AppLocalizations.of(context)!.zipcode),
                       TextFormField(
                         controller: _zipcodeController,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                          hintText: asProvider.getString('Enter zipcode'),
+                          hintText: AppLocalizations.of(context)!.enter_zipcode,
                         ),
                         onChanged: (value) {
                           saProvider.setZipCode(value);
@@ -337,13 +338,14 @@ class SippingAddressCheckout extends StatelessWidget {
                         },
                       ),
                       EmptySpaceHelper.emptyHight(10),
-                      FieldTitle(asProvider.getString('Order note')),
+                      FieldTitle(AppLocalizations.of(context)!.order_note),
                       TextFormField(
                         controller: _orderNoteController,
                         minLines: 3,
                         maxLines: 4,
                         decoration: InputDecoration(
-                            hintText: asProvider.getString('Enter Order note')),
+                            hintText:
+                                AppLocalizations.of(context)!.enter_Order_note),
                         onChanged: (value) {
                           saProvider.setOrderNote(value);
                         },

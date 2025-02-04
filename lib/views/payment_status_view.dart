@@ -4,6 +4,8 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/profile_info_service.dart';
 import 'package:safecart/views/order_details_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../helpers/common_helper.dart';
 import '../services/cart_data_service.dart';
 import '../services/checkout_service/checkout_service.dart';
@@ -65,8 +67,8 @@ class PaymentStatusView extends StatelessWidget {
                       const SizedBox(height: 45),
                       Text(
                         isError
-                            ? asProvider.getString('Oops!')
-                            : asProvider.getString('Payment successful!'),
+                            ?AppLocalizations.of(context)!.oops
+                            : AppLocalizations.of(context)!.payment_successful,
                         style: const TextStyle(
                           fontSize: 23,
                           fontWeight: FontWeight.bold,
@@ -80,8 +82,7 @@ class PaymentStatusView extends StatelessWidget {
                           text: isError
                               ? asProvider.getString(
                                   "Your order has been placed, but there was an issue with your payment. Your order ID is ")
-                              : asProvider.getString(
-                                  "Your order has been successful! You'll receive ordered items in 3-5 days. Your order ID is "),
+                              : AppLocalizations.of(context)!.your_order_has_been_successful_You_ll_receive_ordered_items_in_days_Your_order_ID_is,
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!

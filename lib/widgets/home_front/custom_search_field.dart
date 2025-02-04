@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/helpers/navigation_helper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../services/search_seatvice.dart';
@@ -68,7 +69,7 @@ class CustomSearchField extends StatelessWidget {
                     controller: textEditingController,
                     textAlign: TextAlign.justify,
                     decoration: InputDecoration(
-                      hintText: asProvider.getString('Search your need here'),
+                      hintText: AppLocalizations.of(context)!.search_your_need_here,
                       border: InputBorder.none,
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,

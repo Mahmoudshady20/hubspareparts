@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:safecart/models/city_dropdown_model.dart';
 import 'package:safecart/models/profile_info_model.dart';
@@ -110,12 +111,12 @@ class ProfileInfoService with ChangeNotifier {
     }
     if (selectedCountryName == null &&
         profileInfo?.userDetails.userCountry?.name == null) {
-      showToast(asProvider.getString('Please select a country'), cc.red);
+      showToast(AppLocalizations.of(context)!.please_select_a_country, cc.red);
       return;
     }
     if (selectedStateName == null &&
         profileInfo?.userDetails.userState?.name == null) {
-      showToast(asProvider.getString('Please select a state'), cc.red);
+      showToast(AppLocalizations.of(context)!.please_select_a_state, cc.red);
       return;
     }
     setLoadingProfileUpdate(true);
@@ -162,18 +163,19 @@ class ProfileInfoService with ChangeNotifier {
         await fetchProfileInfo(context);
         print('profile update response');
         print(await response.stream.bytesToString());
-        showToast(asProvider.getString('Profile info successfully updated'),
+        showToast(
+            AppLocalizations.of(context)!.profile_info_successfully_updated,
             cc.green);
         Navigator.pop(context);
         setLoadingProfileUpdate(false);
       } else {
-        showToast(
-            asProvider.getString('Profile info updated failed'), cc.green);
+        showToast(AppLocalizations.of(context)!.profile_info_updated_failed,
+            cc.green);
         print(response.reasonPhrase);
         setLoadingProfileUpdate(false);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       setLoadingProfileUpdate(false);
     } catch (err) {
       showToast(asProvider.getString(err.toString()), cc.red);

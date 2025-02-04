@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:money_formatter/money_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/search_filter_data_service.dart';
 import 'package:safecart/services/search_product_service.dart';
+import 'package:safecart/utils/custom_row_button.dart';
 import 'package:safecart/utils/responsive.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
 import '../../services/common_services.dart';
 import '../../services/rtl_service.dart';
-import 'package:safecart/utils/custom_row_button.dart';
 import '../common/field_title.dart';
 import 'filter_rtl_padding.dart';
 
@@ -38,7 +39,7 @@ class FilterBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              asProvider.getString('Filter'),
+              AppLocalizations.of(context)!.filter,
               style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
             ),
           ],
@@ -48,7 +49,7 @@ class FilterBottomSheet extends StatelessWidget {
             filterOption.filterOprions!.allCategory!.isNotEmpty)
           FilterRtlPadding(
             child: Text(
-              asProvider.getString('Category'),
+              AppLocalizations.of(context)!.categories,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -95,7 +96,7 @@ class FilterBottomSheet extends StatelessWidget {
                   foProvider.selectedCategory != ''
               ? FilterRtlPadding(
                   child: Text(
-                    asProvider.getString('Sub-category'),
+                    AppLocalizations.of(context)!.sub_Category,
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -154,7 +155,7 @@ class FilterBottomSheet extends StatelessWidget {
                   foProvider.selectedSubCategory != ''
               ? FilterRtlPadding(
                   child: Text(
-                    asProvider.getString('Child-category'),
+                    AppLocalizations.of(context)!.child_Category,
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -212,7 +213,7 @@ class FilterBottomSheet extends StatelessWidget {
         if (filterOption.filterOprions?.allColors?.isNotEmpty ?? false)
           FilterRtlPadding(
             child: Text(
-              asProvider.getString('Color'),
+              AppLocalizations.of(context)!.color,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -251,7 +252,7 @@ class FilterBottomSheet extends StatelessWidget {
         if (filterOption.filterOprions?.allSizes?.isNotEmpty ?? false)
           FilterRtlPadding(
             child: Text(
-              asProvider.getString('Size'),
+              AppLocalizations.of(context)!.size,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -288,7 +289,7 @@ class FilterBottomSheet extends StatelessWidget {
         if (filterOption.filterOprions?.allBrands?.isNotEmpty ?? false)
           FilterRtlPadding(
             child: Text(
-              asProvider.getString('Brands'),
+              AppLocalizations.of(context)!.brands,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -335,7 +336,7 @@ class FilterBottomSheet extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FieldTitle(asProvider.getString('Filter Price')),
+                FieldTitle(AppLocalizations.of(context)!.filter_Price),
                 Consumer<SearchFilterDataService>(
                     builder: (context, sfdProvider, child) {
                   return Text(
@@ -380,7 +381,7 @@ class FilterBottomSheet extends StatelessWidget {
           });
         }),
         FilterRtlPadding(
-            child: FieldTitle(asProvider.getString('Average Rating'))),
+            child: FieldTitle(AppLocalizations.of(context)!.average_Rating)),
         const SizedBox(height: 10),
         // for (var i = 0; i < 5; i++)
         //   FilterRtlPadding(
@@ -440,8 +441,8 @@ class FilterBottomSheet extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: CustomRowButton(
                 width: (screenWidth / 1.2) / 2.3,
-                bt1text: asProvider.getString('Reset Filter'),
-                bt2text: asProvider.getString('Apply Filter'),
+                bt1text: AppLocalizations.of(context)!.reset_Filter,
+                bt2text: AppLocalizations.of(context)!.apply_Filter,
                 bt1func: () {
                   scaffoldKey.currentState!.closeEndDrawer();
                   Provider.of<SearchProductService>(context, listen: false)

@@ -5,11 +5,11 @@ import 'package:safecart/helpers/common_helper.dart';
 import '../../services/rtl_service.dart';
 
 class CustomDropdown extends StatelessWidget {
-  String hintText;
-  List listData;
-  String? value;
-  void Function(dynamic)? onChanged;
-  CustomDropdown(this.hintText, this.listData, this.onChanged,
+  final String hintText;
+  final List listData;
+  final String? value;
+  final void Function(dynamic)? onChanged;
+  const CustomDropdown(this.hintText, this.listData, this.onChanged,
       {this.value, Key? key})
       : super(key: key);
 

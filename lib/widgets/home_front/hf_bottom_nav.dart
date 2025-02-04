@@ -5,12 +5,18 @@ import 'package:provider/provider.dart';
 import 'package:safecart/helpers/common_helper.dart';
 import 'package:safecart/services/cart_data_service.dart';
 import 'package:safecart/services/wishlist_data_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/navigation_helper.dart';
 
-class HFBottomNav extends StatelessWidget {
+class HFBottomNav extends StatefulWidget {
   const HFBottomNav({super.key});
 
+  @override
+  State<HFBottomNav> createState() => _HFBottomNavState();
+}
+
+class _HFBottomNavState extends State<HFBottomNav> {
   @override
   Widget build(BuildContext context) {
     return Consumer<NavigationHelper>(builder: (context, nProvider, child) {
@@ -39,7 +45,7 @@ class HFBottomNav extends StatelessWidget {
               height: 27,
               color: cc.greyHint,
             ),
-            label: asProvider.getString('Home')),
+            label: AppLocalizations.of(context)!.home),
         BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(
               'assets/icons/product_fill.svg',
@@ -51,7 +57,7 @@ class HFBottomNav extends StatelessWidget {
               height: 27,
               color: cc.greyHint,
             ),
-            label: asProvider.getString('Products')),
+            label: AppLocalizations.of(context)!.products),
         BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(
               'assets/icons/cart_fill.svg',
@@ -73,7 +79,7 @@ class HFBottomNav extends StatelessWidget {
                 ),
               );
             }),
-            label: asProvider.getString('Cart')),
+            label: AppLocalizations.of(context)!.cart),
         BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(
               'assets/icons/wishlist_fill.svg',
@@ -95,7 +101,7 @@ class HFBottomNav extends StatelessWidget {
                 ),
               );
             }),
-            label: asProvider.getString('Wishlist')),
+            label: AppLocalizations.of(context)!.wishlist),
         BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(
               'assets/icons/profile_fill.svg',
@@ -107,6 +113,6 @@ class HFBottomNav extends StatelessWidget {
               height: 27,
               color: cc.greyHint,
             ),
-            label: asProvider.getString('Profile')),
+            label: AppLocalizations.of(context)!.profile),
       ];
 }

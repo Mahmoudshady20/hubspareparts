@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:safecart/helpers/common_helper.dart';
 import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/common/field_title.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../services/location/country_dropdown_service.dart';
 import '../helpers/empty_space_helper.dart';
@@ -106,7 +107,7 @@ class CountryDropdown extends StatelessWidget {
                                     height: 64,
                                     child: Center(
                                       child: Text(
-                                        asProvider.getString("No result found"),
+                                        AppLocalizations.of(context)!.no_result_found,
                                         style: textStyle,
                                       ),
                                     ),
@@ -119,7 +120,7 @@ class CountryDropdown extends StatelessWidget {
                                     height: 64,
                                     child: Center(
                                       child: Text(
-                                        asProvider.getString("No result found"),
+                                        AppLocalizations.of(context)!.no_result_found,
                                         style: textStyle,
                                       ),
                                     ),
