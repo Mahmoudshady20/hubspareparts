@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/calculate_tax_service.dart';
@@ -12,10 +13,9 @@ import 'package:safecart/services/profile_info_service.dart';
 
 import '../../../helpers/common_helper.dart';
 import '../../../models/city_dropdown_model.dart';
+import '../../../models/country_model.dart' as cm;
 import '../../../models/shipping_addresses_model.dart';
 import '../../../models/state_model.dart';
-import '../../../models/country_model.dart' as cm;
-import '../country_state_service.dart';
 
 class ShippingAddressService with ChangeNotifier {
   List<Datum>? shippingAddressList;
@@ -245,7 +245,7 @@ class ShippingAddressService with ChangeNotifier {
       }
     } on TimeoutException {
       shippingAddressList = [];
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       shippingAddressList = [];
       showToast(asProvider.getString(err.toString()), cc.red);
@@ -307,22 +307,22 @@ class ShippingAddressService with ChangeNotifier {
       if (response.statusCode == 200) {
         await fetchShippingAddress(context);
         showToast(
-            asProvider.getString('Address added successfully.'), cc.green);
+            AppLocalizations.of(context)!.address_added_successfully, cc.green);
         Navigator.of(context).pop();
         setLoadingNewAddress(false);
         print(resData);
       } else {
-        showToast(asProvider.getString('Failed to add Address.'), cc.red);
+        showToast(AppLocalizations.of(context)!.failed_to_add_Address, cc.red);
         setLoadingNewAddress(false);
         print(response.reasonPhrase);
         print(resData);
       }
     } on TimeoutException {
       setLoadingNewAddress(false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       setLoadingNewAddress(false);
-      showToast(asProvider.getString('Something went wrong'), cc.red);
+      showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
       print(err);
       rethrow;
     }
@@ -349,20 +349,21 @@ class ShippingAddressService with ChangeNotifier {
         shippingAddressList!
             .removeWhere((element) => element.id.toString() == id.toString());
 
-        showToast(asProvider.getString('Address delete successful.'), cc.green);
+        showToast(
+            AppLocalizations.of(context)!.address_delete_successful, cc.green);
         setLoadingDeleteAddress(false);
         return;
       } else {
-        showToast(asProvider.getString('Address delete failed.'), cc.red);
+        showToast(AppLocalizations.of(context)!.address_delete_failed, cc.red);
         setLoadingDeleteAddress(false);
         print(response.reasonPhrase);
       }
     } on TimeoutException {
       setLoadingDeleteAddress(false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       setLoadingDeleteAddress(false);
-      showToast(asProvider.getString('Something went wrong'), cc.red);
+      showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
       print(err);
       rethrow;
     }

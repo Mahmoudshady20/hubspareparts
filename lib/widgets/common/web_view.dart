@@ -21,7 +21,7 @@ class WebViewScreen extends StatelessWidget {
         }),
         body: FutureBuilder(
           future: Provider.of<TermsAndCondition>(context, listen: false)
-              .getTermsAndCondi(url),
+              .getTermsAndCondi(url,context),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Column(

@@ -21,8 +21,8 @@ class OrderTile extends StatelessWidget {
     this.orderedDate,
     this.order,
     this.payment, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class OrderTile extends StatelessWidget {
                 const Spacer(),
                 RichText(
                   text: TextSpan(
-                      text: asProvider.getString('View'),
+                      text: AppLocalizations.of(context)!.view,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: Colors.transparent,
                             fontSize: 14,

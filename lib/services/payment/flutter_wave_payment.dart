@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/shipping_address_service.dart';
 import 'package:safecart/services/rtl_service.dart';
@@ -27,7 +28,7 @@ class FlutterWavePayment {
         Provider.of<ShippingAddressService>(context, listen: false);
     if (selectedGateway.credentials['public_key'] == null ||
         selectedGateway.credentials['secret_key'] == null) {
-      snackBar(context, asProvider.getString('Invalid developer keys'));
+      snackBar(context, AppLocalizations.of(context)!.invalid_developer_keys);
     }
     String publicKey = selectedGateway.credentials['public_key'] ?? '';
 

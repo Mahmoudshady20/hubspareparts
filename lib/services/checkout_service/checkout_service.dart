@@ -7,6 +7,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/models/vendor_details_list_model.dart';
@@ -291,7 +292,7 @@ class CheckoutService with ChangeNotifier {
         setLoadingVendorDetailsList(false);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       setLoadingVendorDetailsList(false);
     } catch (err) {
       showToast(asProvider.getString(err.toString()), cc.red);
@@ -308,7 +309,7 @@ class CheckoutService with ChangeNotifier {
       return;
     }
     if (couponText == null || couponText == '') {
-      showToast(asProvider.getString('Enter a valid coupon'), cc.red);
+      showToast(AppLocalizations.of(context)!.enter_a_valid_coupon, cc.red);
       return;
     }
     setLoadingCouponApply(true);
@@ -350,10 +351,10 @@ class CheckoutService with ChangeNotifier {
       }
     } on TimeoutException {
       setLoadingCouponApply(false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       setLoadingCouponApply(false);
-      showToast(asProvider.getString('Something went wrong'), cc.red);
+      showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
       print(err);
       rethrow;
     }
@@ -380,7 +381,8 @@ class CheckoutService with ChangeNotifier {
       if (calculateTax.selectedCountry == null ||
           calculateTax.selectedState == null) {
         showToast(
-            asProvider.getString('Please enter all the information'), cc.red);
+            AppLocalizations.of(context)!.please_enter_all_the_information,
+            cc.red);
         setLoadingPlaceOrder(false);
         return;
       }
@@ -447,8 +449,8 @@ class CheckoutService with ChangeNotifier {
         print(pickedImage?.path);
         snackBar(
             context,
-            asProvider.getString(
-                'Uploading image, this might take some time. Please wait...'),
+            AppLocalizations.of(context)!
+                .uploading_image_this_might_take_some_time,
             backgroundColor: cc.green,
             duration: const Duration(seconds: 1000));
         request.files.add(await http.MultipartFile.fromPath(
@@ -456,14 +458,14 @@ class CheckoutService with ChangeNotifier {
       }
       if (pickedImage == null &&
           paymentGateway.selectedGateway?.name == 'manual_payment') {
-        showToast(
-            asProvider.getString('Please provide payment document'), cc.red);
+        showToast(AppLocalizations.of(context)!.please_provide_payment_document,
+            cc.red);
         return;
       }
       request.headers.addAll(headers);
       Timer scheduleTimeout = Timer(const Duration(seconds: 10), () {
-        showToast(
-            asProvider.getString("Server connection slow"), cc.blackColor);
+        showToast(AppLocalizations.of(context)!.server_connection_slow,
+            cc.blackColor);
       });
       http.StreamedResponse response = await request.send();
       scheduleTimeout.cancel();
@@ -510,10 +512,10 @@ class CheckoutService with ChangeNotifier {
       }
     } on TimeoutException {
       setLoadingPlaceOrder(false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       setLoadingPlaceOrder(false);
-      showToast(asProvider.getString('Something went wrong'), cc.red);
+      showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
       print(err);
       rethrow;
     }
@@ -557,15 +559,16 @@ class CheckoutService with ChangeNotifier {
       dev.log(json.encode(updatePaymentBody));
       if (response.statusCode == 200 && data['data']?['success'] == true) {
         print(data);
-        showToast('Payment confirm success', cc.primaryColor);
+        showToast(AppLocalizations.of(context)!.payment_confirm_success,
+            cc.primaryColor);
         ScaffoldMessenger.of(context).removeCurrentSnackBar();
 
         return;
       } else {
         snackBar(
           context,
-          asProvider.getString("Payment confirm failed"),
-          buttonText: asProvider.getString('Retry'),
+          AppLocalizations.of(context)!.payment_confirm_failed,
+          buttonText: AppLocalizations.of(context)!.retry,
           duration: const Duration(seconds: 60),
           onTap: () async {
             await updatePaymentStatus(context);
@@ -576,8 +579,8 @@ class CheckoutService with ChangeNotifier {
     } on TimeoutException {
       snackBar(
         context,
-        asProvider.getString("Payment confirm failed"),
-        buttonText: asProvider.getString('Retry'),
+        AppLocalizations.of(context)!.payment_confirm_failed,
+        buttonText: AppLocalizations.of(context)!.retry,
         duration: const Duration(seconds: 60),
         onTap: () async {
           await updatePaymentStatus(context);
@@ -586,8 +589,8 @@ class CheckoutService with ChangeNotifier {
     } catch (err) {
       snackBar(
         context,
-        asProvider.getString("Payment confirm failed"),
-        buttonText: asProvider.getString('Retry'),
+        AppLocalizations.of(context)!.payment_confirm_failed,
+        buttonText: AppLocalizations.of(context)!.retry,
         duration: const Duration(seconds: 60),
         onTap: () async {
           await updatePaymentStatus(context);

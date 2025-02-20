@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/services/auth_service/reset_password_service.dart';
@@ -41,11 +42,11 @@ class OtpService with ChangeNotifier {
         otpCode = data['otp'];
         return data['otp'];
       } else {
-        showToast(asProvider.getString('OTP send error'), cc.red);
+        showToast(AppLocalizations.of(context)!.oTP_send_error, cc.red);
         print(response.reasonPhrase);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
     } finally {
@@ -73,7 +74,7 @@ class OtpService with ChangeNotifier {
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       print(err);
     }

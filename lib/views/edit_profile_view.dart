@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/utils/city_dropdown.dart';
 import 'package:safecart/utils/country_dropdown.dart';
@@ -137,27 +138,29 @@ class EditProfileView extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         FieldTitle(
-                                            asProvider.getString('Name')),
+                                            AppLocalizations.of(context)!.name),
                                         TextFormField(
                                           style: getFieldStyle(context),
                                           controller: _nameController,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: asProvider
-                                                .getString('Enter your name'),
+                                            hintText:
+                                                AppLocalizations.of(context)!
+                                                    .enter_your_name,
                                           ),
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty ||
                                                 value.length < 3) {
-                                              return asProvider.getString(
-                                                  'Enter a valid name');
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_a_valid_name;
                                             }
                                             return null;
                                           },
                                         ),
-                                        FieldTitle(
-                                            asProvider.getString('Email')),
+                                        FieldTitle(AppLocalizations.of(context)!
+                                            .email),
                                         TextFormField(
                                           controller: _emailController,
                                           style: getFieldStyle(context),
@@ -165,34 +168,38 @@ class EditProfileView extends StatelessWidget {
                                               TextInputType.emailAddress,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: asProvider
-                                                .getString('Enter your email'),
+                                            hintText:
+                                                AppLocalizations.of(context)!
+                                                    .enter_your_email,
                                           ),
                                           validator: (value) {
                                             if (!EmailValidator.validate(
                                                 value ?? '')) {
-                                              return asProvider.getString(
-                                                  'Enter a valid email address');
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_a_valid_email_address;
                                             }
                                             return null;
                                           },
                                         ),
-                                        FieldTitle(
-                                            asProvider.getString('Phone')),
+                                        FieldTitle(AppLocalizations.of(context)!
+                                            .phone),
                                         TextFormField(
                                           controller: _phoneController,
                                           style: getFieldStyle(context),
                                           keyboardType: TextInputType.phone,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: asProvider
-                                                .getString('Enter your phone'),
+                                            hintText:
+                                                AppLocalizations.of(context)!
+                                                    .enter_your_phone,
                                           ),
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty) {
-                                              return asProvider.getString(
-                                                  'Enter your phone number');
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_your_phone_number;
                                             }
                                             return null;
                                           },
@@ -248,32 +255,35 @@ class EditProfileView extends StatelessWidget {
                                             pProvider.setSelectedCity(city);
                                           },
                                         ),
-                                        FieldTitle(
-                                            asProvider.getString('Zipcode')),
+                                        FieldTitle(AppLocalizations.of(context)!
+                                            .zipcode),
                                         TextFormField(
                                           style: getFieldStyle(context),
                                           controller: _zipcodeController,
                                           keyboardType: TextInputType.number,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: asProvider.getString(
-                                                'Enter your zipcode'),
+                                            hintText:
+                                                AppLocalizations.of(context)!
+                                                    .enter_your_zipcode,
                                           ),
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty) {
-                                              return asProvider.getString(
-                                                  'Enter your zipcode');
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_your_zipcode;
                                             }
                                             if (value.trim().length <= 3) {
-                                              return asProvider.getString(
-                                                  'Enter a valid zip code');
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_your_zipcode;
                                             }
                                             return null;
                                           },
                                         ),
-                                        FieldTitle(
-                                            asProvider.getString('Address')),
+                                        FieldTitle(AppLocalizations.of(context)!
+                                            .address),
                                         TextFormField(
                                           style: getFieldStyle(context),
                                           controller: _addressController,
@@ -281,26 +291,30 @@ class EditProfileView extends StatelessWidget {
                                           minLines: 3,
                                           maxLines: 4,
                                           decoration: InputDecoration(
-                                            hintText: asProvider.getString(
-                                                'Enter your address'),
+                                            hintText:
+                                                AppLocalizations.of(context)!
+                                                    .enter_your_address,
                                           ),
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty) {
-                                              return asProvider.getString(
-                                                  'Enter your address');
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_your_address;
                                             }
                                             if (value.trim().length <= 2) {
-                                              return asProvider.getString(
-                                                  'Enter a valid address');
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_a_valid_address;
                                             }
                                             return null;
                                           },
                                         ),
                                         EmptySpaceHelper.emptyHight(25),
                                         CustomCommonButton(
-                                            btText: asProvider
-                                                .getString('Save changes'),
+                                            btText:
+                                                AppLocalizations.of(context)!
+                                                    .save_changes,
                                             isLoading:
                                                 pProvider.loadingProfileUpdate,
                                             onPressed: () {

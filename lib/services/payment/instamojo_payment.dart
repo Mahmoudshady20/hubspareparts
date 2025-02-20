@@ -92,7 +92,7 @@ class InstamojoPayment extends StatelessWidget {
 
                   print(selectedUrl);
                   return selectedUrl == null || selectedUrl == ''
-                      ? errorWidget()
+                      ? errorWidget(context)
                       : WebViewWidget(
                           controller: _controller,
                         );

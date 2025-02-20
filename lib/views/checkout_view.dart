@@ -35,11 +35,10 @@ class CheckoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cdProvider = Provider.of<CartDataService>(context, listen: false);
-    final subTotal = cdProvider.calculateSubtotal().toDouble();
     return Scaffold(
       appBar: CustomAppBar().appBarTitled(
         context,
-        asProvider.getString('Checkout'),
+        AppLocalizations.of(context)!.checkout,
         () {
           Navigator.of(context).pop();
         },
@@ -113,24 +112,28 @@ class CheckoutView extends StatelessWidget {
               const Divider(height: 2),
               EmptySpaceHelper.emptyHight(20),
               Consumer<CheckoutService>(builder: (context, cProvider, child) {
-                return moneyRow(context, asProvider.getString('Items total'),
+                return moneyRow(
+                    context,
+                    AppLocalizations.of(context)!.items_total,
                     cProvider.totalItemCost.toDouble());
               }),
               EmptySpaceHelper.emptyHight(10),
               Consumer<CheckoutService>(builder: (context, cdProvider, child) {
                 return moneyRow(
                     context,
-                    asProvider.getString('Coupon discount'),
+                    AppLocalizations.of(context)!.coupon_discount,
                     cdProvider.couponDiscount);
               }),
               EmptySpaceHelper.emptyHight(10),
               Consumer<CheckoutService>(builder: (context, cProvider, child) {
-                return moneyRow(context, asProvider.getString('Tax'),
+                return moneyRow(context, AppLocalizations.of(context)!.tax,
                     cProvider.totalTax.toDouble());
               }),
               EmptySpaceHelper.emptyHight(10),
               Consumer<CheckoutService>(builder: (context, cProvider, child) {
-                return moneyRow(context, asProvider.getString('Shipping cost'),
+                return moneyRow(
+                    context,
+                    AppLocalizations.of(context)!.shipping_cost,
                     cProvider.totalShippingCost.toDouble());
               }),
               EmptySpaceHelper.emptyHight(10),
@@ -138,7 +141,7 @@ class CheckoutView extends StatelessWidget {
               EmptySpaceHelper.emptyHight(10),
               Consumer<CheckoutService>(builder: (context, cProvider, child) {
                 cProvider.setCartDataService(cdProvider);
-                return moneyRow(context, asProvider.getString('Total'),
+                return moneyRow(context, AppLocalizations.of(context)!.total,
                     cProvider.totalCalculation.toDouble());
               }),
               EmptySpaceHelper.emptyHight(20),
@@ -188,7 +191,7 @@ class CheckoutView extends StatelessWidget {
               Consumer<PaymentGatewayService>(
                   builder: (context, pgProvider, child) {
                 return pgProvider.selectedGateway?.name == 'authorizenet'
-                    ? FieldTitle(asProvider.getString('Card'))
+                    ? FieldTitle(AppLocalizations.of(context)!.card)
                     : const SizedBox();
               }),
               Consumer<PaymentGatewayService>(
@@ -206,7 +209,7 @@ class CheckoutView extends StatelessWidget {
               Consumer<PaymentGatewayService>(
                   builder: (context, pgProvider, child) {
                 return pgProvider.selectedGateway?.name == 'authorizenet'
-                    ? FieldTitle(asProvider.getString('Expiry-date'))
+                    ? FieldTitle(AppLocalizations.of(context)!.expiry_date)
                     : const SizedBox();
               }),
               Consumer<PaymentGatewayService>(
@@ -227,7 +230,7 @@ class CheckoutView extends StatelessWidget {
                           });
                         },
                         btText: pgProvider.authPayED == null
-                            ? asProvider.getString('Select expiry-date')
+                            ? AppLocalizations.of(context)!.select_expiry_date
                             : DateFormat.yMMM().format(pgProvider.authPayED!),
                         isLoading: false)
                     : const SizedBox();
@@ -235,7 +238,7 @@ class CheckoutView extends StatelessWidget {
               Consumer<PaymentGatewayService>(
                   builder: (context, pgProvider, child) {
                 return pgProvider.selectedGateway?.name == 'authorizenet'
-                    ? FieldTitle(asProvider.getString('Card code'))
+                    ? FieldTitle(AppLocalizations.of(context)!.card_code)
                     : const SizedBox();
               }),
               Consumer<PaymentGatewayService>(
@@ -245,7 +248,7 @@ class CheckoutView extends StatelessWidget {
                         controller: _authCardCodeController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                            hintText: asProvider.getString('Card code')),
+                            hintText: AppLocalizations.of(context)!.card_code),
                       )
                     : const SizedBox();
               }),
@@ -285,16 +288,16 @@ class CheckoutView extends StatelessWidget {
                                     Navigator.of(context).pushNamed(
                                         WebViewScreen.routeName,
                                         arguments: [
-                                          asProvider.getString(
-                                              'Terms and Conditions'),
+                                          AppLocalizations.of(context)!
+                                              .terms_and_Conditions,
                                           '$baseApi/terms-and-condition-page'
                                         ]);
                                   },
-                                text: asProvider.getString(
-                                    'terms of service and Conditions'),
+                                text: AppLocalizations.of(context)!
+                                    .terms_of_service_and_Conditions,
                                 style: TextStyle(color: cc.secondaryColor)),
                             TextSpan(
-                                text: ', ${asProvider.getString('and')} ',
+                                text: ', ${AppLocalizations.of(context)!.and} ',
                                 style: TextStyle(color: cc.greyHint)),
                             TextSpan(
                                 recognizer: TapGestureRecognizer()
@@ -303,12 +306,13 @@ class CheckoutView extends StatelessWidget {
                                     Navigator.of(context).pushNamed(
                                         WebViewScreen.routeName,
                                         arguments: [
-                                          asProvider
-                                              .getString('Privacy Policy'),
+                                          AppLocalizations.of(context)!
+                                              .privacy_Policy,
                                           '$baseApi/privacy-policy-page'
                                         ]);
                                   },
-                                text: asProvider.getString('privacy policy.'),
+                                text: AppLocalizations.of(context)!
+                                    .privacy_Policy,
                                 style: TextStyle(color: cc.secondaryColor)),
                           ]),
                     ),
@@ -318,14 +322,12 @@ class CheckoutView extends StatelessWidget {
               EmptySpaceHelper.emptyHight(20),
               Consumer<CheckoutService>(builder: (context, csProvider, child) {
                 return CustomCommonButton(
-                  btText: asProvider.getString('Confirm order'),
+                  btText: AppLocalizations.of(context)!.confirm_order,
                   isLoading: csProvider.loadingPlaceOrder,
                   onPressed: () async {
                     final pgProvider = Provider.of<PaymentGatewayService>(
                         context,
                         listen: false);
-                    print(pgProvider.selectedGateway?.name);
-
                     if (pgProvider.selectedGateway?.name == 'authorizenet' &&
                         _authCardCodeController.text.trim().isEmpty &&
                         _authCardController.text.trim().length < 3 &&

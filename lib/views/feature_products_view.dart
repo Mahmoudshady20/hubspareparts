@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/feature_products_service.dart';
 import 'package:safecart/widgets/common/product_card.dart';
 
-import '../helpers/common_helper.dart';
 import '../services/product_details_service.dart';
 import '../widgets/common/custom_app_bar.dart';
 import 'product_details_view.dart';
@@ -18,8 +18,8 @@ class FeatureProductsView extends StatelessWidget {
   Widget build(BuildContext context) {
     // controller.addListener((() => scrollListener(context)));
     return Scaffold(
-      appBar: CustomAppBar()
-          .appBarTitled(context, asProvider.getString('Feature Items'), () {
+      appBar: CustomAppBar().appBarTitled(
+          context, AppLocalizations.of(context)!.feature_Items, () {
         Navigator.of(context).pop();
       }),
       body: Consumer<FeatureProductsService>(

@@ -10,6 +10,7 @@ import 'package:safecart/services/profile_info_service.dart';
 import 'package:safecart/services/rtl_service.dart';
 import 'package:safecart/services/search_filter_data_service.dart';
 import 'package:safecart/utils/custom_preloader.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/db_helper.dart';
@@ -61,7 +62,7 @@ class SplashView extends StatelessWidget {
                           elevation: 0,
                         ),
                         child: Text(
-                          asProvider.getString('Retry'),
+                          AppLocalizations.of(context)!.retry,
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:safecart/models/order_details_list_model.dart';
 
@@ -58,7 +59,7 @@ class OrderListService with ChangeNotifier {
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
       print(err);
@@ -94,14 +95,14 @@ class OrderListService with ChangeNotifier {
       } else {
         setLoadingNextPage(false);
         print(data);
-        showToast(asProvider.getString('Something went wrong'), cc.red);
+        showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
       }
     } on TimeoutException {
       setLoadingNextPage(false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       setLoadingNextPage(false);
-      showToast(asProvider.getString('Something went wrong'), cc.red);
+      showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
       print(err);
     }
   }

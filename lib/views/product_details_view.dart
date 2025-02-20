@@ -1,29 +1,29 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/wishlist_data_service.dart';
 import 'package:safecart/widgets/common/internet_checker_widget.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../widgets/product_details_view/product_details_images.dart';
-import '../widgets/common/boxed_back_button.dart';
-import '../widgets/product_details_view/product_info_pages.dart';
-import '../widgets/product_details_view/product_rating_score.dart';
-import '../widgets/product_details_view/sellers_products.dart';
-import '../widgets/product_details_view/shipping_methods.dart';
-import '../widgets/search_view/filter_rtl_padding.dart';
-import '../helpers/empty_space_helper.dart';
 import '../helpers/common_helper.dart';
+import '../helpers/empty_space_helper.dart';
 import '../services/product_details_service.dart';
 import '../services/rtl_service.dart';
 import '../utils/responsive.dart';
+import '../widgets/common/boxed_back_button.dart';
 import '../widgets/product_details_view/product_attributes.dart';
 import '../widgets/product_details_view/product_details_cart_button.dart';
-import '../widgets/product_details_view/related_products.dart';
+import '../widgets/product_details_view/product_details_images.dart';
+import '../widgets/product_details_view/product_info_pages.dart';
+import '../widgets/product_details_view/product_rating_score.dart';
 import '../widgets/product_details_view/product_title_row.dart';
+import '../widgets/product_details_view/related_products.dart';
+import '../widgets/product_details_view/sellers_products.dart';
+import '../widgets/product_details_view/shipping_methods.dart';
+import '../widgets/search_view/filter_rtl_padding.dart';
 import '../widgets/skelletons/product_details_skeleton.dart';
 
 class ProductDetailsView extends StatelessWidget {
@@ -287,9 +287,9 @@ class ProductDetailsView extends StatelessWidget {
                                             .summary!,
                                     maxLines: 4,
                                     expandText:
-                                    AppLocalizations.of(context)!.show_more,
+                                        AppLocalizations.of(context)!.show_more,
                                     collapseText:
-                                    AppLocalizations.of(context)!.show_less,
+                                        AppLocalizations.of(context)!.show_less,
                                     linkColor: cc.primaryColor,
                                     style: Theme.of(context)
                                         .textTheme
@@ -340,7 +340,8 @@ class ProductDetailsView extends StatelessWidget {
                                 EmptySpaceHelper.emptyHight(8),
                                 subInfo(
                                     context,
-                                    AppLocalizations.of(context)!.child_Category,
+                                    AppLocalizations.of(context)!
+                                        .child_Category,
                                     Provider.of<ProductDetailsService>(context,
                                                         listen: false)
                                                     .productDetails!
@@ -359,7 +360,8 @@ class ProductDetailsView extends StatelessWidget {
                                             .childCategory!
                                             .first
                                             .name
-                                        : asProvider.getString('None')),
+                                        : AppLocalizations.of(context)!.none
+                                            as dynamic),
                                 EmptySpaceHelper.emptyHight(8),
                                 subInfo(
                                     context,
@@ -381,12 +383,12 @@ class ProductDetailsView extends StatelessWidget {
                                 EmptySpaceHelper.emptyHight(8),
                                 subInfo(
                                     context,
-                                    asProvider.getString('Unit'),
+                                    AppLocalizations.of(context)!.unit,
                                     Provider.of<ProductDetailsService>(context,
                                                 listen: false)
                                             .productDetails
                                             ?.uom?['unit']?['name'] ??
-                                        asProvider.getString('None')),
+                                        AppLocalizations.of(context)!.none),
                                 if ((Provider.of<ProductDetailsService>(context,
                                                 listen: false)
                                             .productDetails!
@@ -513,7 +515,8 @@ class ProductDetailsView extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20),
                                     child: Text(
-                                      AppLocalizations.of(context)!.seller_s_Products,
+                                      AppLocalizations.of(context)!
+                                          .seller_s_Products,
                                       style: const TextStyle(
                                           fontSize: 19,
                                           fontWeight: FontWeight.w600),
@@ -552,7 +555,8 @@ class ProductDetailsView extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20),
                                     child: Text(
-                                      AppLocalizations.of(context)!.related_Products,
+                                      AppLocalizations.of(context)!
+                                          .related_Products,
                                       style: const TextStyle(
                                           fontSize: 19,
                                           fontWeight: FontWeight.w600),

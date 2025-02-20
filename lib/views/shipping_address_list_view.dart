@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/shipping_address_service.dart';
 import 'package:safecart/views/add_new_shipping_address_view.dart';
 import 'package:safecart/widgets/shipping_address_list_view/shipping_address_tile.dart';
 import 'package:safecart/widgets/skelletons/shipping_address_tile_skeleton.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../utils/responsive.dart';
@@ -47,7 +47,7 @@ class ShippingAddressListView extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Center(
                       child: Text(
-                        asProvider.getString("Shipping address"),
+                        AppLocalizations.of(context)!.shipping_address,
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!
@@ -118,7 +118,9 @@ class ShippingAddressListView extends StatelessWidget {
                                     : SizedBox(
                                         height: screenHeight / 2,
                                         child: Center(
-                                          child: Text(AppLocalizations.of(context)!.no_address_found),
+                                          child: Text(
+                                              AppLocalizations.of(context)!
+                                                  .no_address_found),
                                         ),
                                       );
                               });

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 
 import '../../helpers/common_helper.dart';
@@ -33,21 +34,21 @@ class ChangePasswordService with ChangeNotifier {
       http.StreamedResponse response = await request.send();
       final data = await response.stream.bytesToString();
       if (response.statusCode == 200) {
-        showToast(
-            asProvider.getString('Password change succeeded'), cc.primaryColor);
+        showToast(AppLocalizations.of(context)!.password_change_succeeded,
+            cc.primaryColor);
         Navigator.pop(context);
 
         print(data);
       } else {
         showToast(
             jsonDecode(data)['message'] ??
-                asProvider.getString('Password change failed'),
+                AppLocalizations.of(context)!.password_change_failed,
             cc.red);
 
         print(response.reasonPhrase);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
       print(err);

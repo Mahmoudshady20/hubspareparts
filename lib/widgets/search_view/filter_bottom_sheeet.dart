@@ -143,7 +143,8 @@ class FilterBottomSheet extends StatelessWidget {
                       child: Container(
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           child: Text(
-                            asProvider.getString('No sub-category available'),
+                            AppLocalizations.of(context)!
+                                .no_sub_category_available,
                             style: TextStyle(color: cc.greyHint, fontSize: 14),
                           )),
                     )
@@ -203,7 +204,8 @@ class FilterBottomSheet extends StatelessWidget {
                       child: Container(
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           child: Text(
-                            asProvider.getString('No sub-category available'),
+                            AppLocalizations.of(context)!
+                                .no_sub_category_available,
                             style: TextStyle(color: cc.greyHint, fontSize: 14),
                           )),
                     )

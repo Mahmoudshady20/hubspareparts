@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -11,7 +12,7 @@ class TermsAndCondition with ChangeNotifier {
   bool rtl = false;
   String html = '';
 
-  Future getTermsAndCondi(uri) async {
+  Future getTermsAndCondi(uri,BuildContext context) async {
     final url = Uri.parse(uri);
 
     try {
@@ -26,7 +27,7 @@ class TermsAndCondition with ChangeNotifier {
       }
       throw '';
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
       print(err);

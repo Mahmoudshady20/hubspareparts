@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/orders_service/order_details_service.dart';
+import 'package:safecart/utils/Constant_colors.dart';
 import 'package:safecart/utils/responsive.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
-import 'package:safecart/utils/Constant_colors.dart';
 
 class ShippingInfo extends StatelessWidget {
   ShippingInfo({super.key});
@@ -21,7 +22,7 @@ class ShippingInfo extends StatelessWidget {
       Container(
         padding: const EdgeInsets.only(bottom: 4),
         child: Text(
-          asProvider.getString('Shipping Details'),
+          AppLocalizations.of(context)!.shipping_details,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context)
@@ -36,20 +37,26 @@ class ShippingInfo extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
-              infoRow(context, 'Name', address?.name ?? 'None'),
+              infoRow(context, AppLocalizations.of(context)!.name,
+                  address?.name ?? 'None'),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Email', address?.email ?? 'None'),
+              infoRow(context, AppLocalizations.of(context)!.email,
+                  address?.email ?? 'None'),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Phone', '${address?.phone ?? 'None'}'),
+              infoRow(context, AppLocalizations.of(context)!.phone,
+                  '${address?.phone ?? 'None'}'),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Country', address?.country?.name ?? '-'),
+              infoRow(context, AppLocalizations.of(context)!.country,
+                  address?.country?.name ?? '-'),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'State', address?.state?.name ?? '-'),
+              infoRow(context, AppLocalizations.of(context)!.state,
+                  address?.state?.name ?? '-'),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'City', address?.cityInfo?.name ?? '-'),
+              infoRow(context, AppLocalizations.of(context)!.city,
+                  address?.cityInfo?.name ?? '-'),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(
-                  context, 'Street Address', '${address?.address ?? 'None'}'),
+              infoRow(context, AppLocalizations.of(context)!.street_address,
+                  '${address?.address ?? 'None'}'),
             ],
           ))
     ]);
@@ -68,7 +75,9 @@ class ShippingInfo extends StatelessWidget {
         ),
         // EmptySpaceHelper.emptywidth(20),
         SizedBox(
-          width: title == 'Street Address' ? screenWidth / 2.2 : null,
+          width: title == 'Street Address' || title == 'عنوان الشارع'
+              ? screenWidth / 2.2
+              : null,
           child: Text(
             amount.toString(),
             maxLines: 3,

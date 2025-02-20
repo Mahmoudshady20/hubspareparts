@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/services/checkout_service/checkout_service.dart';
@@ -26,11 +27,6 @@ class AuthrizeNetPay {
           Uri.parse('https://apitest.authorize.net/xml/v1/request.api'));
       dynamic orderId = cProvider.orderId;
       double amount = cProvider.totalOrderAmount;
-      print({
-        "cardNumber": "$card",
-        "expirationDate": "${edate.year}-${edate.month}",
-        "cardCode": "$ccode"
-      });
       request.body = json.encode({
         "createTransactionRequest": {
           "merchantAuthentication": {
@@ -94,28 +90,22 @@ class AuthrizeNetPay {
       final data = await response.stream.bytesToString();
       if (response.statusCode == 200) {
         if (data.contains('This transaction has been approved')) {
-          print(data);
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => PaymentStatusView(false)),
               (Route<dynamic> route) => false);
         } else {
-          print(orderId);
-          print(data);
-          print(data);
-          print(data);
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => PaymentStatusView(true)),
               (Route<dynamic> route) => false);
-          showToast(asProvider.getString('Payment failed'), cc.red);
+          showToast(AppLocalizations.of(context)!.payment_failed, cc.red);
         }
       } else {
-        print(response.reasonPhrase);
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
-      print(err);
+      showToast(err.toString(), cc.red);
     }
   }
 }

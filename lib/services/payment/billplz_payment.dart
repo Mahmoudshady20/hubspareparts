@@ -48,11 +48,11 @@ class BillplzPayment extends StatelessWidget {
                 );
               }
               if (snapshot.hasData) {
-                return errorWidget();
+                return errorWidget(context);
               }
               if (snapshot.hasError) {
                 print(snapshot.error);
-                return errorWidget();
+                return errorWidget(context);
               }
 
               return InAppWebView(

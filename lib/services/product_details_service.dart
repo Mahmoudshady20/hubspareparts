@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:safecart/helpers/common_helper.dart';
 
@@ -105,7 +106,7 @@ class ProductDetailsService with ChangeNotifier {
     return result;
   }
 
-  addAdditionalPrice() {
+  addAdditionalPrice(BuildContext context) {
     bool setMatched = true;
     if (selectedInventorySetIndex.length != 1) {
       for (int i = 0; i < selectedInventorySetIndex.length; i++) {
@@ -141,8 +142,8 @@ class ProductDetailsService with ChangeNotifier {
       selectedIndex = int.parse(selectedInventorySetIndex[0]);
     }
     if (setMatched) {
-      showToast(
-          asProvider.getString('Attribute set selected'), cc.secondaryColor);
+      showToast(AppLocalizations.of(context)!.attribute_set_selected,
+          cc.secondaryColor);
       productSalePrice = productDetails?.campaignProduct?.campaignPrice ??
           productDetails?.salePrice;
       selectedInventoryHash = inventoryHash[selectedIndex!];

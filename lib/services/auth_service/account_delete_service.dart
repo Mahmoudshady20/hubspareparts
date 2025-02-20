@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:safecart/services/profile_info_service.dart';
 
 import '../../helpers/common_helper.dart';
@@ -47,7 +48,7 @@ class AccountDeleteService with ChangeNotifier {
       if (response.statusCode == 200) {
         print(data);
         showToast(
-            asProvider.getString('Account delete successful'), cc.primaryColor);
+            AppLocalizations.of(context)!.account_delete_successful, cc.primaryColor);
         Provider.of<SaveSignInInfoService>(context, listen: false).clearToken();
         Provider.of<ProfileInfoService>(context, listen: false).logout();
       } else if (data['message'] != null) {
@@ -57,7 +58,7 @@ class AccountDeleteService with ChangeNotifier {
         print(data);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
       print(err);

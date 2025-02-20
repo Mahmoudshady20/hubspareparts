@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:badges/badges.dart' as badge;
 import 'package:safecart/helpers/common_helper.dart';
 import 'package:safecart/helpers/navigation_helper.dart';
 import 'package:safecart/services/search_seatvice.dart';
 import 'package:safecart/views/product_search_view.dart';
 import 'package:safecart/widgets/home_front/custom_search_field.dart';
 
-import '../../helpers/empty_space_helper.dart';
 import '../../services/profile_info_service.dart';
 import '../../services/search_product_service.dart';
 
@@ -124,13 +123,13 @@ class _HFAppBarState extends State<HFAppBar> {
         children: [
           Text(
             pProvider.profileInfo == null
-                ? (asProvider.getString('Welcome to'))
-                : (asProvider.getString('Welcome back') + '!'),
+                ? (AppLocalizations.of(context)!.welcome_to)
+                : ('${AppLocalizations.of(context)!.welcome_back}!'),
             style: const TextStyle(fontSize: 14),
           ),
           Text(
             pProvider.profileInfo == null
-                ? (asProvider.getString('SafeCart'))
+                ? (AppLocalizations.of(context)!.safeCart)
                 : pProvider.profileInfo!.userDetails.name
                     .toString()
                     .capitalize(),
@@ -141,7 +140,7 @@ class _HFAppBarState extends State<HFAppBar> {
     }
     if (index == 1) {
       return Text(
-        "Products",
+        AppLocalizations.of(context)!.products,
         style: Theme.of(context)
             .textTheme
             .titleLarge!
@@ -150,7 +149,7 @@ class _HFAppBarState extends State<HFAppBar> {
     }
     if (index == 2) {
       return Text(
-        "My Cart",
+        AppLocalizations.of(context)!.my_Cart,
         style: Theme.of(context)
             .textTheme
             .titleLarge!
@@ -159,7 +158,7 @@ class _HFAppBarState extends State<HFAppBar> {
     }
     if (index == 3) {
       return Text(
-        "My Wishlist",
+        AppLocalizations.of(context)!.my_wishlist,
         style: Theme.of(context)
             .textTheme
             .titleLarge!

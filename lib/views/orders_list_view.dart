@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/utils/custom_preloader.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/orders_service/order_list_service.dart';
@@ -120,18 +120,22 @@ class OrdersListView extends StatelessWidget {
                                                   '#${e.id ?? ''}',
                                                   e.createdAt ?? DateTime.now(),
                                                   e.orderTrack ??
-                                                      asProvider
-                                                          .getString('None'),
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .none,
                                                   e.paymentStatus ??
-                                                      asProvider
-                                                          .getString('None'),
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .none,
                                                 ))
                                             .toList(),
                                       )
                                     : SizedBox(
                                         height: screenHeight / 2.5,
                                         child: Center(
-                                          child: Text(AppLocalizations.of(context)!.no_order_found),
+                                          child: Text(
+                                              AppLocalizations.of(context)!
+                                                  .no_order_found),
                                         ),
                                       );
                               });
@@ -165,7 +169,8 @@ class OrdersListView extends StatelessWidget {
     if (controller.offset >= controller.position.maxScrollExtent &&
         !controller.position.outOfRange) {
       if (oService.orderListModel?.nextPageUrl == null) {
-        showToast(AppLocalizations.of(context)!.no_more_order_found, cc.blackColor);
+        showToast(
+            AppLocalizations.of(context)!.no_more_order_found, cc.blackColor);
         return;
       }
       if (orderListData?.nextPageUrl != null && !oService.loadingNextPage) {

@@ -17,8 +17,7 @@ import '../views/payment_status_view.dart';
 import 'empty_space_helper.dart';
 
 ConstantColors cc = ConstantColors();
-
-const String baseApi = 'https://safecart.bytesed.com/api/v1';
+const String baseApi = 'https://hubspareparts.com/api/v1';
 String _globalToken = '';
 String imageLoadingAppIcon =
     'https://i.postimg.cc/85gKpbT5/shopcartappicon.png';
@@ -107,9 +106,9 @@ paymentFailAlert(BuildContext context) async {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          title: Text(asProvider.getString('Are you sure?')),
-          content: Text(asProvider
-              .getString('Your payment process will get terminated.')),
+          title: Text(AppLocalizations.of(context)!.are_you_sure),
+          content: Text(AppLocalizations.of(context)!
+              .your_payment_process_will_get_terminated),
           actions: [
             TextButton(
               onPressed: () {
@@ -119,7 +118,7 @@ paymentFailAlert(BuildContext context) async {
                     (Route<dynamic> route) => false);
               },
               child: Text(
-                'Yes',
+                AppLocalizations.of(context)!.yes,
                 style: TextStyle(color: cc.primaryColor),
               ),
             )
@@ -145,7 +144,7 @@ signInUpFailedForDeletedAccount(
                 Navigator.pop(context);
               },
               child: Text(
-                asProvider.getString('Close'),
+                AppLocalizations.of(context)!.close,
                 style: TextStyle(color: cc.primaryColor),
               ),
             )
@@ -160,14 +159,14 @@ extension StringExtension on String {
   }
 }
 
-errorWidget() {
+errorWidget(BuildContext context) {
   return Column(
     children: [
       Image.asset('assets/images/error.png'),
       EmptySpaceHelper.emptyHight(15),
       Center(
         child: Text(
-          asProvider.getString('Loading failed'),
+          AppLocalizations.of(context)!.loading_failed,
           style: TextStyle(color: cc.greyParagraph),
         ),
       )
@@ -180,7 +179,7 @@ paymentFailedDialogue(BuildContext context, descriptionText) async {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          title: Text(asProvider.getString('Payment failed!')),
+          title: Text(AppLocalizations.of(context)!.payment_failed),
           content: descriptionText != null ? Text(descriptionText) : null,
           actions: [
             TextButton(
@@ -189,7 +188,7 @@ paymentFailedDialogue(BuildContext context, descriptionText) async {
                       builder: (context) => PaymentStatusView(true)),
                   (Route<dynamic> route) => false),
               child: Text(
-                asProvider.getString('Return'),
+                AppLocalizations.of(context)!.return_button,
                 style: TextStyle(color: cc.primaryColor),
               ),
             )
@@ -207,14 +206,14 @@ Future showPaymentSuccessDialogue(BuildContext context) async {
         return SizedBox(
           height: 300,
           child: AlertDialog(
-            title: Text(asProvider.getString('Order submitted!')),
+            title: Text(AppLocalizations.of(context)!.order_submitted),
             content: SizedBox(
               width: 200,
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: asProvider.getString(
-                      "Your order has been successful! You'll receive ordered items in 3-5 days."),
+                  text: AppLocalizations.of(context)!
+                      .your_order_has_been_successful_You_ll_receive_ordered_items_in_days_Your_order_ID_is,
                   style: Theme.of(context).textTheme.bodySmall,
                   children: <TextSpan>[
                     TextSpan(
@@ -228,7 +227,8 @@ Future showPaymentSuccessDialogue(BuildContext context) async {
                                 OrderDetailsView(cProvider.orderId.toString()),
                           ));
                         },
-                      text: " \n${asProvider.getString("Your order ID  is")}",
+                      text:
+                          " \n${AppLocalizations.of(context)!.your_order_ID_is}",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     TextSpan(
@@ -253,7 +253,7 @@ Future showPaymentSuccessDialogue(BuildContext context) async {
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: Text(
-                  asProvider.getString('Ok'),
+                  AppLocalizations.of(context)!.ok,
                   style: TextStyle(color: cc.primaryColor),
                 ),
               )

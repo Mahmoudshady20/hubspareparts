@@ -2,17 +2,17 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/services/auth_service/otp_service.dart';
 import 'package:safecart/services/auth_service/save_sign_in_info_service.dart';
-import 'package:safecart/services/location/country_dropdown_service.dart';
 import 'package:safecart/services/profile_info_service.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../models/city_dropdown_model.dart';
-import '../../models/state_model.dart';
 import '../../models/country_model.dart';
+import '../../models/state_model.dart';
 import '../../views/enter_otp_view.dart';
 
 class SignUpService with ChangeNotifier {
@@ -97,7 +97,7 @@ class SignUpService with ChangeNotifier {
         } else if (data['validation_errors']['phone'] != null) {
           showToast(data['validation_errors']['phone'].first, cc.red);
         } else {
-          showToast(asProvider.getString('Sign up failed!'), cc.red);
+          showToast(AppLocalizations.of(context)!.sign_up_failed, cc.red);
         }
         setLoadingSignUp(false);
         return;
@@ -134,11 +134,13 @@ class SignUpService with ChangeNotifier {
                   .fetchProfileInfo(context);
               Navigator.pop(context, true);
 
-              showToast('Sign up succeeded!', cc.green);
+              showToast(
+                  AppLocalizations.of(context)!.sign_up_succeeded, cc.green);
               setLoadingSignUp(false);
               return;
             }
-            showToast('OTP verification failed!', cc.red);
+            showToast(
+                AppLocalizations.of(context)!.oTP_verification_failed, cc.red);
           });
         }
         setLoadingSignUp(false);
@@ -147,7 +149,7 @@ class SignUpService with ChangeNotifier {
         setLoadingSignUp(false);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       setLoadingSignUp(false);
     } catch (err) {
       print(err);

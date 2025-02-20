@@ -60,7 +60,7 @@ class LogInHelper {
               Row(
                 children: [
                   OutlinedButton(
-                    child: asProvider.getString("Cancel"),
+                    child: Text(AppLocalizations.of(context)!.cancel),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -69,7 +69,7 @@ class LogInHelper {
                     width: 16,
                   ),
                   ElevatedButton(
-                    child: asProvider.getString("Sign In"),
+                    child: Text(AppLocalizations.of(context)!.sign_In),
                     onPressed: () {
                       // Provider.of<SignInSignUpService>(context, listen: false)
                       //     .getUserData();

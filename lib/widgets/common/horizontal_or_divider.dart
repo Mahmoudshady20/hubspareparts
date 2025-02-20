@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:safecart/helpers/common_helper.dart';
 
 class HorizontalOrDivider extends StatelessWidget {
@@ -19,7 +20,7 @@ class HorizontalOrDivider extends StatelessWidget {
           ),
         ),
         Text(
-          asProvider.getString('Or'),
+          AppLocalizations.of(context)!.or,
           style: TextStyle(color: cc.greytitle, fontWeight: FontWeight.bold),
         ),
         Expanded(

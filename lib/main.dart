@@ -242,13 +242,13 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'SafeCart',
           navigatorKey: navigatorKey,
-          builder: (context, rtlchild) {
-            return Directionality(
-              textDirection:
-                  rtlProvider.langRtl ? TextDirection.rtl : TextDirection.ltr,
-              child: rtlchild!,
-            );
-          },
+          // builder: (context, rtlchild) {
+          //   return Directionality(
+          //     textDirection:
+          //         rtlProvider.langRtl ? TextDirection.rtl : TextDirection.ltr,
+          //     child: rtlchild!,
+          //   );
+          // },
           debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
             AppLocalizations.delegate, // Add this line

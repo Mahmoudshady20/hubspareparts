@@ -2,11 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/services/auth_service/save_sign_in_info_service.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:safecart/services/profile_info_service.dart';
 
 import '../../helpers/common_helper.dart';
@@ -106,7 +107,7 @@ class SocialSignInSignUpService with ChangeNotifier {
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       print(err);
     }

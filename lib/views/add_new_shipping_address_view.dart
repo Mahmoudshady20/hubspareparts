@@ -133,27 +133,25 @@ class AddNewShippingAddressView extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         FieldTitle(
-                                            asProvider.getString('Title')),
+                                            AppLocalizations.of(context)!.title),
                                         TextFormField(
                                           style: getFieldStyle(context),
                                           controller: _nameController,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: asProvider
-                                                .getString('Enter a title'),
+                                            hintText: AppLocalizations.of(context)!.enter_a_title,
                                           ),
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty ||
                                                 value.length < 3) {
-                                              return asProvider.getString(
-                                                  'Enter a valid name');
+                                              return AppLocalizations.of(context)!.enter_a_valid_name;
                                             }
                                             return null;
                                           },
                                         ),
                                         FieldTitle(
-                                            asProvider.getString('Email')),
+                                            AppLocalizations.of(context)!.email),
                                         TextFormField(
                                           controller: _emailController,
                                           style: getFieldStyle(context),
@@ -161,34 +159,30 @@ class AddNewShippingAddressView extends StatelessWidget {
                                               TextInputType.emailAddress,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: asProvider
-                                                .getString('Enter an email'),
+                                            hintText: AppLocalizations.of(context)!.enter_an_email,
                                           ),
                                           validator: (value) {
                                             if (!EmailValidator.validate(
                                                 value ?? '')) {
-                                              return asProvider.getString(
-                                                  'Enter a valid email address');
+                                              return AppLocalizations.of(context)!.enter_a_valid_email_address;
                                             }
                                             return null;
                                           },
                                         ),
                                         FieldTitle(
-                                            asProvider.getString('Phone')),
+                                            AppLocalizations.of(context)!.phone),
                                         TextFormField(
                                           controller: _phoneController,
                                           style: getFieldStyle(context),
                                           keyboardType: TextInputType.phone,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: asProvider.getString(
-                                                'Enter a phone number'),
+                                            hintText: AppLocalizations.of(context)!.enter_a_phone_number,
                                           ),
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty) {
-                                              return asProvider.getString(
-                                                  'Enter a phone number');
+                                              return AppLocalizations.of(context)!.enter_a_phone_number;
                                             }
                                             return null;
                                           },
@@ -233,31 +227,28 @@ class AddNewShippingAddressView extends StatelessWidget {
                                           );
                                         }),
                                         FieldTitle(
-                                            asProvider.getString('Zipcode')),
+                                            AppLocalizations.of(context)!.zipcode),
                                         TextFormField(
                                           controller: _zipcodeController,
                                           style: getFieldStyle(context),
                                           keyboardType: TextInputType.number,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: asProvider
-                                                .getString('Enter zipcode'),
+                                            hintText: AppLocalizations.of(context)!.enter_zipcode,
                                           ),
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty) {
-                                              return asProvider
-                                                  .getString('Enter zipcode');
+                                              return AppLocalizations.of(context)!.enter_zipcode;
                                             }
                                             if (value.trim().length <= 3) {
-                                              return asProvider.getString(
-                                                  'Enter a valid zip code');
+                                              return AppLocalizations.of(context)!.enter_your_zipcode;
                                             }
                                             return null;
                                           },
                                         ),
                                         FieldTitle(
-                                            asProvider.getString('Address')),
+                                            AppLocalizations.of(context)!.address),
                                         TextFormField(
                                           controller: _addressController,
                                           style: getFieldStyle(context),
@@ -265,18 +256,15 @@ class AddNewShippingAddressView extends StatelessWidget {
                                           maxLines: 6,
                                           minLines: 3,
                                           decoration: InputDecoration(
-                                            hintText: asProvider
-                                                .getString('Enter address'),
+                                            hintText: AppLocalizations.of(context)!.enter_address,
                                           ),
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty) {
-                                              return asProvider
-                                                  .getString('Enter address');
+                                              return AppLocalizations.of(context)!.enter_address;
                                             }
                                             if (value.trim().length <= 2) {
-                                              return asProvider.getString(
-                                                  'Enter a valid address');
+                                              return AppLocalizations.of(context)!.enter_a_valid_address;
                                             }
                                             return null;
                                           },
@@ -286,8 +274,7 @@ class AddNewShippingAddressView extends StatelessWidget {
                                             builder:
                                                 (context, saProvider, child) {
                                           return CustomCommonButton(
-                                              btText: asProvider
-                                                  .getString('Add address'),
+                                              btText: AppLocalizations.of(context)!.add_address,
                                               isLoading:
                                                   saProvider.loadingNewAddress,
                                               onPressed: () {

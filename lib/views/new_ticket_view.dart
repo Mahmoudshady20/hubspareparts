@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/utils/custom_preloader.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/new_ticket_service.dart';
@@ -13,7 +13,7 @@ import '../widgets/common/field_title.dart';
 
 class NewTicketView extends StatelessWidget {
   static const routeName = 'add new ticket';
-  NewTicketView({Key? key}) : super(key: key);
+  NewTicketView({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _subjectFN = FocusNode();
@@ -21,8 +21,10 @@ class NewTicketView extends StatelessWidget {
   Future _onSubmit(BuildContext context, NewTicketService ntService) async {
     final validated = _formKey.currentState!.validate();
     if (!validated) {
-      snackBar(context,
-          AppLocalizations.of(context)!.please_give_all_the_information_properly,
+      snackBar(
+          context,
+          AppLocalizations.of(context)!
+              .please_give_all_the_information_properly,
           backgroundColor: cc.red);
       return;
     }
@@ -113,24 +115,24 @@ class NewTicketView extends StatelessWidget {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                FieldTitle(asProvider.getString('Title')),
+                                FieldTitle(AppLocalizations.of(context)!.title),
                                 // const SizedBox(height: 8),
                                 TextFormField(
                                   decoration: InputDecoration(
-                                    hintText:
-                                        asProvider.getString('Enter a title'),
+                                    hintText: AppLocalizations.of(context)!
+                                        .enter_a_title,
                                   ),
                                   onChanged: (value) {
                                     ntService.setTitle(value);
                                   },
                                   validator: (name) {
                                     if (name!.isEmpty) {
-                                      return asProvider
-                                          .getString('Enter a title');
+                                      return AppLocalizations.of(context)!
+                                          .enter_a_title;
                                     }
                                     if (name.length <= 2) {
-                                      return asProvider
-                                          .getString('Enter a valid title');
+                                      return AppLocalizations.of(context)!
+                                          .enter_a_valid_title;
                                     }
                                     return null;
                                   },
@@ -139,12 +141,13 @@ class NewTicketView extends StatelessWidget {
                                         .requestFocus(_subjectFN);
                                   },
                                 ),
-                                FieldTitle(asProvider.getString('Subject')),
+                                FieldTitle(
+                                    AppLocalizations.of(context)!.subject),
                                 // const SizedBox(height: 8),
                                 TextFormField(
                                   decoration: InputDecoration(
-                                    hintText:
-                                        asProvider.getString('Enter a subject'),
+                                    hintText: AppLocalizations.of(context)!
+                                        .enter_a_subject,
                                   ),
                                   focusNode: _subjectFN,
                                   onChanged: (value) {
@@ -152,12 +155,12 @@ class NewTicketView extends StatelessWidget {
                                   },
                                   validator: (name) {
                                     if (name!.isEmpty) {
-                                      return asProvider
-                                          .getString('Enter a valid subject');
+                                      return AppLocalizations.of(context)!
+                                          .enter_a_valid_subject;
                                     }
                                     if (name.length <= 5) {
-                                      return asProvider.getString(
-                                          'Enter a subject with more then 5 character');
+                                      return AppLocalizations.of(context)!
+                                          .enter_a_subject_with_more_then_character;
                                     }
                                     return null;
                                   },
@@ -165,7 +168,8 @@ class NewTicketView extends StatelessWidget {
                                     ntService.setIsLoading(false);
                                   },
                                 ),
-                                FieldTitle(asProvider.getString('Priority')),
+                                FieldTitle(
+                                    AppLocalizations.of(context)!.priority),
                                 // const SizedBox(height: 8),
                                 CustomDropdown(
                                   ntService.selectedPriority as String,
@@ -177,12 +181,14 @@ class NewTicketView extends StatelessWidget {
                                   value: ntService.selectedPriority,
                                 ),
 
-                                FieldTitle(asProvider.getString('Department')),
+                                FieldTitle(
+                                    AppLocalizations.of(context)!.department),
                                 ntService.allDepartment == null
                                     ? SizedBox(
                                         height: 56, child: CustomPreloader())
                                     : CustomDropdown(
-                                        asProvider.getString('Department'),
+                                        AppLocalizations.of(context)!
+                                            .department,
                                         ntService.departmentNames,
                                         (newValue) {
                                           ntService
@@ -192,20 +198,21 @@ class NewTicketView extends StatelessWidget {
                                             ntService.selectedDepartment?.name,
                                       ),
 
-                                FieldTitle(asProvider.getString('Description')),
+                                FieldTitle(
+                                    AppLocalizations.of(context)!.description),
                                 // const SizedBox(height: 8),
                                 TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: asProvider
-                                        .getString('Describe your issue'),
+                                    hintText: AppLocalizations.of(context)!
+                                        .describe_your_issue,
                                   ),
                                   onChanged: (value) {
                                     ntService.setDescription(value);
                                   },
                                   validator: (address) {
                                     if (address == null || address.isEmpty) {
-                                      return asProvider.getString(
-                                          'You have to give some description');
+                                      return AppLocalizations.of(context)!
+                                          .you_have_to_give_some_description;
                                     }
 
                                     return null;
@@ -216,7 +223,8 @@ class NewTicketView extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 40),
                                 CustomCommonButton(
-                                    btText: asProvider.getString('Add Ticket'),
+                                    btText: AppLocalizations.of(context)!
+                                        .add_Ticket,
                                     isLoading: ntService.isLoading,
                                     onPressed: () {
                                       _onSubmit(context, ntService);

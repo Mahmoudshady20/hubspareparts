@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/helpers/common_helper.dart';
 import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/common/field_title.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/empty_space_helper.dart';
 import '../services/location/city_dropdown_service.dart';
@@ -45,7 +45,7 @@ class CityDropdown extends StatelessWidget {
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FieldTitle(asProvider.getString("City")),
+              FieldTitle(AppLocalizations.of(context)!.city),
               InkWell(
                 onTap: () {
                   Provider.of<CityDropdownService>(context, listen: false)
@@ -78,7 +78,8 @@ class CityDropdown extends StatelessWidget {
                                 child: TextFormField(
                                     decoration: InputDecoration(
                                         hintText: textFieldHint ??
-                                            asProvider.getString("Search city"),
+                                            AppLocalizations.of(context)!
+                                                .search_city,
                                         prefixIcon: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 12),
@@ -118,7 +119,8 @@ class CityDropdown extends StatelessWidget {
                                           width: screenWidth - 60,
                                           child: Center(
                                             child: Text(
-                                              AppLocalizations.of(context)!.no_results_found,
+                                              AppLocalizations.of(context)!
+                                                  .no_results_found,
                                               style: textStyle,
                                             ),
                                           ),
@@ -185,7 +187,7 @@ class CityDropdown extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        selectedValue ?? asProvider.getString("Select city"),
+                        selectedValue ?? AppLocalizations.of(context)!.select_city,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: cc.blackColor.withOpacity(.40),
                             fontWeight: FontWeight.w600),

@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/helpers/common_helper.dart';
 import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/common/field_title.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../services/location/country_dropdown_service.dart';
 import '../helpers/empty_space_helper.dart';
@@ -39,7 +39,7 @@ class CountryDropdown extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FieldTitle(asProvider.getString("Country")),
+        FieldTitle(AppLocalizations.of(context)!.country),
         InkWell(
           onTap: () {
             Provider.of<CountryDropdownService>(context, listen: false)
@@ -67,7 +67,8 @@ class CountryDropdown extends StatelessWidget {
                           child: TextFormField(
                               decoration: InputDecoration(
                                   hintText: textFieldHint ??
-                                      asProvider.getString("Search country"),
+                                      AppLocalizations.of(context)!
+                                          .search_country,
                                   prefixIcon: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 12),
@@ -107,7 +108,8 @@ class CountryDropdown extends StatelessWidget {
                                     height: 64,
                                     child: Center(
                                       child: Text(
-                                        AppLocalizations.of(context)!.no_result_found,
+                                        AppLocalizations.of(context)!
+                                            .no_result_found,
                                         style: textStyle,
                                       ),
                                     ),
@@ -120,7 +122,8 @@ class CountryDropdown extends StatelessWidget {
                                     height: 64,
                                     child: Center(
                                       child: Text(
-                                        AppLocalizations.of(context)!.no_result_found,
+                                        AppLocalizations.of(context)!
+                                            .no_result_found,
                                         style: textStyle,
                                       ),
                                     ),
@@ -185,7 +188,7 @@ class CountryDropdown extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  selectedValue ?? asProvider.getString("Select country"),
+                  selectedValue ?? AppLocalizations.of(context)!.select_country,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: cc.blackColor.withOpacity(.40),
                       fontWeight: FontWeight.w600),

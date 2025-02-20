@@ -2,13 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:safecart/helpers/common_helper.dart';
-import '../../data/network/base_api_services.dart';
 import 'package:http/http.dart' as http;
+import 'package:safecart/helpers/common_helper.dart';
 
-import 'package:safecart/main.dart';
-import 'package:safecart/views/sign_in_view.dart';
+import '../../data/network/base_api_services.dart';
 import '../app_exceptions.dart';
 
 class NetworkApiServices extends BaseApiServices {

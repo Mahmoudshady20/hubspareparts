@@ -40,7 +40,8 @@ class TicketTile extends StatelessWidget {
             snackBar(context, value);
           }
         }).onError((error, stackTrace) {
-          snackBar(context, 'Could not load any messages');
+          snackBar(context,
+              AppLocalizations.of(context)!.could_not_load_any_message);
         });
         Navigator.of(context).push(MaterialPageRoute<void>(
           builder: (BuildContext context) => TicketChatView(title, ticketId),
@@ -158,7 +159,7 @@ class TicketTile extends StatelessWidget {
                     return FittedBox(
                       child: Row(
                         children: [
-                          Text(asProvider.getString('Status') + ':'),
+                          Text('${AppLocalizations.of(context)!.status}:'),
                           const SizedBox(width: 5),
                           PopupMenuButton(
                             child: Container(
@@ -169,7 +170,9 @@ class TicketTile extends StatelessWidget {
                                   bottom: 3),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: status == 'open' ? cc.green : cc.red,
+                                color: status == 'open' || status == 'فتح'
+                                    ? cc.green
+                                    : cc.red,
                               ),
                               child: Row(
                                 children: [
@@ -223,7 +226,10 @@ class TicketTile extends StatelessWidget {
                               snackBar(context, value);
                             }
                           }).onError((error, stackTrace) {
-                            snackBar(context, 'Could not load any messages');
+                            snackBar(
+                                context,
+                                AppLocalizations.of(context)!
+                                    .could_not_load_any_message);
                           });
                           Navigator.of(context).push(MaterialPageRoute<void>(
                             builder: (BuildContext context) =>

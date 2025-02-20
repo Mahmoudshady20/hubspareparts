@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/payment/pagali_payment.dart';
 import 'package:safecart/services/payment/toyyibpay_payment.dart';
 
+import '../../helpers/common_helper.dart';
 import '../../services/payment/billplz_payment.dart';
 import '../../services/payment/cinetpay_payment.dart';
+import '../../services/payment/mollie_payment.dart';
 import '../../services/payment/squareup_payment.dart';
 import '../../services/payment/zitopay_payment.dart';
-import '../../services/payment/mollie_payment.dart';
 import '../../widgets/common/custom_common_button.dart';
-import '../../helpers/common_helper.dart';
 import '../payment/authorize_net_payment.dart';
 import '../payment/cash_free_payment.dart';
 import '../payment/flutter_wave_payment.dart';
@@ -29,12 +30,12 @@ import 'checkout_service.dart';
 Future startPayment(
     BuildContext context, CheckoutService csProvider, pickedImage,
     {zUsername, authNetCard, authNetED, authcCode}) async {
-  print('starting payment');
   final selectedGateaway =
       Provider.of<PaymentGatewayService>(context, listen: false)
           .selectedGateway;
   if (selectedGateaway == null) {
-    snackBar(context, 'Select a payment Gateway', backgroundColor: cc.red);
+    snackBar(context, AppLocalizations.of(context)!.payment_getaway,
+        backgroundColor: cc.red);
     return;
   }
   final cProvider = Provider.of<CheckoutService>(context, listen: false);
@@ -42,7 +43,6 @@ Future startPayment(
   if (selectedGateaway.name.contains('bank_transfer') ||
       selectedGateaway.name.contains('manual_payment')) {
     bool continued = false;
-    print(cProvider.pickedImage);
     await showDialog(
         context: context,
         builder: (context) {
@@ -66,8 +66,8 @@ Future startPayment(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Icon(Icons.image_outlined),
-                              Text(asProvider
-                                  .getString('Select an image from gallery')),
+                              Text(AppLocalizations.of(context)!
+                                  .select_an_image_from_gallery),
                             ],
                           )
                         : Image.file(cProvider.pickedImage!),
@@ -75,19 +75,20 @@ Future startPayment(
             ),
             actions: [
               CustomCommonButton(
-                btText: asProvider.getString('Continue'),
+                btText: AppLocalizations.of(context)!.continue_button,
                 isLoading: false,
-                onPressed: Provider.of<CheckoutService>(context).pickedImage ==
-                        null
-                    ? () {
-                        showToast(
-                            asProvider.getString('Take an image to proceed'),
-                            Colors.red);
-                      }
-                    : () {
-                        continued = true;
-                        Navigator.of(context).pop();
-                      },
+                onPressed:
+                    Provider.of<CheckoutService>(context).pickedImage == null
+                        ? () {
+                            showToast(
+                                AppLocalizations.of(context)!
+                                    .take_an_image_to_proceed,
+                                Colors.red);
+                          }
+                        : () {
+                            continued = true;
+                            Navigator.of(context).pop();
+                          },
               )
             ],
           );
@@ -112,8 +113,6 @@ Future startPayment(
     // Navigator.of(context).pop();
     return;
   }
-  print('no confirming');
-  print(selectedGateaway.name);
   if (selectedGateaway.name.toLowerCase().contains('marcadopago')) {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -144,7 +143,6 @@ Future startPayment(
     return;
   }
   if (selectedGateaway.name.toLowerCase().contains('stripe')) {
-    print('here');
     await StripePayment().makePayment(context);
     return;
   }

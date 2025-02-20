@@ -1,11 +1,12 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/utils/responsive.dart';
 
-import '../../services/orders_service/order_details_service.dart';
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
+import '../../services/orders_service/order_details_service.dart';
 
 class BillingInfo extends StatelessWidget {
   BillingInfo({super.key});
@@ -21,7 +22,7 @@ class BillingInfo extends StatelessWidget {
       Container(
         padding: const EdgeInsets.only(bottom: 4),
         child: Text(
-          asProvider.getString('Order Details'),
+          AppLocalizations.of(context)!.order_details,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context)
@@ -37,41 +38,41 @@ class BillingInfo extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
-              infoRow(context, 'Sub-order Id',
+              infoRow(context, AppLocalizations.of(context)!.sub_order_id,
                   '#${odProvider.orderDetailsModel?.orderTrack.orderId}'),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Transaction Id',
+              infoRow(context, AppLocalizations.of(context)!.transaction_id,
                   '${odProvider.orderDetailsModel?.paymentDetails.transactionId ?? '-'}',
                   textColor: cc.blue),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Payment gateway',
+              infoRow(context, AppLocalizations.of(context)!.payment_getaway,
                   '${odProvider.orderDetailsModel?.paymentDetails.paymentGateway}'),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Payment status',
+              infoRow(context, AppLocalizations.of(context)!.payment_status,
                   '${odProvider.orderDetailsModel?.paymentDetails.paymentStatus}',
                   textColor: odProvider.statusColor(
                       '${odProvider.orderDetailsModel?.paymentDetails.paymentStatus}')),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Order status',
+              infoRow(context, AppLocalizations.of(context)!.order_status,
                   '${odProvider.orderDetailsModel?.orderTrack.name}',
                   textColor: odProvider.statusColor(
                       '${odProvider.orderDetailsModel?.orderTrack.name}')),
               // EmptySpaceHelper.emptyHight(10),
               // infoRow(context, 'Items', '5'),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Items total',
+              infoRow(context, AppLocalizations.of(context)!.items_total,
                   '${odProvider.orderDetailsModel?.paymentDetails.paymentMeta?.subTotal.toStringAsFixed(2) ?? 0.00}',
                   isPrice: true),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Shipping cost',
+              infoRow(context, AppLocalizations.of(context)!.shipping_cost,
                   '${odProvider.orderDetailsModel?.paymentDetails.paymentMeta?.shippingCost.toStringAsFixed(2) ?? 0.00}',
                   isPrice: true),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Tax',
+              infoRow(context, AppLocalizations.of(context)!.tax,
                   '${odProvider.orderDetailsModel?.paymentDetails.paymentMeta?.taxAmount.toStringAsFixed(2) ?? 0.00}',
                   isPrice: true),
               EmptySpaceHelper.emptyHight(10),
-              infoRow(context, 'Total',
+              infoRow(context, AppLocalizations.of(context)!.total,
                   '${odProvider.orderDetailsModel?.paymentDetails.paymentMeta?.totalAmount.toStringAsFixed(2) ?? 0.00}',
                   isPrice: true),
             ],

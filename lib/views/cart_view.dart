@@ -92,7 +92,8 @@ class CartView extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 20),
                   padding: const EdgeInsets.all(20.0),
                   child: CustomCommonButton(
-                    btText: asProvider.getString('Complete Your Purchase'),
+                    btText:
+                        AppLocalizations.of(context)!.complete_Your_Purchase,
                     isLoading: false,
                     onPressed: () async {
                       Provider.of<PaymentGatewayService>(context, listen: false)

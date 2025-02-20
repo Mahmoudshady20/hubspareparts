@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:safecart/models/feature_products_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 
@@ -47,7 +48,7 @@ class FeatureProductsService with ChangeNotifier {
     } on TimeoutException {
       featureProductsList = [];
       setFeatureProductsLoading(value: false);
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       featureProductsList = [];
       setFeatureProductsLoading(value: false);

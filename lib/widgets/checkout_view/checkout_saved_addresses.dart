@@ -29,7 +29,7 @@ class CheckoutSavedAddresses extends StatelessWidget {
                           .setObscurePassword(true);
                       Navigator.of(context).pushNamed(SignInView.routeName);
                     }),
-                    btText: asProvider.getString('Sign In'),
+                    btText: AppLocalizations.of(context)!.sign_In,
                     isLoading: false),
               )
             : Consumer<ShippingAddressService>(

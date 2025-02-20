@@ -4,6 +4,7 @@ import 'package:safecart/services/product_details_service.dart';
 import 'package:safecart/views/all_reviews_view.dart';
 import 'package:safecart/widgets/all_reviews_view/review_tile.dart';
 import 'package:safecart/widgets/all_reviews_view/write_review.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 
@@ -51,7 +52,7 @@ class Reviews extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4))),
             child: Text(
-              asProvider.getString('Show all'),
+              AppLocalizations.of(context)!.show_all,
               style: TextStyle(
                 color: cc.primaryColor,
               ),

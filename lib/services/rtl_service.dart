@@ -41,8 +41,8 @@ class RTLService with ChangeNotifier {
     if (alreadyLoaded == false) {
       try {
         Timer scheduleTimeout = Timer(const Duration(seconds: 10), () {
-          showToast(
-              asProvider.getString("Server connection slow"), cc.blackColor);
+          showToast(AppLocalizations.of(context)!.server_connection_slow,
+              cc.blackColor);
         });
 
         var response =

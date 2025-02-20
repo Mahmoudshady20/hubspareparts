@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 
 import '../../helpers/common_helper.dart';
@@ -49,14 +50,15 @@ class ResetPasswordService with ChangeNotifier {
 
       if (response.statusCode == 200) {
         print(await response.stream.bytesToString());
-        showToast(asProvider.getString('Password reset successful'), cc.green);
+        showToast(
+            AppLocalizations.of(context)!.password_reset_successful, cc.green);
         Navigator.pop(context);
       } else {
         print(response.reasonPhrase);
-        showToast(asProvider.getString('Password reset failed'), cc.red);
+        showToast(AppLocalizations.of(context)!.password_reset_failed, cc.red);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
       print(err);

@@ -30,7 +30,7 @@ class AllCategoriesView extends StatelessWidget {
     controller.addListener((() => scrollListener(context)));
     return Scaffold(
       appBar: CustomAppBar()
-          .appBarTitled(context, asProvider.getString('Categories'), () {
+          .appBarTitled(context, AppLocalizations.of(context)!.categories, () {
         controller.dispose();
         Navigator.of(context).pop();
       }),

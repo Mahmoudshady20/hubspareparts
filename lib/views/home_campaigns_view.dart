@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutterzilla_fixed_grid/flutterzilla_fixed_grid.dart';
 import 'package:safecart/services/home_campaigns_service.dart';
 import 'package:safecart/widgets/home_view/campaign_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/product_by_campaigns_service.dart';
@@ -19,7 +20,7 @@ class HomeCampaignsView extends StatelessWidget {
     controller.addListener((() => scrollListener(context)));
     return Scaffold(
       appBar: CustomAppBar()
-          .appBarTitled(context, asProvider.getString('Campaigns'), () {
+          .appBarTitled(context, AppLocalizations.of(context)!.campaigns, () {
         Navigator.of(context).pop();
       }),
       body: Column(

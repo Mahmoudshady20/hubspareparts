@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/intro_service.dart';
 import 'package:safecart/utils/dot_indicator.dart';
@@ -102,7 +103,7 @@ class IntroView extends StatelessWidget {
             height: 50,
             margin: const EdgeInsets.all(20),
             child: CustomRowButton(
-              bt1text: asProvider.getString('Skip'),
+              bt1text: AppLocalizations.of(context)!.skip,
               bt1func: () {
                 Provider.of<CommonServices>(context, listen: false)
                     .introSubmitted();
@@ -111,8 +112,8 @@ class IntroView extends StatelessWidget {
               },
               bt2text: iProvider.currentIndex ==
                       ((iProvider.introList?.length ?? 0) - 1)
-                  ? asProvider.getString('Submit')
-                  : asProvider.getString('Continue'),
+                  ? AppLocalizations.of(context)!.submit
+                  : AppLocalizations.of(context)!.continue_button,
               bt2func: () {
                 if (iProvider.introList!.indexOf(iProvider.introList!.last) ==
                     iProvider.currentIndex) {

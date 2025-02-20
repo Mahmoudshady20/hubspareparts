@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/profile_info_service.dart';
 import 'package:safecart/views/order_details_view.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/cart_data_service.dart';
@@ -67,7 +67,7 @@ class PaymentStatusView extends StatelessWidget {
                       const SizedBox(height: 45),
                       Text(
                         isError
-                            ?AppLocalizations.of(context)!.oops
+                            ? AppLocalizations.of(context)!.oops
                             : AppLocalizations.of(context)!.payment_successful,
                         style: const TextStyle(
                           fontSize: 23,
@@ -80,9 +80,10 @@ class PaymentStatusView extends StatelessWidget {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           text: isError
-                              ? asProvider.getString(
-                                  "Your order has been placed, but there was an issue with your payment. Your order ID is ")
-                              : AppLocalizations.of(context)!.your_order_has_been_successful_You_ll_receive_ordered_items_in_days_Your_order_ID_is,
+                              ? AppLocalizations.of(context)!
+                                  .your_order_has_been_placed
+                              : AppLocalizations.of(context)!
+                                  .your_order_has_been_successful_You_ll_receive_ordered_items_in_days_Your_order_ID_is,
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
@@ -116,8 +117,8 @@ class PaymentStatusView extends StatelessWidget {
               )),
               profileInfo != null
                   ? CustomRowButton(
-                      bt1text: asProvider.getString('Back to home'),
-                      bt2text: asProvider.getString('Track your order'),
+                      bt1text: AppLocalizations.of(context)!.back_to_home,
+                      bt2text: AppLocalizations.of(context)!.track_your_order,
                       bt1func: () {
                         // Provider.of<CartDataService>(context, listen: false)
                         //     .emptyCart();
@@ -134,7 +135,7 @@ class PaymentStatusView extends StatelessWidget {
                         ));
                       })
                   : CustomCommonButton(
-                      btText: asProvider.getString('Back to home'),
+                      btText: AppLocalizations.of(context)!.back_to_home,
                       isLoading: false,
                       onPressed: () {
                         Navigator.of(context)

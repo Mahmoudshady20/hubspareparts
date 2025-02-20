@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:safecart/services/profile_info_service.dart';
 
 import '../../helpers/common_helper.dart';
@@ -37,7 +38,8 @@ class SignOutService with ChangeNotifier {
       if (response.statusCode == 200) {
         print(data);
 
-        showToast(asProvider.getString('Sign out successful'), cc.primaryColor);
+        showToast(
+            AppLocalizations.of(context)!.sign_out_successful, cc.primaryColor);
         Provider.of<SaveSignInInfoService>(context, listen: false).clearToken();
         Provider.of<ProfileInfoService>(context, listen: false).logout();
 
@@ -46,12 +48,12 @@ class SignOutService with ChangeNotifier {
         showToast(asProvider.getString(data['message']), cc.red);
         setLoadingSignOut(false);
       } else {
-        showToast(asProvider.getString('Sign in failed'), cc.red);
+        showToast(AppLocalizations.of(context)!.sign_in_failed, cc.red);
         print(data);
         setLoadingSignOut(false);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       setLoadingSignOut(false);
     } catch (err) {
       showToast(err.toString(), cc.red);

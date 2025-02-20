@@ -30,7 +30,8 @@ class WishlistToCart extends StatelessWidget {
       builder: (context, pdService, child) {
         fetchAttribute = false;
         return pdService.loadingFailed
-            ? Padding(padding: const EdgeInsets.all(20), child: errorWidget())
+            ? Padding(
+                padding: const EdgeInsets.all(20), child: errorWidget(context))
             : SizedBox(
                 height:
                     pdService.productDetails == null ? 80 : screenHeight / 1.7,

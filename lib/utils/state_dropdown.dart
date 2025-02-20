@@ -45,7 +45,7 @@ class StateDropdown extends StatelessWidget {
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FieldTitle(asProvider.getString("State")),
+              FieldTitle(AppLocalizations.of(context)!.state),
               InkWell(
                 onTap: () {
                   Provider.of<StatesDropdownService>(context, listen: false)
@@ -78,8 +78,7 @@ class StateDropdown extends StatelessWidget {
                                 child: TextFormField(
                                     decoration: InputDecoration(
                                         hintText: textFieldHint ??
-                                            asProvider
-                                                .getString("Search State"),
+                                            AppLocalizations.of(context)!.search_State,
                                         prefixIcon: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 12),

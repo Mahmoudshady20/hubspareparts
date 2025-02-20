@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/services/auth_service/otp_service.dart';
@@ -118,12 +119,12 @@ class SignInService with ChangeNotifier {
         showToast(asProvider.getString(data['message']), cc.red);
         setLoadingSignIn(false);
       } else {
-        showToast(asProvider.getString('Sign in failed'), cc.red);
+        showToast(AppLocalizations.of(context)!.sign_in_failed, cc.red);
         print(data);
         setLoadingSignIn(false);
       }
     } on TimeoutException {
-      showToast(asProvider.getString('Request timeout'), cc.red);
+      showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       setLoadingSignIn(false);
     } catch (err) {
       showToast(err.toString(), cc.red);

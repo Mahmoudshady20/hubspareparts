@@ -1,15 +1,14 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:safecart/services/auth_service/sign_in_service.dart';
 import 'package:safecart/utils/country_dropdown.dart';
 import 'package:safecart/utils/state_dropdown.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../services/auth_service/sign_up_service.dart';
-import '../../services/country_state_service.dart';
 import '../../utils/custom_preloader.dart';
 import '../helpers/common_helper.dart';
 import '../helpers/empty_space_helper.dart';
@@ -17,7 +16,6 @@ import '../services/auth_service/social_signin_signup_service.dart';
 import '../utils/responsive.dart';
 import '../widgets/common/boxed_back_button.dart';
 import '../widgets/common/custom_common_button.dart';
-import '../widgets/common/custom_dropdown.dart';
 import '../widgets/common/field_title.dart';
 import '../widgets/common/horizontal_or_divider.dart';
 import '../widgets/common/web_view.dart';
@@ -41,16 +39,19 @@ class SignUpView extends StatelessWidget {
 
     final suProvider = Provider.of<SignUpService>(context, listen: false);
     if (suProvider.selectedCountry == null) {
-      showToast(AppLocalizations.of(context)!.you_have_to_select_a_country, cc.red);
+      showToast(
+          AppLocalizations.of(context)!.you_have_to_select_a_country, cc.red);
       return;
     }
     if (suProvider.selectedState == null) {
-      showToast(AppLocalizations.of(context)!.you_have_to_select_a_state, cc.red);
+      showToast(
+          AppLocalizations.of(context)!.you_have_to_select_a_state, cc.red);
       return;
     }
     if (suProvider.acceptTPP != true) {
       showToast(
-          AppLocalizations.of(context)!.you_have_to_agree_our_terms_and_conditions,
+          AppLocalizations.of(context)!
+              .you_have_to_agree_our_terms_and_conditions,
           cc.red);
       return;
     }
@@ -147,7 +148,9 @@ class SignUpView extends StatelessWidget {
                                           controller: _nameController,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                              hintText: AppLocalizations.of(context)!.enter_your_name,
+                                              hintText:
+                                                  AppLocalizations.of(context)!
+                                                      .enter_your_name,
                                               prefixIcon: Padding(
                                                   padding:
                                                       const EdgeInsets.all(12),
@@ -157,19 +160,23 @@ class SignUpView extends StatelessWidget {
                                             if (value == null ||
                                                 value.trim().isEmpty ||
                                                 value.length < 3) {
-                                              return AppLocalizations.of(context)!.enter_a_valid_name;
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_a_valid_name;
                                             }
                                             return null;
                                           },
                                         ),
                                         EmptySpaceHelper.emptyHight(10),
-                                        FieldTitle(
-                                            AppLocalizations.of(context)!.username),
+                                        FieldTitle(AppLocalizations.of(context)!
+                                            .username),
                                         TextFormField(
                                           controller: _userNameController,
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
-                                            hintText: AppLocalizations.of(context)!.enter_your_username,
+                                            hintText:
+                                                AppLocalizations.of(context)!
+                                                    .enter_your_username,
                                             prefixIcon: Padding(
                                               padding: const EdgeInsets.all(12),
                                               child: SvgPicture.asset(
@@ -180,21 +187,25 @@ class SignUpView extends StatelessWidget {
                                             if (value == null ||
                                                 value.trim().isEmpty ||
                                                 value.length < 3) {
-                                              return AppLocalizations.of(context)!.enter_a_valid_username;
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_a_valid_username;
                                             }
                                             return null;
                                           },
                                         ),
                                         EmptySpaceHelper.emptyHight(10),
-                                        FieldTitle(
-                                            AppLocalizations.of(context)!.email),
+                                        FieldTitle(AppLocalizations.of(context)!
+                                            .email),
                                         TextFormField(
                                           controller: _emailController,
                                           textInputAction: TextInputAction.next,
                                           keyboardType:
                                               TextInputType.emailAddress,
                                           decoration: InputDecoration(
-                                            hintText: AppLocalizations.of(context)!.enter_your_email,
+                                            hintText:
+                                                AppLocalizations.of(context)!
+                                                    .enter_your_email,
                                             prefixIcon: Padding(
                                               padding: const EdgeInsets.all(12),
                                               child: SvgPicture.asset(
@@ -204,7 +215,9 @@ class SignUpView extends StatelessWidget {
                                           validator: (value) {
                                             if (!EmailValidator.validate(
                                                 value ?? '')) {
-                                              return AppLocalizations.of(context)!.enter_a_valid_email_address;
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_a_valid_email_address;
                                             }
                                             return null;
                                           },
@@ -288,14 +301,16 @@ class SignUpView extends StatelessWidget {
                                         //       ? const SizedBox()
                                         //       : EmptySpaceHelper.emptyHight(10);
                                         // }),
-                                        FieldTitle(
-                                            AppLocalizations.of(context)!.phone),
+                                        FieldTitle(AppLocalizations.of(context)!
+                                            .phone),
                                         TextFormField(
                                           controller: _phoneController,
                                           textInputAction: TextInputAction.next,
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
-                                            hintText:AppLocalizations.of(context)!.enter_your_phone_number,
+                                            hintText:
+                                                AppLocalizations.of(context)!
+                                                    .enter_your_phone_number,
                                             prefixIcon: Padding(
                                               padding: const EdgeInsets.all(12),
                                               child: SvgPicture.asset(
@@ -305,14 +320,16 @@ class SignUpView extends StatelessWidget {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty) {
-                                              return AppLocalizations.of(context)!.enter_your_phone_number;
+                                              return AppLocalizations.of(
+                                                      context)!
+                                                  .enter_your_phone_number;
                                             }
                                             return null;
                                           },
                                         ),
                                         EmptySpaceHelper.emptyHight(10),
-                                        FieldTitle(
-                                            AppLocalizations.of(context)!.password),
+                                        FieldTitle(AppLocalizations.of(context)!
+                                            .password),
                                         Consumer<SignUpService>(builder:
                                             (context, suProvider, child) {
                                           return TextFormField(
@@ -322,7 +339,9 @@ class SignUpView extends StatelessWidget {
                                             obscureText:
                                                 suProvider.obscurePasswordOne,
                                             decoration: InputDecoration(
-                                              hintText: AppLocalizations.of(context)!.enter_your_Password,
+                                              hintText:
+                                                  AppLocalizations.of(context)!
+                                                      .enter_your_Password,
                                               prefixIcon: Padding(
                                                 padding:
                                                     const EdgeInsets.all(12),
@@ -348,21 +367,26 @@ class SignUpView extends StatelessWidget {
                                               if (value == null ||
                                                   value.trim().isEmpty ||
                                                   value.length < 6) {
-                                                return AppLocalizations.of(context)!.password_must_be_more_then_character;
+                                                return AppLocalizations.of(
+                                                        context)!
+                                                    .password_must_be_more_then_character;
                                               }
                                               return null;
                                             },
                                           );
                                         }),
                                         EmptySpaceHelper.emptyHight(10),
-                                        FieldTitle(AppLocalizations.of(context)!.confirm_new_password),
+                                        FieldTitle(AppLocalizations.of(context)!
+                                            .confirm_new_password),
                                         Consumer<SignUpService>(builder:
                                             (context, suProvider, child) {
                                           return TextFormField(
                                             obscureText:
                                                 suProvider.obscurePasswordTwo,
                                             decoration: InputDecoration(
-                                              hintText: AppLocalizations.of(context)!.re_enter_your_Password,
+                                              hintText:
+                                                  AppLocalizations.of(context)!
+                                                      .re_enter_your_Password,
                                               prefixIcon: Padding(
                                                 padding:
                                                     const EdgeInsets.all(12),
@@ -387,7 +411,9 @@ class SignUpView extends StatelessWidget {
                                             validator: (value) {
                                               if (_newPassController.text !=
                                                   value) {
-                                                return AppLocalizations.of(context)!.password_didn_match;
+                                                return AppLocalizations.of(
+                                                        context)!
+                                                    .password_didn_match;
                                               }
                                               return null;
                                             },
@@ -437,12 +463,14 @@ class SignUpView extends StatelessWidget {
                                                                           WebViewScreen
                                                                               .routeName,
                                                                           arguments: [
-                                                                        asProvider
-                                                                            .getString('Terms and Conditions'),
+                                                                        AppLocalizations.of(context)!
+                                                                            .terms_and_Conditions,
                                                                         '$baseApi/terms-and-condition-page'
                                                                       ]);
                                                                 },
-                                                          text: AppLocalizations.of(context)!.terms_of_service_and_Conditions,
+                                                          text: AppLocalizations
+                                                                  .of(context)!
+                                                              .terms_of_service_and_Conditions,
                                                           style: TextStyle(
                                                               color: cc
                                                                   .secondaryColor)),
@@ -465,12 +493,14 @@ class SignUpView extends StatelessWidget {
                                                                           WebViewScreen
                                                                               .routeName,
                                                                           arguments: [
-                                                                        asProvider
-                                                                            .getString('Privacy Policy'),
+                                                                        AppLocalizations.of(context)!
+                                                                            .privacy_Policy,
                                                                         '$baseApi/privacy-policy-page'
                                                                       ]);
                                                                 },
-                                                          text:AppLocalizations.of(context)!.privacy_Policy,
+                                                          text: AppLocalizations
+                                                                  .of(context)!
+                                                              .privacy_Policy,
                                                           style: TextStyle(
                                                               color: cc
                                                                   .secondaryColor)),
@@ -483,7 +513,9 @@ class SignUpView extends StatelessWidget {
                                         Consumer<SignUpService>(builder:
                                             (context, suProvider, child) {
                                           return CustomCommonButton(
-                                              btText:AppLocalizations.of(context)!.sign_up,
+                                              btText:
+                                                  AppLocalizations.of(context)!
+                                                      .sign_up,
                                               isLoading:
                                                   suProvider.loadingSignUp,
                                               onPressed: () {
@@ -531,7 +563,9 @@ class SignUpView extends StatelessWidget {
                                           child: RichText(
                                             softWrap: true,
                                             text: TextSpan(
-                                                text: AppLocalizations.of(context)!.already_have_an_account,
+                                                text: AppLocalizations.of(
+                                                        context)!
+                                                    .already_have_an_account,
                                                 style: TextStyle(
                                                   color: cc.greyHint,
                                                   fontWeight: FontWeight.w600,
@@ -557,7 +591,9 @@ class SignUpView extends StatelessWidget {
                                                               Navigator.pop(
                                                                   context);
                                                             },
-                                                      text: AppLocalizations.of(context)!.sign_In,
+                                                      text: AppLocalizations.of(
+                                                              context)!
+                                                          .sign_In,
                                                       style: TextStyle(
                                                           color: cc
                                                               .secondaryColor)),
@@ -584,7 +620,9 @@ class SignUpView extends StatelessWidget {
                                                   socialProvider
                                                       .googleSignInSignUp(
                                                           context,
-                                                          'Sign up failed');
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .sign_up_failed);
                                                 },
                                                 icon: SvgPicture.asset(
                                                     'assets/icons/google.svg'),
@@ -594,7 +632,9 @@ class SignUpView extends StatelessWidget {
                                                         child:
                                                             CustomPreloader(),
                                                       )
-                                                    : Text(AppLocalizations.of(context)!.sign_up_with_Google)),
+                                                    : Text(AppLocalizations.of(
+                                                            context)!
+                                                        .sign_up_with_Google)),
                                           );
                                         }),
                                         EmptySpaceHelper.emptyHight(10),
@@ -615,7 +655,9 @@ class SignUpView extends StatelessWidget {
                                                   socialProvider
                                                       .facebookSignInSignUp(
                                                           context,
-                                                          'Sign up failed');
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .sign_up_failed);
                                                 },
                                                 icon: SvgPicture.asset(
                                                     'assets/icons/facebook.svg'),
@@ -625,7 +667,9 @@ class SignUpView extends StatelessWidget {
                                                         child:
                                                             CustomPreloader(),
                                                       )
-                                                    : Text(AppLocalizations.of(context)!.sign_up_with_Facebook)),
+                                                    : Text(AppLocalizations.of(
+                                                            context)!
+                                                        .sign_up_with_Facebook)),
                                           );
                                         }),
                                         EmptySpaceHelper.emptyHight(30),

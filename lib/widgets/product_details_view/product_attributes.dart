@@ -86,7 +86,7 @@ class ProductAttribute extends StatelessWidget {
             value = element;
             manageInventorySet(pdService, element);
             pdService.addSelectedAttribute(element);
-            pdService.addAdditionalPrice();
+            pdService.addAdditionalPrice(context);
           },
           child: colorCode != null
               ? colorBox(

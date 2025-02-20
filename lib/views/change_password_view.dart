@@ -112,50 +112,45 @@ class ChangePasswordView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          FieldTitle(asProvider.getString('Current password')),
+                          FieldTitle(AppLocalizations.of(context)!.current_password),
                           TextFormField(
                             controller: _currentPassword,
                             textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
-                                hintText: asProvider
-                                    .getString('Enter your current password')),
+                                hintText: AppLocalizations.of(context)!.enter_your_Password),
                             validator: (value) {
                               if (value == null ||
                                   value.trim().isEmpty ||
                                   value.length < 6) {
-                                return asProvider.getString(
-                                    'Please provide current password');
+                                return AppLocalizations.of(context)!.please_provide_current_password;
                               }
                               return null;
                             },
                           ),
-                          FieldTitle(asProvider.getString('New password')),
+                          FieldTitle(AppLocalizations.of(context)!.new_password),
                           TextFormField(
                             controller: _newPassword,
                             textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
                                 hintText:
-                                    asProvider.getString('Enter new password')),
+                                AppLocalizations.of(context)!.enter_new_password),
                             validator: (value) {
                               if (value == null ||
                                   value.trim().isEmpty ||
                                   value.length < 6) {
-                                return asProvider.getString(
-                                    'Password must be at least 6 character');
+                                return AppLocalizations.of(context)!.password_must_be_more_then_character;
                               }
                               return null;
                             },
                           ),
                           FieldTitle(
-                              asProvider.getString('Confirm new password')),
+                              AppLocalizations.of(context)!.confirm_new_password),
                           TextFormField(
                             decoration: InputDecoration(
-                                hintText: asProvider
-                                    .getString('Re-enter new password')),
+                                hintText: AppLocalizations.of(context)!.re_enter_new_password),
                             validator: (value) {
                               if (_newPassword.text != value) {
-                                return asProvider
-                                    .getString("Password didn't match");
+                                return AppLocalizations.of(context)!.password_didn_match;
                               }
                               return null;
                             },
@@ -166,7 +161,7 @@ class ChangePasswordView extends StatelessWidget {
                           Consumer<ChangePasswordService>(
                               builder: (context, cpProvider, child) {
                             return CustomCommonButton(
-                              btText: asProvider.getString('Change Password'),
+                              btText: AppLocalizations.of(context)!.change_Password,
                               isLoading: cpProvider.loadingChangePassword,
                               onPressed: () {
                                 tryChangePassword(context);
