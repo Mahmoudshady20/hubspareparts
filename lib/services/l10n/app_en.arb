@@ -1,7 +1,7 @@
 {
   "cancel": "Cancel",
   "are_you_sure": "Are you sure?",
-  "safeCart": "SafeCart",
+  "safeCart": "HubSpareParts",
   "please_select_a_country": "Please select a country",
   "please_select_a_state": "Please select a state",
   "profile_info_successfully_updated": "Profile info successfully updated",
@@ -288,7 +288,7 @@
   "please_select_an_attribute_set": "Please select an attribute set",
   "items_total": "Items total",
   "you_have_agree_to_our_Terms_Conditions": "You have agree to our Terms & Conditions",
-  "safeCart_Products": "SafeCart Products",
+  "safeCart_Products": "HubSpareParts Products",
   "payment_confirm_success": "Payment confirm success",
   "payment_confirm_failed": "Payment confirm failed",
   "please_enter_all_the_information": "Please enter all the information",
