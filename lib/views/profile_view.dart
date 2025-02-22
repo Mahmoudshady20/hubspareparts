@@ -4,10 +4,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:safecart/services/country_state_service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/views/settings_view.dart';
 
 import '../../services/auth_service/sign_in_service.dart';
 import '../../views/shipping_address_list_view.dart';
@@ -118,7 +118,8 @@ class ProfileView extends StatelessWidget {
                                       EmptySpaceHelper.emptyHight(10),
                                       profileItem(
                                         context,
-                                        AppLocalizations.of(context)!.shipping_address,
+                                        AppLocalizations.of(context)!
+                                            .shipping_address,
                                         'assets/icons/menu_shipping_address.svg',
                                         onTap: () {
                                           Navigator.of(context).pushNamed(
@@ -129,7 +130,8 @@ class ProfileView extends StatelessWidget {
                                       EmptySpaceHelper.emptyHight(10),
                                       profileItem(
                                         context,
-                                        AppLocalizations.of(context)!.support_Ticket,
+                                        AppLocalizations.of(context)!
+                                            .support_Ticket,
                                         'assets/icons/support_ticket.svg',
                                         onTap: () {
                                           Navigator.of(context).pushNamed(
@@ -139,7 +141,18 @@ class ProfileView extends StatelessWidget {
                                       EmptySpaceHelper.emptyHight(10),
                                       profileItem(
                                         context,
-                                        AppLocalizations.of(context)!.edit_profile,
+                                        AppLocalizations.of(context)!.language,
+                                        'assets/icons/language.svg',
+                                        onTap: () {
+                                          Navigator.of(context).pushNamed(
+                                              SettingsView.routeName);
+                                        },
+                                      ),
+                                      EmptySpaceHelper.emptyHight(10),
+                                      profileItem(
+                                        context,
+                                        AppLocalizations.of(context)!
+                                            .edit_profile,
                                         'assets/icons/edit_profile.svg',
                                         onTap: () {
                                           Navigator.of(context).pushNamed(
@@ -149,7 +162,8 @@ class ProfileView extends StatelessWidget {
                                       EmptySpaceHelper.emptyHight(10),
                                       profileItem(
                                         context,
-                                        AppLocalizations.of(context)!.change_Password,
+                                        AppLocalizations.of(context)!
+                                            .change_Password,
                                         'assets/icons/change_pass.svg',
                                         onTap: () {
                                           Navigator.of(context).pushNamed(
@@ -159,7 +173,8 @@ class ProfileView extends StatelessWidget {
                                       EmptySpaceHelper.emptyHight(10),
                                       profileItem(
                                         context,
-                                        AppLocalizations.of(context)!.delete_account,
+                                        AppLocalizations.of(context)!
+                                            .delete_account,
                                         'assets/icons/profile_delete.svg',
                                         onTap: () async {
                                           bool continueLogout = false;
@@ -284,7 +299,9 @@ class ProfileView extends StatelessWidget {
                                                         .symmetric(
                                                         horizontal: 30),
                                                     child: Text(
-                                                        AppLocalizations.of(context)!.you_ll_have_to_Sign_in_Sign_up_to_edit_or_see_your_profile_info,
+                                                        AppLocalizations.of(
+                                                                context)!
+                                                            .you_ll_have_to_Sign_in_Sign_up_to_edit_or_see_your_profile_info,
                                                         textAlign:
                                                             TextAlign.center,
                                                         style: const TextStyle(
@@ -292,8 +309,9 @@ class ProfileView extends StatelessWidget {
                                                         ))),
                                                 const SizedBox(height: 20),
                                                 CustomCommonButton(
-                                                    btText:
-                                                    AppLocalizations.of(context)!.sign_in_Sign_up,
+                                                    btText: AppLocalizations.of(
+                                                            context)!
+                                                        .sign_in_Sign_up,
                                                     isLoading: false,
                                                     onPressed: () async {
                                                       Provider.of<SignInService>(

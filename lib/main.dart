@@ -9,6 +9,7 @@ import 'package:safecart/services/location/city_dropdown_service.dart';
 import 'package:safecart/services/location/country_dropdown_service.dart';
 import 'package:safecart/services/location/state_dropdown_service.dart';
 import 'package:safecart/services/settings_services.dart';
+import 'package:safecart/views/settings_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/common_helper.dart';
@@ -302,6 +303,7 @@ class MyApp extends StatelessWidget {
             ProductByCategoryView.routeName: (context) =>
                 ProductByCategoryView(),
             ChangePasswordView.routeName: (context) => ChangePasswordView(),
+            SettingsView.routeName: (context) => SettingsView(),
           },
         );
       }),

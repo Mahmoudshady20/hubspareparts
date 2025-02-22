@@ -346,5 +346,8 @@
   "please_provide_payment_document": "يرجى تقديم وثيقة الدفع",
   "server_connection_slow": "الاتصال بالسيرفر يسرى. يرجى المحاولة مرة أخرى في وقت لاحق",
   "skip": "تخطي",
-  "unit": "وحدة"
+  "unit": "وحدة",
+  "language": "اللغة",
+  "arabic": "العربية",
+  "english": "الانجليزية"
 }

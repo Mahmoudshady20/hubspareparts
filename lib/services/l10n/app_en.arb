@@ -346,5 +346,8 @@
   "please_provide_payment_document": "Please provide payment document",
   "server_connection_slow": "Server connection slow",
   "skip": "Skip",
-  "unit": "Unit"
+  "unit": "Unit",
+  "language": "language",
+  "arabic": "arabic",
+  "english": "English"
 }
