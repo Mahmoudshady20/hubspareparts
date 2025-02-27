@@ -51,7 +51,6 @@ class IntroView extends StatelessWidget {
                                     width: screenWidth - 60,
                                     margin:
                                         const EdgeInsets.symmetric(vertical: 8),
-                                    child: Container(),
                                   ),
                                 ],
                               ),

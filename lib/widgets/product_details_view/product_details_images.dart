@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
 import '../../services/product_details_service.dart';
@@ -122,7 +121,7 @@ class ProductDetailsImages extends StatelessWidget {
                                       decoration: const BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
-                                                  'assets/images/loading_image.png'),
+                                                  'assets/images/loading_imaage.png'),
                                               opacity: .5)),
                                     ),
                                   ],
@@ -138,7 +137,7 @@ class ProductDetailsImages extends StatelessWidget {
                                       decoration: const BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
-                                                  'assets/images/loading_image.png'),
+                                                  'assets/images/loading_imaage.png'),
                                               opacity: .5)),
                                     ),
                                   ],

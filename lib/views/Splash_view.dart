@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/auth_service/save_sign_in_info_service.dart';
 import 'package:safecart/services/intro_service.dart';
@@ -10,7 +11,6 @@ import 'package:safecart/services/profile_info_service.dart';
 import 'package:safecart/services/rtl_service.dart';
 import 'package:safecart/services/search_filter_data_service.dart';
 import 'package:safecart/utils/custom_preloader.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/db_helper.dart';
@@ -38,9 +38,11 @@ class SplashView extends StatelessWidget {
             color: cc.primaryColor,
             width: double.infinity,
             height: double.infinity,
-            child: Image.asset(
-              'assets/images/splash.png',
-              fit: BoxFit.cover,
+            child: Center(
+              child: Image.asset(
+                'assets/images/app_icoon.png',
+                width: MediaQuery.sizeOf(context).width / 1.35,
+              ),
             ),
           ),
           Consumer<RTLService>(builder: (context, rtlProvider, child) {

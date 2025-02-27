@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:safecart/views/settings_view.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
@@ -88,6 +89,16 @@ class HomeAppDrawer extends StatelessWidget {
                             onTap: () {
                               Navigator.of(context)
                                   .pushNamed(TicketListView.routeName);
+                            },
+                          ),
+                          EmptySpaceHelper.emptyHight(10),
+                          profileItem(
+                            context,
+                            AppLocalizations.of(context)!.language,
+                            'assets/icons/language.svg',
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(SettingsView.routeName);
                             },
                           ),
                           EmptySpaceHelper.emptyHight(10),
@@ -190,6 +201,15 @@ class HomeAppDrawer extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        profileItem(
+                          context,
+                          AppLocalizations.of(context)!.language,
+                          'assets/icons/language.svg',
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(SettingsView.routeName);
+                          },
+                        ),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(

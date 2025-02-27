@@ -35,7 +35,7 @@ class CampaignCard extends StatelessWidget {
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                             image:
-                                AssetImage('assets/images/loading_image.png'),
+                                AssetImage('assets/images/loading_imaage.png'),
                             opacity: .4)),
                   ),
                   errorWidget: (context, url, error) => Container(
@@ -43,7 +43,7 @@ class CampaignCard extends StatelessWidget {
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                             image:
-                                AssetImage('assets/images/loading_image.png'),
+                                AssetImage('assets/images/loading_imaage.png'),
                             opacity: .4)),
                   ),
                 )),

@@ -78,7 +78,7 @@ class WishlistToCart extends StatelessWidget {
                                             decoration: const BoxDecoration(
                                                 image: DecorationImage(
                                                     image: AssetImage(
-                                                        'assets/images/loading_image.png'),
+                                                        'assets/images/loading_imaage.png'),
                                                     opacity: .4)),
                                           );
                                         },
@@ -89,7 +89,7 @@ class WishlistToCart extends StatelessWidget {
                                             decoration: const BoxDecoration(
                                                 image: DecorationImage(
                                                     image: AssetImage(
-                                                        'assets/images/loading_image.png'),
+                                                        'assets/images/loading_imaage.png'),
                                                     opacity: .4)),
                                           );
                                         },

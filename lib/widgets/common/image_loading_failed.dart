@@ -14,7 +14,7 @@ class ImageLoadingFailed extends StatelessWidget {
           width: size,
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/images/loading_image.png'),
+                  image: AssetImage('assets/images/loading_imaage.png'),
                   opacity: .5)),
         ),
       ],

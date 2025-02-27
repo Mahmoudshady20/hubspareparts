@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/cart_data_service.dart';
 import 'package:safecart/services/wishlist_data_service.dart';
 import 'package:safecart/utils/responsive.dart';
 import 'package:slide_countdown/slide_countdown.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
@@ -107,7 +107,7 @@ class ProductCard extends StatelessWidget {
                                     decoration: const BoxDecoration(
                                         image: DecorationImage(
                                             image: AssetImage(
-                                                'assets/images/loading_image.png'),
+                                                'assets/images/loading_imaage.png'),
                                             opacity: .5)),
                                   ),
                                 ],
@@ -123,7 +123,7 @@ class ProductCard extends StatelessWidget {
                                     decoration: const BoxDecoration(
                                         image: DecorationImage(
                                             image: AssetImage(
-                                                'assets/images/loading_image.png'),
+                                                'assets/images/loading_imaage.png'),
                                             opacity: .5)),
                                   ),
                                 ],
@@ -312,7 +312,9 @@ class ProductCard extends StatelessWidget {
                                 ),
                           onPressed: () {
                             if (stock <= 0) {
-                              showToast(AppLocalizations.of(context)!.product_stock_is_insufficient,
+                              showToast(
+                                  AppLocalizations.of(context)!
+                                      .product_stock_is_insufficient,
                                   cc.blackColor);
                             }
                             if (cartable) {
