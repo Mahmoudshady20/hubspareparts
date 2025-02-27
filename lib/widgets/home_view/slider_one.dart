@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/helpers/empty_space_helper.dart';
+import 'package:safecart/services/settings_services.dart';
+import 'package:safecart/utils/responsive.dart';
+import 'package:safecart/views/product_by_campaign_view.dart';
+import 'package:safecart/views/product_by_category_view.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../services/product_by_campaigns_service.dart';
 import '../../services/rtl_service.dart';
 import '../../services/search_product_service.dart';
-import 'package:safecart/utils/responsive.dart';
-import 'package:safecart/views/product_by_campaign_view.dart';
-import 'package:safecart/views/product_by_category_view.dart';
 import '../common/custom_common_button.dart';
 
 class SliderOne extends StatelessWidget {
@@ -25,7 +26,7 @@ class SliderOne extends StatelessWidget {
   Widget build(BuildContext context) {
     getScreenSize(context);
     final rtl = Provider.of<RTLService>(context, listen: false).langRtl;
-
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
       padding: const EdgeInsets.only(left: 20, right: 20),
@@ -47,81 +48,90 @@ class SliderOne extends StatelessWidget {
               child: Image.network(
                 image,
                 fit: BoxFit.contain,
-                alignment: rtl ? Alignment.centerLeft : Alignment.centerRight,
+                alignment: settingsProvider.myLocal == Locale('ar')
+                    ? Alignment.centerLeft
+                    : Alignment.centerRight,
                 errorBuilder: (context, error, stackTrace) => const SizedBox(),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: screenWidth / 2.5,
-                  child: Text(
-                    subTitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: cc.primaryColor),
-                    maxLines: 1,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                SizedBox(
+            Align(
+              alignment: settingsProvider.myLocal == Locale('en')
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
                     width: screenWidth / 2.5,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: rtl ? 0 : 0,
-                        right: rtl ? 0 : 0,
-                      ),
-                      child: Text(
-                        title,
-                        style:
-                            Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                  color: cc.blackColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                        maxLines: 2,
-                      ),
-                    )),
-                EmptySpaceHelper.emptyHight(12),
-                if (capm != null || cat != null) const SizedBox(height: 10),
-                if (capm != null || cat != null)
-                  CustomCommonButton(
-                    onPressed: () {
-                      if (capm != null) {
-                        print('camp $capm');
+                    child: Text(
+                      subTitle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: cc.primaryColor),
+                      maxLines: 1,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                      width: screenWidth / 2.5,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: rtl ? 0 : 0,
+                          right: rtl ? 0 : 0,
+                        ),
+                        child: Text(
+                          title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                color: cc.blackColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                          maxLines: 2,
+                        ),
+                      )),
+                  EmptySpaceHelper.emptyHight(12),
+                  if (capm != null || cat != null) const SizedBox(height: 10),
+                  if (capm != null || cat != null)
+                    CustomCommonButton(
+                      onPressed: () {
+                        if (capm != null) {
+                          print('camp $capm');
 
-                        Provider.of<ProductByCampaignsService>(context,
-                                listen: false)
-                            .clearProductByCampaignData();
-                        Navigator.of(context).pushNamed(
-                            ProductByCampaignView.routeName,
-                            arguments: [title, capm.toString()]);
-                        // Navigator.of(context).pushNamed(
-                        //     ALLCampProductFromLink.routeName,
-                        //     arguments: [capm.toString(), title]);
-                      }
+                          Provider.of<ProductByCampaignsService>(context,
+                                  listen: false)
+                              .clearProductByCampaignData();
+                          Navigator.of(context).pushNamed(
+                              ProductByCampaignView.routeName,
+                              arguments: [title, capm.toString()]);
+                          // Navigator.of(context).pushNamed(
+                          //     ALLCampProductFromLink.routeName,
+                          //     arguments: [capm.toString(), title]);
+                        }
 
-                      if (cat != null) {
-                        print('cat $cat');
-                        Provider.of<SearchProductService>(context,
-                                listen: false)
-                            .setFilterOptions(catVal: cat);
-                        Provider.of<SearchProductService>(context,
-                                listen: false)
-                            .fetchProducts(context);
-                        Navigator.of(context).pushNamed(
-                            ProductByCategoryView.routeName,
-                            arguments: [cat!]);
-                      }
-                    },
-                    btText: btText,
-                    isLoading: false,
-                    height: 38,
-                    width: screenWidth / 4,
-                  )
-              ],
+                        if (cat != null) {
+                          print('cat $cat');
+                          Provider.of<SearchProductService>(context,
+                                  listen: false)
+                              .setFilterOptions(catVal: cat);
+                          Provider.of<SearchProductService>(context,
+                                  listen: false)
+                              .fetchProducts(context);
+                          Navigator.of(context).pushNamed(
+                              ProductByCategoryView.routeName,
+                              arguments: [cat!]);
+                        }
+                      },
+                      btText: btText,
+                      isLoading: false,
+                      height: 38,
+                      width: screenWidth / 4,
+                    )
+                ],
+              ),
             ),
           ]),
     );
