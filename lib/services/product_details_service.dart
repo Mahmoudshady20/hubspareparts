@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -255,6 +256,8 @@ class ProductDetailsService with ChangeNotifier {
         productDetails = ProductDetailsModel.fromJson(data).product;
         print('Product details data');
         print(productDetails);
+        print('mahmoud shady ${productDetails!.image}');
+        log('mahmoud shady ${productDetails!.image}');
         vendor = ProductDetailsModel.fromJson(data).product!.vendor;
         productUrl = ProductDetailsModel.fromJson(data).productUrl;
         relatedProduct = ProductDetailsModel.fromJson(data).relatedProducts;

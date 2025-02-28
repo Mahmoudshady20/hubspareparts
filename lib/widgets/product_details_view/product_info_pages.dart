@@ -2,22 +2,20 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/product_details_service.dart';
+import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/product_details_view/description.dart';
 import 'package:safecart/widgets/product_details_view/reviews.dart';
-import 'package:safecart/widgets/product_details_view/seller_info.dart';
 
 import '../../helpers/common_helper.dart';
-import 'package:safecart/utils/responsive.dart';
 
 class ProductInfoPages extends StatelessWidget {
   ProductInfoPages({super.key});
   final List pageNames = [
     'Description',
-    'Seller Information',
     'Reviews',
   ];
   SwiperController? controller = SwiperController();
-  final pages = [const Description(), const SellerInfo(), Reviews()];
+  final pages = [const Description(), Reviews()];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,7 +34,7 @@ class ProductInfoPages extends StatelessWidget {
                     },
                     child: SizedBox(
                       height: 80,
-                      width: (screenWidth - 40) / 3,
+                      width: (screenWidth - 40) / 2,
                       child: Column(
                         children: [
                           Container(
