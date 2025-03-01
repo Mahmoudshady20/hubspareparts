@@ -10,14 +10,27 @@ import 'product_details_indicator.dart';
 class ProductDetailsImages extends StatelessWidget {
   const ProductDetailsImages({super.key});
 
+  List<String> getAllImages(ProductDetailsService provider) {
+    List<String> images = provider.productDetails?.galleryImages ?? [];
+
+    // Ensure the main image is added only once
+    if (provider.productDetails?.image != null &&
+        !images.contains(provider.productDetails!.image)) {
+      images.add(provider.productDetails!.image!);
+    }
+
+    return images;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductDetailsService>(
         builder: (context, pdProvider, child) {
+      List<String> allImages =
+          getAllImages(pdProvider); // Use the function here
+
       return SizedBox(
         height: 300,
-        // margin: EdgeInsets.only(top: topPadding),
-        // padding: const EdgeInsets.symmetric(vertical: 20),
         child: pdProvider.additionalInfoImage != null
             ? GestureDetector(
                 onTap: () {
@@ -34,39 +47,12 @@ class ProductDetailsImages extends StatelessWidget {
                   child: ClipRRect(
                     child: CachedNetworkImage(
                       fit: BoxFit.cover,
-                      // color: Colors.red,
                       imageUrl: pdProvider.additionalInfoImage ?? '',
                       placeholder: (context, url) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 40,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/app_icon.png'),
-                                      opacity: .5)),
-                            ),
-                          ],
-                        );
+                        return _buildPlaceholder();
                       },
                       errorWidget: (context, url, error) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 40,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/app_icon.png'),
-                                      opacity: .5)),
-                            ),
-                          ],
-                        );
+                        return _buildPlaceholder();
                       },
                     ),
                   ),
@@ -75,15 +61,10 @@ class ProductDetailsImages extends StatelessWidget {
             : Stack(
                 children: [
                   Swiper(
-                    itemCount: pdProvider.productDetails!.galleryImages != null
-                        ? pdProvider.productDetails!.galleryImages!.length
-                        : 1,
+                    itemCount: allImages.length, // Now it has a fixed count
                     viewportFraction: 1,
                     scale: 1,
-                    autoplay:
-                        (pdProvider.productDetails?.galleryImages?.length ??
-                                1) >
-                            1,
+                    autoplay: allImages.length > 1,
                     onIndexChanged: (value) => pdProvider.changeIndex(value),
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -91,10 +72,7 @@ class ProductDetailsImages extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute<void>(
                               builder: (BuildContext context) => ImageView(
-                                pdProvider.productDetails?.galleryImages != null
-                                    ? pdProvider
-                                        .productDetails!.galleryImages![index]
-                                    : pdProvider.productDetails!.image ?? '',
+                                allImages[index],
                               ),
                             ),
                           );
@@ -104,44 +82,12 @@ class ProductDetailsImages extends StatelessWidget {
                           child: ClipRRect(
                             child: CachedNetworkImage(
                               fit: BoxFit.cover,
-                              // color: Colors.red,
-                              imageUrl:
-                                  pdProvider.productDetails?.galleryImages !=
-                                          null
-                                      ? pdProvider
-                                          .productDetails!.galleryImages![index]
-                                      : pdProvider.productDetails!.image ?? '',
+                              imageUrl: allImages[index],
                               placeholder: (context, url) {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: 200,
-                                      width: 200,
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  'assets/images/loading_imaage.png'),
-                                              opacity: .5)),
-                                    ),
-                                  ],
-                                );
+                                return _buildLargePlaceholder();
                               },
                               errorWidget: (context, url, error) {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: 200,
-                                      width: 200,
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  'assets/images/loading_imaage.png'),
-                                              opacity: .5)),
-                                    ),
-                                  ],
-                                );
+                                return _buildLargePlaceholder();
                               },
                             ),
                           ),
@@ -154,20 +100,10 @@ class ProductDetailsImages extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 20),
                     child: FittedBox(
                       child: Row(
-                        children: [
-                          ...(pdProvider.productDetails!.galleryImages != null
-                                  ? pdProvider.productDetails!.galleryImages!
-                                  : [])
-                              .map((e) => ProductDetailsIndicator(e ==
-                                  (pdProvider.productDetails!.galleryImages !=
-                                              null &&
-                                          pdProvider.productDetails!
-                                              .galleryImages!.isNotEmpty
-                                      ? pdProvider
-                                              .productDetails!.galleryImages![
-                                          pdProvider.currentIndex]
-                                      : 1))),
-                        ],
+                        children: allImages
+                            .map((e) => ProductDetailsIndicator(
+                                e == allImages[pdProvider.currentIndex]))
+                            .toList(),
                       ),
                     ),
                   ),
@@ -175,5 +111,37 @@ class ProductDetailsImages extends StatelessWidget {
               ),
       );
     });
+  }
+
+  Widget _buildPlaceholder() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 40,
+          width: 40,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/app_icon.png'),
+                  opacity: .5)),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLargePlaceholder() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 200,
+          width: 200,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/loading_imaage.png'),
+                  opacity: .5)),
+        ),
+      ],
+    );
   }
 }
