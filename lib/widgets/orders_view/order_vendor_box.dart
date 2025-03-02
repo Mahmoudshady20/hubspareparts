@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:safecart/models/order_details_model.dart';
+import 'package:safecart/views/product_details_view.dart';
 import 'package:safecart/widgets/orders_view/order_details_tile.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
-import 'package:safecart/models/order_details_model.dart';
 import '../../services/cart_data_service.dart';
 import '../../services/product_details_service.dart';
 import '../../services/rtl_service.dart';
-import 'package:safecart/views/product_details_view.dart';
 
 class OrderVendorBox extends StatelessWidget {
   final Order order;
@@ -29,7 +30,8 @@ class OrderVendorBox extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            order.vendor?.businessName ?? "Safecart",
+            order.vendor?.businessName ??
+                AppLocalizations.of(context)!.safeCart,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: cc.greyHint,
                   fontWeight: FontWeight.bold,
