@@ -165,9 +165,9 @@ class ToyyibPayPayment extends StatelessWidget {
       'billPriceSetting': '1',
       'billAmount': cProvider.totalOrderAmount.toStringAsFixed(2),
       'billPayorInfo': '1',
-      'billTo': saProvider.title,
-      'billEmail': saProvider.email,
-      'billPhone': saProvider.phone,
+      'billTo': saProvider.title ?? '',
+      'billEmail': saProvider.email ?? '',
+      'billPhone': saProvider.phone ?? '',
       'cancel_url': 'www.cancel.com',
       'success_url': 'www.success.com'
     });

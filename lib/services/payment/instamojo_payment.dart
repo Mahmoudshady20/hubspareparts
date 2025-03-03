@@ -115,8 +115,8 @@ class InstamojoPayment extends StatelessWidget {
     Map<String, String> body = {
       "amount": '$amount', //amount to be paid
       "purpose": asProvider.getString('Safecart Products'),
-      "buyer_name": saProvider.title,
-      "email": saProvider.email,
+      "buyer_name": saProvider.title ?? '',
+      "email": saProvider.email ?? '',
       "allow_repeated_payments": "true",
       "send_email": "true",
       "phone": '1236521452',

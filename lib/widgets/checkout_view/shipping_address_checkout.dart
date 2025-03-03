@@ -145,9 +145,9 @@ class SippingAddressCheckout extends StatelessWidget {
                                                 element.shippingAddressName ??
                                                     "";
                                             _emailController.text =
-                                                element.email;
+                                                element.email ?? '';
                                             _phoneController.text =
-                                                element.phone;
+                                                element.phone ?? '';
                                             _addressController.text =
                                                 element.address ?? "";
                                             _zipcodeController.text =

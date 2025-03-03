@@ -188,7 +188,7 @@ class CinetPayPayment extends StatelessWidget {
     final piProvider = Provider.of<ProfileInfoService>(context, listen: false);
     double amount = cProvider.totalOrderAmount;
     dynamic orderId = cProvider.orderId;
-    String username = saProvider.title;
+    String username = saProvider.title ?? '';
     final url = Uri.parse('https://api-checkout.cinetpay.com/v2/payment');
     final header = {
       "Content-Type": "application/json",

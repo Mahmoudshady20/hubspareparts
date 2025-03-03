@@ -19,14 +19,14 @@ import '../../../models/state_model.dart';
 
 class ShippingAddressService with ChangeNotifier {
   List<Datum>? shippingAddressList;
-  String title = '';
-  String email = '';
-  String phone = '';
+  String? title = '';
+  String? email = '';
+  String? phone = '';
   String? country;
-  String streetAddress = '';
-  String townCity = '';
-  String zipcode = '';
-  String orderNote = '';
+  String? streetAddress = '';
+  String? townCity = '';
+  String? zipcode = '';
+  String? orderNote = '';
   bool currentAddress = true;
   String? state;
   Datum? selectedShippingAddress;
@@ -169,13 +169,14 @@ class ShippingAddressService with ChangeNotifier {
   }
 
   bool get allDataGiven {
-    if (title.trim().isEmpty ||
-        !EmailValidator.validate(email) ||
-        phone.trim().isEmpty ||
-        selectedCountry == null ||
-        selectedState == null ||
-        streetAddress.trim().isEmpty ||
-        zipcode.trim().length < 3) {
+    if (title?.trim().isEmpty ??
+        false ||
+            !EmailValidator.validate(email ?? '') ||
+            phone!.trim().isEmpty ||
+            selectedCountry == null ||
+            selectedState == null ||
+            streetAddress!.trim().isEmpty ||
+            zipcode!.trim().length < 3) {
       debugPrint([
         title,
         email,

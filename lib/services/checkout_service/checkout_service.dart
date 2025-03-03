@@ -402,18 +402,18 @@ class CheckoutService with ChangeNotifier {
       var request =
           http.MultipartRequest('POST', Uri.parse('$baseApi/checkout'));
       request.fields.addAll({
-        'full_name': shippingAddress.title,
-        'note': shippingAddress.orderNote,
-        'phone': shippingAddress.phone,
+        'full_name': shippingAddress.title ?? '',
+        'note': shippingAddress.orderNote ?? '',
+        'phone': shippingAddress.phone ?? '',
         'cart_items': jsonEncode(cartData.cartListWithoutAdmin),
         'selected_payment_gateway':
             paymentGateway.selectedGateway?.name ?? 'cash',
         'country_id': calculateTax.selectedCountry?.id.toString() ?? "",
         'state_id': calculateTax.selectedState?.id.toString() ?? "",
-        'zip_code': shippingAddress.zipcode,
-        'email': shippingAddress.email,
+        'zip_code': shippingAddress.zipcode ?? '',
+        'email': shippingAddress.email ?? '',
         'shipping_cost': jsonEncode(shippingCost),
-        'address': shippingAddress.streetAddress,
+        'address': shippingAddress.streetAddress ?? '',
         'agree': 'on',
         'coupon': couponText ?? ''
       });

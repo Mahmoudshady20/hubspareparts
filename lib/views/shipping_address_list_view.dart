@@ -105,15 +105,17 @@ class ShippingAddressListView extends StatelessWidget {
                                         saProvider
                                             .shippingAddressList!.isNotEmpty
                                     ? Column(
-                                        children: saProvider
-                                            .shippingAddressList!
-                                            .toList()
-                                            .map((e) => ShippingAddressTile(
-                                                  id: e.id,
-                                                  title: e.shippingAddressName,
-                                                  address: e.address,
-                                                ))
-                                            .toList(),
+                                        children:
+                                            saProvider.shippingAddressList!
+                                                .toList()
+                                                .map((e) => ShippingAddressTile(
+                                                      id: e.id ?? '',
+                                                      title:
+                                                          e.shippingAddressName ??
+                                                              '',
+                                                      address: e.address ?? '',
+                                                    ))
+                                                .toList(),
                                       )
                                     : SizedBox(
                                         height: screenHeight / 2,

@@ -35,9 +35,9 @@ class Datum {
   });
 
   dynamic id;
-  String name;
-  String email;
-  String phone;
+  String? name;
+  String? email;
+  String? phone;
   dynamic userId;
   dynamic countryId;
   dynamic stateId;
@@ -78,7 +78,7 @@ class Country {
   });
 
   dynamic id;
-  String name;
+  String? name;
 
   factory Country.fromJson(Map<String, dynamic> json) => Country(
         id: json["id"],
