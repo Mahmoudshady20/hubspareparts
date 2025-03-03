@@ -45,67 +45,69 @@ class Categories extends StatelessWidget {
                 ? EmptySpaceHelper.emptyHight(20)
                 : const SizedBox();
           }),
-          FutureBuilder(
-            future: (!hCatProvider.categoryLoading) &&
-                    hCatProvider.categories == null
-                ? hCatProvider.fetchHomeCategories(context)
-                : null,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return SizedBox(
-                  height: 90,
-                  child: ListView.separated(
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.85,
+            child: FutureBuilder(
+              future: (!hCatProvider.categoryLoading) &&
+                      hCatProvider.categories == null
+                  ? hCatProvider.fetchHomeCategories(context)
+                  : null,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                      ),
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return const CategoryCardSkeleton();
                       },
-                      separatorBuilder: (context, index) =>
-                          EmptySpaceHelper.emptywidth(15),
-                      itemCount: 5),
-                );
-              }
-              return Consumer<HomeCategoriesService>(
-                  builder: (context, cProvider, child) {
-                return cProvider.categories != null &&
-                        cProvider.categories!.isNotEmpty
-                    ? Container(
-                        constraints: const BoxConstraints(maxHeight: 108),
-                        child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            physics: const BouncingScrollPhysics(),
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Provider.of<SearchProductService>(context,
-                                          listen: false)
-                                      .setFilterOptions(
-                                          catVal: cProvider
-                                              .categories![index]!.name);
-                                  Provider.of<SearchProductService>(context,
-                                          listen: false)
-                                      .fetchProducts(context);
-                                  Navigator.of(context).pushNamed(
-                                      ProductByCategoryView.routeName,
-                                      arguments: [
-                                        cProvider.categories![index]!.name!
-                                      ]);
-                                },
-                                child: CategoryCard(
-                                  cProvider.categories![index]!.name!,
-                                  cProvider.categories![index]!.imageUrl,
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, index) =>
-                                EmptySpaceHelper.emptywidth(15),
-                            itemCount: cProvider.categories!.length),
-                      )
-                    : const SizedBox();
-              });
-            },
+                      itemCount: 5);
+                }
+                return Consumer<HomeCategoriesService>(
+                    builder: (context, cProvider, child) {
+                  return cProvider.categories != null &&
+                          cProvider.categories!.isNotEmpty
+                      ? Container(
+                          constraints: const BoxConstraints(maxHeight: 108),
+                          child: GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
+                              physics: const BouncingScrollPhysics(),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Provider.of<SearchProductService>(context,
+                                            listen: false)
+                                        .setFilterOptions(
+                                            catVal: cProvider
+                                                .categories![index]!.name);
+                                    Provider.of<SearchProductService>(context,
+                                            listen: false)
+                                        .fetchProducts(context);
+                                    Navigator.of(context).pushNamed(
+                                        ProductByCategoryView.routeName,
+                                        arguments: [
+                                          cProvider.categories![index]!.name!
+                                        ]);
+                                  },
+                                  child: CategoryCard(
+                                    cProvider.categories![index]!.name!,
+                                    cProvider.categories![index]!.imageUrl,
+                                  ),
+                                );
+                              },
+                              itemCount: cProvider.categories!.length),
+                        )
+                      : const SizedBox();
+                });
+              },
+            ),
           ),
         ],
       ),

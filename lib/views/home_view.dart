@@ -7,7 +7,6 @@ import 'package:safecart/services/home_campaign_products_service.dart';
 import 'package:safecart/utils/custom_refresh_indicator.dart';
 import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/home_view/auto_slider.dart';
-import 'package:safecart/widgets/home_view/categories.dart';
 import 'package:safecart/widgets/home_view/categories_and_products.dart';
 import 'package:safecart/widgets/home_view/feature_products.dart';
 import 'package:safecart/widgets/home_view/home_campaign_products.dart';
@@ -15,7 +14,6 @@ import 'package:safecart/widgets/home_view/home_campaigns.dart';
 import 'package:safecart/widgets/home_view/menual_slider.dart';
 import 'package:safecart/widgets/home_view/menual_slider_two.dart';
 
-import '../helpers/common_helper.dart';
 import '../helpers/empty_space_helper.dart';
 import '../services/home_campaigns_service.dart';
 import '../services/home_categories_service.dart';
@@ -51,7 +49,7 @@ class HomeView extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const Categories(),
+            //const Categories(),
             const AutoSlider(),
             const FeatureProducts(),
             const ManualSlider(),
