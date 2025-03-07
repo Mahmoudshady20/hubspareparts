@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart'
+    as stgv;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterzilla_fixed_grid/flutterzilla_fixed_grid.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart'
-    as stgv;
 import 'package:safecart/services/search_filter_data_service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../helpers/common_helper.dart';
 import '../helpers/empty_space_helper.dart';
+import '../services/product_details_service.dart';
+import '../services/search_product_service.dart';
+import '../services/search_seatvice.dart';
 import '../utils/custom_preloader.dart';
 import '../utils/responsive.dart';
 import '../widgets/common/custom_app_bar.dart';
 import '../widgets/common/product_card.dart';
 import '../widgets/search_view/filter_bottom_sheeet.dart';
 import '../widgets/skelletons/product_card_skeleton.dart';
-import '../helpers/common_helper.dart';
-import '../services/product_details_service.dart';
-import '../services/search_product_service.dart';
-import '../services/search_seatvice.dart';
 import 'product_details_view.dart';
 
 class ProductSearchView extends StatelessWidget {
@@ -46,12 +46,13 @@ class ProductSearchView extends StatelessWidget {
         Navigator.pop(context);
       }, actions: [
         GestureDetector(
-          onTap: () {
+          onTap: () async {
             searchBarFocusNode.unfocus();
             final saProvider =
                 Provider.of<SearchProductService>(context, listen: false);
             final sfdProvider =
                 Provider.of<SearchFilterDataService>(context, listen: false);
+            await sfdProvider.fetchCategories();
             // sfdProvider.setSelectedCategory(saProvider.selectedCategory);
             // sfdProvider.setSelectedSubCategory(saProvider.selectedSubCategory);
             // sfdProvider.setSelectedChildCats(saProvider.selectedChildCats);
@@ -156,7 +157,8 @@ class ProductSearchView extends StatelessWidget {
                     initialValue: saProvider.selectedName,
                     textAlign: TextAlign.justify,
                     decoration: InputDecoration(
-                      hintText: AppLocalizations.of(context)!.search_your_need_here,
+                      hintText:
+                          AppLocalizations.of(context)!.search_your_need_here,
                       prefixIcon: Padding(
                         padding: const EdgeInsets.all(12),
                         child: SvgPicture.asset(
@@ -217,8 +219,8 @@ class ProductSearchView extends StatelessWidget {
                           : saProvider.searchedProduct != null &&
                                   saProvider.searchedProduct!.isEmpty
                               ? Center(
-                                  child: Text(
-                                      AppLocalizations.of(context)!.no_more_product_found),
+                                  child: Text(AppLocalizations.of(context)!
+                                      .no_more_product_found),
                                 )
                               : stgv.StaggeredGridView.countBuilder(
                                   crossAxisCount: 2, controller: controller,
@@ -303,7 +305,8 @@ class ProductSearchView extends StatelessWidget {
       // saProvider.setNextLoading(false);
 
       if (saProvider.nextPage == null) {
-        showToast(AppLocalizations.of(context)!.no_more_product_found, cc.blackColor);
+        showToast(
+            AppLocalizations.of(context)!.no_more_product_found, cc.blackColor);
       }
     }
   }

@@ -1,14 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:isolate';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
+import 'package:safecart/models/Filter_Category.dart';
 import 'package:safecart/models/search_filter_data_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/common_helper.dart';
 
@@ -21,18 +19,33 @@ class SearchFilterDataService with ChangeNotifier {
   dynamic selectedSubCategory = '';
   bool lodingCategoryProducts = false;
   dynamic selectedChildCats = '[]';
-  double minPrice = 0;
-  double maxPrice = 1000;
-  double? selectedMinPrice;
-  double? selectedMaxPrice;
-  int selectedRating = 0;
+  double minCurrentRatings = 0;
+  double maxCurrentRatings = 1600;
+  double? selectedMinCurrentRatings;
+  double? selectedMaxCurrentRatings;
+  int? voltageRatingById;
+  int? controlVoltageById;
+  int? powerRatingById;
   String selectedColor = '';
   String selectedSize = '';
   String selectedBrand = '';
   dynamic selectedTags;
   dynamic selectedCategorieId = 1;
+  FilterCategory? filterCategory;
   bool loading = false;
   bool noSubcategory = false;
+
+  Future<void> fetchCategories() async {
+    final response = await http.get(Uri.parse('$baseApi/filter-categories'));
+    if (response.statusCode == 200) {
+      filterCategory = FilterCategory.fromJson(jsonDecode(response.body));
+      notifyListeners();
+    } else {
+      throw Exception('فشل في تحميل الفئات');
+      notifyListeners();
+    }
+    notifyListeners();
+  }
 
   setSelectedCategory(value) {
     if (selectedCategory == value || (value ?? '').isEmpty) {
@@ -128,26 +141,42 @@ class SearchFilterDataService with ChangeNotifier {
   }
 
   setSelectedRating(value) {
-    if (value == selectedRating) {
+    if (value == voltageRatingById) {
       return;
     }
-    selectedRating = value;
+    voltageRatingById = value;
+    notifyListeners();
+  }
+
+  setControlVoltageById(value) {
+    if (value == controlVoltageById) {
+      return;
+    }
+    controlVoltageById = value;
+    notifyListeners();
+  }
+
+  setPowerRatingById(value) {
+    if (value == powerRatingById) {
+      return;
+    }
+    powerRatingById = value;
     notifyListeners();
   }
 
   setRangeValues(RangeValues value) {
-    selectedMinPrice = value.start.toDouble();
-    selectedMaxPrice = value.end.toDouble();
+    selectedMinCurrentRatings = value.start.toDouble();
+    selectedMaxCurrentRatings = value.end.toDouble();
     notifyListeners();
   }
 
-  setSelectedMinPrice(value) {
-    selectedMinPrice = value ?? minPrice;
+  setSelectedMinCurrentRatings(value) {
+    selectedMinCurrentRatings = value ?? minCurrentRatings;
     notifyListeners();
   }
 
-  setSelectedMaxPrice(value) {
-    selectedMaxPrice = value ?? maxPrice;
+  setSelectedMaxCurrentRatings(value) {
+    selectedMaxCurrentRatings = value ?? maxCurrentRatings;
     notifyListeners();
   }
 
@@ -157,9 +186,11 @@ class SearchFilterDataService with ChangeNotifier {
     selectedSubcategoryChildList = [];
     selectedSubCategory = '';
     selectedChildCats = '';
-    selectedMinPrice;
-    selectedMaxPrice;
-    selectedRating = 0;
+    selectedMinCurrentRatings = 0;
+    selectedMaxCurrentRatings = 1600;
+    voltageRatingById = null;
+    controlVoltageById = null;
+    powerRatingById = null;
     selectedColor = '';
     selectedSize = '';
     selectedBrand = '';
@@ -190,9 +221,9 @@ class SearchFilterDataService with ChangeNotifier {
       selectedSubCategory = subCat;
     }
     selectedChildCats = childCat;
-    selectedMinPrice = minPrize;
-    selectedMaxPrice = maxPrize;
-    selectedRating = rating;
+    selectedMinCurrentRatings = minPrize;
+    selectedMaxCurrentRatings = maxPrize;
+    voltageRatingById = rating;
     selectedColor = color;
     selectedSize = size;
     selectedBrand = brand;
@@ -245,6 +276,14 @@ class SearchFilterDataService with ChangeNotifier {
   setFilterOptions(value) {
     filterOprions = value;
     debugPrint("updating filter options $filterOprions".toString());
+  }
+
+  void setSelectedVoltageRating(int? value) {
+    if (value == voltageRatingById) {
+      return;
+    }
+    voltageRatingById = value;
+    notifyListeners();
   }
 }
 

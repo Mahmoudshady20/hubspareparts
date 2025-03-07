@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:http/http.dart' as http;
 import 'package:safecart/models/search_product_model.dart';
 
 import '../helpers/common_helper.dart';
-import 'package:http/http.dart' as http;
 
 class SearchProductService with ChangeNotifier {
   List<Datum>? searchedProduct;
@@ -27,6 +27,11 @@ class SearchProductService with ChangeNotifier {
   String? nextPage;
   bool nextLoading = false;
   String url = '';
+  double? selectedMinCurrentRatings;
+  double? selectedMaxCurrentRatings;
+  String? voltageRatingById;
+  String? controlVoltageById;
+  String? powerRatingById;
 
   setLoading(value) {
     loading = value ?? !loading;
@@ -48,7 +53,12 @@ class SearchProductService with ChangeNotifier {
       brandVal,
       minPrice,
       maxPrice,
-      rating}) {
+      rating,
+      selectedMinCurrentRatingsFun,
+      selectedMaxCurrentRatingsFun,
+      String? voltageRatingByIdFun,
+      String? controlVoltageByIdFun,
+      String? powerRatingByIdFun}) {
     selectedName = nameVal ?? selectedName;
     selectedCategory = catVal ?? selectedCategory;
     selectedSubCategory = subCatVal ?? selectedSubCategory;
@@ -59,6 +69,22 @@ class SearchProductService with ChangeNotifier {
     selectedMinPrice = minPrice ?? selectedMinPrice;
     selectedMaxPrice = maxPrice ?? selectedMaxPrice;
     selectedRating = rating ?? selectedRating;
+    selectedMinCurrentRatings = selectedMinCurrentRatingsFun ?? 0.0;
+    selectedMaxCurrentRatings = selectedMaxCurrentRatingsFun ?? 1600.0;
+    voltageRatingById = voltageRatingByIdFun ?? voltageRatingById;
+    controlVoltageById = controlVoltageByIdFun ?? controlVoltageById;
+    powerRatingById = powerRatingByIdFun ?? powerRatingById;
+    if (voltageRatingByIdFun == null || voltageRatingByIdFun.isEmpty) {
+      voltageRatingById = '';
+    }
+    if (controlVoltageByIdFun == null || controlVoltageByIdFun.isEmpty) {
+      controlVoltageById = '';
+    }
+    if (powerRatingByIdFun == null || powerRatingByIdFun.isEmpty) {
+      powerRatingById = '';
+    }
+    print(
+        'mahmoud shady $voltageRatingById hi $controlVoltageById hi $powerRatingById');
   }
 
   resetFilterOptions() {
@@ -73,6 +99,11 @@ class SearchProductService with ChangeNotifier {
     selectedMinPrice = '';
     selectedMaxPrice = '';
     selectedRating = 0;
+    selectedMinCurrentRatings = 0.0;
+    selectedMaxCurrentRatings = 1600.0;
+    voltageRatingById = '';
+    controlVoltageById = '';
+    powerRatingById = '';
   }
 
   resetSearch() {
@@ -95,8 +126,20 @@ class SearchProductService with ChangeNotifier {
     selectedMaxPrice = selectedMaxPrice == 'null' || selectedMaxPrice == null
         ? ''
         : selectedMaxPrice;
+
+    /**
+     *     selectedMinCurrentRatings = 0.0;
+        selectedMaxCurrentRatings = 1600.0;
+        voltageRatingById = null;
+        controlVoltageById = null;
+        powerRatingById = null;
+     */
+
+    //max_price and min_price ==> minCurrentRating and maxCurrentRating
     final url =
-        "$baseApi/product?name=$selectedName&category=$selectedCategory&sub_category=$selectedSubCategory&child_category=$selectedChildCats&size=$selectedSize&brand=$selectedBrand&color=$selectedColor&min_price=$selectedMinPrice&max_price=$selectedMaxPrice&rating=$selectedRating&sku&tag&delivery_option&refundable&inventory_warning&from_price&to_price&date_range&count";
+        "$baseApi/product?name=$selectedName&brand=$selectedBrand&category=$selectedCategory&sub_category=$selectedSubCategory&child_category=$selectedChildCats&color=$selectedColor&voltage_rating=${voltageRatingById ?? ''}&controll_voltage=${controlVoltageById ?? ''}&power_rating=${powerRatingById ?? ''}&min_current_rating=${selectedMinCurrentRatings!.toInt()}&max_current_rating=${selectedMaxCurrentRatings!.toInt()}&size=$selectedSize&delivery_option=&min_price=&max_price=&rating=&order_by=&page&country=&city=&state=";
+    print(
+        'mahmoud shady mahmoud shady     "$baseApi/product?name=$selectedName&brand=$selectedBrand&category=$selectedCategory&sub_category=$selectedSubCategory&child_category=$selectedChildCats&color=$selectedColor&voltage_rating=$voltageRatingById&controll_voltage=$controlVoltageById&power_rating=$powerRatingById&min_current_rating=$selectedMinCurrentRatings&max_current_rating=$selectedMaxCurrentRatings&size=$selectedSize&delivery_option=&min_price=&max_price=&rating=&order_by=&page&country=&city=&state=";');
     try {
       var request = http.Request('GET', Uri.parse(url));
 

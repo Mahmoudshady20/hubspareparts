@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:money_formatter/money_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/search_filter_data_service.dart';
 import 'package:safecart/services/search_product_service.dart';
@@ -18,18 +15,11 @@ import 'filter_rtl_padding.dart';
 
 class FilterBottomSheet extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  const FilterBottomSheet(this.scaffoldKey, {Key? key}) : super(key: key);
+  const FilterBottomSheet(this.scaffoldKey, {super.key});
 
   @override
   Widget build(BuildContext context) {
     final rtl = Provider.of<RTLService>(context, listen: false);
-
-    MoneyFormatter startRange = MoneyFormatter(
-        amount: Provider.of<SearchFilterDataService>(context, listen: false)
-            .minPrice);
-    MoneyFormatter endRange = MoneyFormatter(
-        amount: Provider.of<SearchFilterDataService>(context, listen: false)
-            .maxPrice);
     final filterOption =
         Provider.of<SearchFilterDataService>(context, listen: false);
     return SingleChildScrollView(
@@ -44,7 +34,6 @@ class FilterBottomSheet extends StatelessWidget {
             ),
           ],
         ),
-
         if (filterOption.filterOprions?.allCategory != null &&
             filterOption.filterOprions!.allCategory!.isNotEmpty)
           FilterRtlPadding(
@@ -89,7 +78,6 @@ class FilterBottomSheet extends StatelessWidget {
                   })),
             );
           }),
-
         Consumer<SearchFilterDataService>(
             builder: (context, foProvider, child) {
           return foProvider.selectedCategory != null &&
@@ -211,7 +199,6 @@ class FilterBottomSheet extends StatelessWidget {
                     )
               : const SizedBox();
         }),
-
         if (filterOption.filterOprions?.allColors?.isNotEmpty ?? false)
           FilterRtlPadding(
             child: Text(
@@ -228,26 +215,7 @@ class FilterBottomSheet extends StatelessWidget {
             return FilterRtlPadding(
               child: SizedBox(
                 height: 44,
-                child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          filterOption.setSelectedColor(filterOption
-                              .filterOprions!.allColors![index].name);
-                        },
-                        child: filterColorOption(
-                          filterOption
-                              .filterOprions!.allColors![index].colorCode!,
-                          spProvider.selectedColor ==
-                              filterOption
-                                  .filterOprions!.allColors![index].name,
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) =>
-                        EmptySpaceHelper.emptywidth(5),
-                    itemCount: filterOption.filterOprions!.allColors!.length),
+                child: Container(),
               ),
             );
           }),
@@ -338,14 +306,11 @@ class FilterBottomSheet extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FieldTitle(AppLocalizations.of(context)!.filter_Price),
+                FieldTitle(AppLocalizations.of(context)!.current_rating),
                 Consumer<SearchFilterDataService>(
                     builder: (context, sfdProvider, child) {
                   return Text(
-                    rtl.curRtl
-                        ? '${MoneyFormatter(amount: sfdProvider.selectedMinPrice ?? sfdProvider.minPrice).output.withoutFractionDigits}${rtl.currency}-${MoneyFormatter(amount: sfdProvider.selectedMaxPrice ?? sfdProvider.maxPrice).output.withoutFractionDigits}${rtl.currency}'
-                        : '${rtl.currency}${MoneyFormatter(amount: sfdProvider.selectedMinPrice ?? sfdProvider.minPrice).output.withoutFractionDigits}-${rtl.currency}${MoneyFormatter(amount: sfdProvider.selectedMaxPrice ?? sfdProvider.maxPrice).output.withoutFractionDigits}',
-                  );
+                      '${sfdProvider.selectedMinCurrentRatings?.toInt() ?? sfdProvider.minCurrentRatings.toInt()}-${sfdProvider.selectedMaxCurrentRatings?.toInt() ?? sfdProvider.filterCategory?.currentRating?.max?.toInt()}');
                 })
               ],
             ),
@@ -365,14 +330,20 @@ class FilterBottomSheet extends StatelessWidget {
               ),
               child: RangeSlider(
                 values: RangeValues(
-                    sfdProvider.selectedMinPrice ?? sfdProvider.minPrice,
-                    sfdProvider.selectedMaxPrice ?? sfdProvider.maxPrice),
-                max:
-                    Provider.of<SearchFilterDataService>(context, listen: false)
-                        .maxPrice,
-                min:
-                    Provider.of<SearchFilterDataService>(context, listen: false)
-                        .minPrice,
+                    sfdProvider.selectedMinCurrentRatings ??
+                        sfdProvider.filterCategory?.currentRating?.min
+                            ?.toDouble() ??
+                        0.0,
+                    sfdProvider.selectedMaxCurrentRatings ??
+                        sfdProvider.filterCategory?.currentRating?.max
+                            ?.toDouble() ??
+                        1600.0),
+                max: sfdProvider.filterCategory?.currentRating?.max
+                        ?.toDouble() ??
+                    1600.0,
+                min: sfdProvider.filterCategory?.currentRating?.min
+                        ?.toDouble() ??
+                    0.0,
                 inactiveColor: cc.lightPrimary10,
                 labels: const RangeLabels('44', '55'),
                 onChanged: (RangeValues values) {
@@ -383,7 +354,7 @@ class FilterBottomSheet extends StatelessWidget {
           });
         }),
         FilterRtlPadding(
-            child: FieldTitle(AppLocalizations.of(context)!.average_Rating)),
+            child: FieldTitle(AppLocalizations.of(context)!.voltage_rating)),
         const SizedBox(height: 10),
         // for (var i = 0; i < 5; i++)
         //   FilterRtlPadding(
@@ -391,52 +362,98 @@ class FilterBottomSheet extends StatelessWidget {
         //           fProvider.ratingOptions[i], () {
         //     fProvider.setSelectedRating(i);
         //   })),
-
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(children: [
-            Consumer<SearchFilterDataService>(
-                builder: (context, sfProvider, child) {
-              return RatingBar.builder(
-                itemSize: 24,
-                initialRating: sfProvider.selectedRating.toDouble(),
-                minRating: 1,
-                direction: Axis.horizontal,
-                allowHalfRating: false,
-                itemCount: 5,
-                unratedColor: cc.lightPrimary,
-                itemPadding: const EdgeInsets.symmetric(horizontal: 3),
-                itemBuilder: (context, _) => SvgPicture.asset(
-                  'assets/icons/star.svg',
-                  color: cc.orangeRating,
-                ),
-                onRatingUpdate: (rating) {
-                  sfProvider.setSelectedRating(rating.toInt());
-                  print(rating);
-                },
-              );
-            }),
-            const Spacer(),
-            Consumer<SearchFilterDataService>(
+        FilterRtlPadding(
+          child: Consumer<SearchFilterDataService>(
               builder: (context, sfProvider, child) {
-                return Container(
-                  child: GestureDetector(
+            return SizedBox(
+              height: 44,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: sfProvider.filterCategory!.voltageRating!.length,
+                itemBuilder: ((context, index) {
+                  return GestureDetector(
                     onTap: () {
-                      sfProvider.setSelectedRating(0);
+                      sfProvider.setSelectedVoltageRating(sfProvider
+                          .filterCategory?.voltageRating![index].id as int?);
                     },
-                    child: Icon(
-                      Icons.refresh_rounded,
-                      color: cc.primaryColor,
-                    ),
-                  ),
-                );
-              },
-            )
-          ]),
+                    child: filterOptions(
+                        sfProvider.filterCategory?.voltageRating?[index].name ??
+                            '',
+                        sfProvider.voltageRatingById ==
+                            sfProvider
+                                .filterCategory?.voltageRating![index].id),
+                  );
+                }),
+                separatorBuilder: (context, index) =>
+                    EmptySpaceHelper.emptywidth(5),
+              ),
+            );
+          }),
         ),
-
         EmptySpaceHelper.emptyHight(20),
-
+        FilterRtlPadding(
+            child: FieldTitle(AppLocalizations.of(context)!.control_voltage)),
+        const SizedBox(height: 10),
+        FilterRtlPadding(
+          child: Consumer<SearchFilterDataService>(
+              builder: (context, sfProvider, child) {
+            return SizedBox(
+              height: 44,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: sfProvider.filterCategory!.controlVoltage!.length,
+                itemBuilder: ((context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      sfProvider.setControlVoltageById(sfProvider
+                          .filterCategory?.controlVoltage![index].id as int?);
+                    },
+                    child: filterOptions(
+                        sfProvider
+                                .filterCategory?.controlVoltage?[index].name ??
+                            '',
+                        sfProvider.controlVoltageById ==
+                            sfProvider
+                                .filterCategory?.controlVoltage![index].id),
+                  );
+                }),
+                separatorBuilder: (context, index) =>
+                    EmptySpaceHelper.emptywidth(5),
+              ),
+            );
+          }),
+        ),
+        EmptySpaceHelper.emptyHight(20),
+        FilterRtlPadding(
+            child: FieldTitle(AppLocalizations.of(context)!.power_rating)),
+        const SizedBox(height: 10),
+        FilterRtlPadding(
+          child: Consumer<SearchFilterDataService>(
+              builder: (context, sfProvider, child) {
+            return SizedBox(
+              height: 44,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: sfProvider.filterCategory!.powerRating!.length,
+                itemBuilder: ((context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      sfProvider.setPowerRatingById(sfProvider
+                          .filterCategory?.powerRating![index].id as int?);
+                    },
+                    child: filterOptions(
+                        sfProvider.filterCategory?.powerRating?[index].name ??
+                            '',
+                        sfProvider.powerRatingById ==
+                            sfProvider.filterCategory?.powerRating![index].id),
+                  );
+                }),
+                separatorBuilder: (context, index) =>
+                    EmptySpaceHelper.emptywidth(5),
+              ),
+            );
+          }),
+        ),
         const SizedBox(height: 40),
         Consumer<CommonServices>(builder: (context, srData, child) {
           return Padding(
@@ -457,6 +474,22 @@ class FilterBottomSheet extends StatelessWidget {
                 },
                 bt2func: () {
                   scaffoldKey.currentState!.closeEndDrawer();
+                  String? v, c, p;
+                  if (filterOption.voltageRatingById == null) {
+                    v = '';
+                  } else {
+                    v = filterOption.voltageRatingById.toString();
+                  }
+                  if (filterOption.powerRatingById == null) {
+                    p = '';
+                  } else {
+                    p = filterOption.powerRatingById.toString();
+                  }
+                  if (filterOption.controlVoltageById == null) {
+                    c = '';
+                  } else {
+                    c = filterOption.controlVoltageById.toString();
+                  }
                   Provider.of<SearchProductService>(context, listen: false)
                       .setFilterOptions(
                     catVal: filterOption.selectedCategory,
@@ -465,9 +498,15 @@ class FilterBottomSheet extends StatelessWidget {
                     colorVal: filterOption.selectedColor,
                     sizeVal: filterOption.selectedSize,
                     brandVal: filterOption.selectedBrand,
-                    minPrice: filterOption.selectedMinPrice.toString(),
-                    maxPrice: filterOption.selectedMaxPrice.toString(),
-                    rating: filterOption.selectedRating,
+                    minPrice: filterOption.selectedMinCurrentRatings,
+                    maxPrice: filterOption.selectedMaxCurrentRatings,
+                    controlVoltageByIdFun: c,
+                    powerRatingByIdFun: p,
+                    voltageRatingByIdFun: v,
+                    selectedMaxCurrentRatingsFun:
+                        filterOption.selectedMaxCurrentRatings,
+                    selectedMinCurrentRatingsFun:
+                        filterOption.selectedMinCurrentRatings,
                   );
                   Provider.of<SearchProductService>(context, listen: false)
                       .fetchProducts(context);
