@@ -8,7 +8,9 @@ import 'package:safecart/services/internet_checker_service.dart';
 import 'package:safecart/services/location/city_dropdown_service.dart';
 import 'package:safecart/services/location/country_dropdown_service.dart';
 import 'package:safecart/services/location/state_dropdown_service.dart';
+import 'package:safecart/services/payment/home_brand_services.dart';
 import 'package:safecart/services/settings_services.dart';
+import 'package:safecart/views/product_by_brand_view.dart';
 import 'package:safecart/views/settings_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -144,6 +146,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<AppStringService>(
             create: (context) => AppStringService()),
+        ChangeNotifierProvider<HomeBrandService>(
+            create: (context) => HomeBrandService()),
         ChangeNotifierProvider<IntroHelper>(create: (context) => IntroHelper()),
         ChangeNotifierProvider<CommonServices>(
             create: (context) => CommonServices()),
@@ -296,6 +300,7 @@ class MyApp extends StatelessWidget {
             ProductSearchView.routeName: (context) => ProductSearchView(),
             NewTicketView.routeName: (context) => NewTicketView(),
             HomeCampaignsView.routeName: (context) => HomeCampaignsView(),
+            ProductByBrandView.routeName: (context) => ProductByBrandView(),
             ProductByCampaignView.routeName: (context) =>
                 ProductByCampaignView(),
             ShippingAddressListView.routeName: (context) =>

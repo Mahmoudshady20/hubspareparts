@@ -13,6 +13,7 @@ import 'package:safecart/widgets/home_view/home_campaign_products.dart';
 import 'package:safecart/widgets/home_view/home_campaigns.dart';
 import 'package:safecart/widgets/home_view/menual_slider.dart';
 import 'package:safecart/widgets/home_view/menual_slider_two.dart';
+import 'package:safecart/widgets/home_view/new_brand.dart';
 
 import '../helpers/empty_space_helper.dart';
 import '../services/home_campaigns_service.dart';
@@ -50,6 +51,7 @@ class HomeView extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             //const Categories(),
+            const NewBrand(),
             const AutoSlider(),
             const FeatureProducts(),
             const ManualSlider(),

@@ -1,4 +1,5 @@
-import 'Brands.dart';
+import 'package:safecart/models/brand_filter.dart';
+
 import 'Categories.dart';
 import 'ControlVoltage.dart';
 import 'CurrentRating.dart';
@@ -47,7 +48,7 @@ class FilterCategory {
     if (json['brands'] != null) {
       brands = [];
       json['brands'].forEach((v) {
-        brands?.add(Brands.fromJson(v));
+        brands?.add(BrandFilter.fromJson(v));
       });
     }
     success = json['success'];
@@ -57,7 +58,7 @@ class FilterCategory {
   List<VoltageRating>? voltageRating;
   List<ControlVoltage>? controlVoltage;
   List<PowerRating>? powerRating;
-  List<Brands>? brands;
+  List<BrandFilter>? brands;
   bool? success;
 
   Map<String, dynamic> toJson() {
