@@ -138,8 +138,6 @@ class SearchProductService with ChangeNotifier {
     //max_price and min_price ==> minCurrentRating and maxCurrentRating
     final url =
         "$baseApi/product?name=$selectedName&brand=$selectedBrand&category=$selectedCategory&sub_category=$selectedSubCategory&child_category=$selectedChildCats&color=$selectedColor&voltage_rating=${voltageRatingById ?? ''}&controll_voltage=${controlVoltageById ?? ''}&power_rating=${powerRatingById ?? ''}&min_current_rating=${selectedMinCurrentRatings!.toInt()}&max_current_rating=${selectedMaxCurrentRatings!.toInt()}&size=$selectedSize&delivery_option=&min_price=&max_price=&rating=&order_by=&page&country=&city=&state=";
-    print(
-        'mahmoud shady mahmoud shady     "$baseApi/product?name=$selectedName&brand=$selectedBrand&category=$selectedCategory&sub_category=$selectedSubCategory&child_category=$selectedChildCats&color=$selectedColor&voltage_rating=$voltageRatingById&controll_voltage=$controlVoltageById&power_rating=$powerRatingById&min_current_rating=$selectedMinCurrentRatings&max_current_rating=$selectedMaxCurrentRatings&size=$selectedSize&delivery_option=&min_price=&max_price=&rating=&order_by=&page&country=&city=&state=";');
     try {
       var request = http.Request('GET', Uri.parse(url));
 

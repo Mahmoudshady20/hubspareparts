@@ -21,6 +21,7 @@ class HFAppBar extends StatefulWidget {
 }
 
 class _HFAppBarState extends State<HFAppBar> {
+  final searchBarFocusNode = FocusNode();
   bool showField = false;
   @override
   Widget build(BuildContext context) {
@@ -109,7 +110,35 @@ class _HFAppBarState extends State<HFAppBar> {
                 ],
               ),
             ],
-          )
+          ),
+          GestureDetector(
+            onTap: () async {
+              Provider.of<SearchProductService>(context, listen: false)
+                  .setFilterOptions(nameVal: textEditingController.text);
+              Provider.of<SearchProductService>(context, listen: false)
+                  .fetchProducts(context);
+              FocusScope.of(context).unfocus();
+              Navigator.of(context).pushNamed(ProductSearchView.routeName);
+            },
+            child: Container(
+              height: 40,
+              width: 40,
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: cc.greyFive,
+                  width: 1.5,
+                ),
+                color: cc.pureWhite,
+              ),
+              child: SvgPicture.asset(
+                'assets/icons/filter.svg',
+                color: cc.blackColor,
+              ),
+            ),
+          ),
         ],
       );
     });
