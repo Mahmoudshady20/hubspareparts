@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:safecart/helpers/common_helper.dart';
 import 'package:safecart/helpers/navigation_helper.dart';
 import 'package:safecart/services/search_seatvice.dart';
+import 'package:safecart/services/settings_services.dart';
 import 'package:safecart/views/product_search_view.dart';
 import 'package:safecart/widgets/home_front/custom_search_field.dart';
 
@@ -26,6 +27,7 @@ class _HFAppBarState extends State<HFAppBar> {
   @override
   Widget build(BuildContext context) {
     TextEditingController textEditingController = TextEditingController();
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Consumer<NavigationHelper>(builder: (context, nhProvider, child) {
       return SliverAppBar(
         backgroundColor:
@@ -79,8 +81,8 @@ class _HFAppBarState extends State<HFAppBar> {
                     height: 55,
                     margin: EdgeInsets.only(
                         top: 10,
-                        right: rtlProvider.langRtl ? 0 : 10,
-                        left: rtlProvider.langRtl ? 10 : 0),
+                        right: nhProvider.currentIndex == 1 ? 0 : 10,
+                        left: nhProvider.currentIndex == 1 ? 0 : 10),
                     child: SizedBox(
                       height: 45,
                       child: Consumer<SearchService>(
@@ -111,34 +113,38 @@ class _HFAppBarState extends State<HFAppBar> {
               ),
             ],
           ),
-          GestureDetector(
-            onTap: () async {
-              Provider.of<SearchProductService>(context, listen: false)
-                  .setFilterOptions(nameVal: textEditingController.text);
-              Provider.of<SearchProductService>(context, listen: false)
-                  .fetchProducts(context);
-              FocusScope.of(context).unfocus();
-              Navigator.of(context).pushNamed(ProductSearchView.routeName);
-            },
-            child: Container(
-              height: 40,
-              width: 40,
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: cc.greyFive,
-                  width: 1.5,
-                ),
-                color: cc.pureWhite,
-              ),
-              child: SvgPicture.asset(
-                'assets/icons/filter.svg',
-                color: cc.blackColor,
-              ),
-            ),
-          ),
+          nhProvider.currentIndex == 1
+              ? GestureDetector(
+                  onTap: () async {
+                    Provider.of<SearchProductService>(context, listen: false)
+                        .setFilterOptions(nameVal: textEditingController.text);
+                    Provider.of<SearchProductService>(context, listen: false)
+                        .fetchProducts(context);
+                    FocusScope.of(context).unfocus();
+                    Navigator.of(context)
+                        .pushNamed(ProductSearchView.routeName);
+                  },
+                  child: Container(
+                    height: 45,
+                    width: 45,
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: cc.greyFive,
+                        width: 1.5,
+                      ),
+                      color: cc.pureWhite,
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/icons/filter.svg',
+                      color: cc.blackColor,
+                    ),
+                  ),
+                )
+              : Container(),
         ],
       );
     });

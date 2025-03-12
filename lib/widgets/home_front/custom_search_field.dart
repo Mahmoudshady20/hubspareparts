@@ -36,7 +36,12 @@ class CustomSearchField extends StatelessWidget {
           duration: const Duration(milliseconds: 500),
           // width: width ?? (screenWidth - 40),
           width: showField
-              ? screenWidth - (nhProvider.currentIndex == 4 ? 70 : 112)
+              ? screenWidth -
+                  (nhProvider.currentIndex == 4
+                      ? 30
+                      : nhProvider.currentIndex == 1
+                          ? 107
+                          : 58)
               : 45,
           margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
