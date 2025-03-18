@@ -29,7 +29,7 @@ class Categories extends StatelessWidget {
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TitleCommon(
-                          AppLocalizations.of(context)!.find_Your_Style,
+                          AppLocalizations.of(context)!.categories,
                           () {},
                           seeAll: false,
                         ),

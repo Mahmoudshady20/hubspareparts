@@ -26,7 +26,7 @@ class NewBrand extends StatelessWidget {
                 ? Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: TitleCommon(
-                      AppLocalizations.of(context)!.find_Your_Brand,
+                      AppLocalizations.of(context)!.brands,
                       () {},
                       seeAll: false,
                     ),

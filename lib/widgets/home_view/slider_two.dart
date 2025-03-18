@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:safecart/services/settings_services.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../services/product_by_campaigns_service.dart';
@@ -36,6 +37,7 @@ class SliderTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     getScreenSize(context);
     final rtl = Provider.of<RTLService>(context, listen: false).langRtl;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
 
     return Container(
       // margin: const EdgeInsets.symmetric(vertical: 20),
@@ -58,7 +60,9 @@ class SliderTwo extends StatelessWidget {
 
           children: [
             Align(
-              alignment: rtl ? Alignment.centerLeft : Alignment.centerRight,
+              alignment: settingsProvider.myLocal == Locale('ar')
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
               child: SizedBox(
                 height: 180,
                 width: screenWidth / 2.5,
@@ -67,7 +71,9 @@ class SliderTwo extends StatelessWidget {
                 child: Image.network(
                   image,
                   fit: BoxFit.contain,
-                  alignment: rtl ? Alignment.centerLeft : Alignment.centerRight,
+                  alignment: settingsProvider.myLocal == Locale('en')
+                      ? Alignment.centerLeft
+                      : Alignment.centerRight,
                   errorBuilder: (context, error, stackTrace) =>
                       const SizedBox(),
                 ),
