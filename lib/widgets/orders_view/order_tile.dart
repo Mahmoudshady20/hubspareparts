@@ -15,11 +15,13 @@ class OrderTile extends StatelessWidget {
   final DateTime orderedDate;
   final String? order;
   final String? payment;
+  final String? createdAt;
   const OrderTile(
     this.totalAmount,
     this.trackingCode,
     this.orderedDate,
     this.order,
+    this.createdAt,
     this.payment, {
     super.key,
   });
@@ -53,15 +55,30 @@ class OrderTile extends StatelessWidget {
                   ),
             ),
             EmptySpaceHelper.emptyHight(4),
-            Text(
-              rtlProvider.curRtl
-                  ? totalAmount.toStringAsFixed(2) + rtlProvider.currency
-                  : rtlProvider.currency + totalAmount.toStringAsFixed(2),
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: cc.primaryColor,
-                  ),
+            Row(
+              children: [
+                Text(
+                  rtlProvider.curRtl
+                      ? totalAmount.toStringAsFixed(2) + rtlProvider.currency
+                      : rtlProvider.currency + totalAmount.toStringAsFixed(2),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: cc.primaryColor,
+                      ),
+                ),
+                Spacer(),
+                Text(
+                  rtlProvider.curRtl
+                      ? createdAt.toString()
+                      : createdAt.toString(),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: cc.primaryColor,
+                      ),
+                ),
+              ],
             ),
             EmptySpaceHelper.emptyHight(4),
             Row(

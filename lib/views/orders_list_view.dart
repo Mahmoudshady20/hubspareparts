@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 
@@ -12,7 +13,7 @@ import '../widgets/skelletons/order_tile_skeleton.dart';
 
 class OrdersListView extends StatelessWidget {
   static const routeName = 'order_list_view';
-  OrdersListView({Key? key}) : super(key: key);
+  OrdersListView({super.key});
   ScrollController controller = ScrollController();
 
   @override
@@ -123,6 +124,9 @@ class OrdersListView extends StatelessWidget {
                                                       AppLocalizations.of(
                                                               context)!
                                                           .none,
+                                                  DateFormat('yyyy-MM-dd')
+                                                      .format(e.createdAt ??
+                                                          DateTime.now()),
                                                   e.paymentStatus ??
                                                       AppLocalizations.of(
                                                               context)!
