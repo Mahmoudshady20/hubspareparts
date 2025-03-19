@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/auth_service/save_sign_in_info_service.dart';
+import 'package:safecart/services/home_categories_service.dart';
 import 'package:safecart/services/intro_service.dart';
 import 'package:safecart/services/profile_info_service.dart';
 import 'package:safecart/services/rtl_service.dart';
@@ -109,7 +110,8 @@ class SplashView extends StatelessWidget {
         .fetchSearchfilterData(context);
     final gotoIntro =
         await Provider.of<CommonServices>(context, listen: false).checkIntro();
-
+    await Provider.of<HomeCategoriesService>(context, listen: false)
+        .fetchHomeCategories(context);
     Provider.of<PaymentGatewayService>(context, listen: false)
         .fetchGateways(context);
 
