@@ -5,6 +5,7 @@ import '../../helpers/common_helper.dart';
 import '../../services/product_by_campaigns_service.dart';
 import '../../services/rtl_service.dart';
 import '../../services/search_product_service.dart';
+import '../../services/settings_services.dart';
 import '../../utils/responsive.dart';
 import '../../views/product_by_campaign_view.dart';
 import '../../views/product_by_category_view.dart';
@@ -36,7 +37,7 @@ class SliderThree extends StatelessWidget {
   Widget build(BuildContext context) {
     getScreenSize(context);
     final rtl = Provider.of<RTLService>(context, listen: false).langRtl;
-
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Container(
       // margin: const EdgeInsets.symmetric(vertical: 20),
       height: 180,
@@ -129,7 +130,9 @@ class SliderThree extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: rtl ? Alignment.centerLeft : Alignment.centerRight,
+              alignment: settingsProvider.myLocal == Locale('ar')
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
               child: Container(
                 height: 180,
                 width: screenWidth / 2.5,
@@ -140,8 +143,9 @@ class SliderThree extends StatelessWidget {
                   child: Image.network(
                     image,
                     fit: BoxFit.contain,
-                    alignment:
-                        rtl ? Alignment.centerLeft : Alignment.centerRight,
+                    alignment: settingsProvider.myLocal == Locale('ar')
+                        ? Alignment.centerLeft
+                        : Alignment.centerRight,
                     errorBuilder: (context, error, stackTrace) =>
                         const SizedBox(),
                   ),
