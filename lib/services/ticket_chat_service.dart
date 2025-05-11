@@ -78,7 +78,6 @@ class TicketChatService with ChangeNotifier {
         setIsLoading(false);
         notifyListeners();
       } else {
-        print(response.reasonPhrase);
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
@@ -115,7 +114,6 @@ class TicketChatService with ChangeNotifier {
       final data = await response.stream.bytesToString();
 
       if (response.statusCode == 200) {
-        print(jsonDecode(data)['attachment']);
         // await fetchOnlyMessages(context, id);
         messagesList.insert(0, AllMessage.fromJson(jsonDecode(data)));
         showToast(AppLocalizations.of(context)!.message_sent, cc.green);
@@ -125,14 +123,12 @@ class TicketChatService with ChangeNotifier {
         setIsLoading(false);
         notifyListeners();
       } else {
-        print(response.reasonPhrase);
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 
@@ -163,14 +159,12 @@ class TicketChatService with ChangeNotifier {
         noMessage = messagesList.isEmpty;
         notifyListeners();
       } else {
-        print(response.reasonPhrase);
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 }

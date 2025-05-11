@@ -14,7 +14,7 @@ import 'product_by_category_view.dart';
 
 class AllCategoriesView extends StatelessWidget {
   static const routeName = 'all_categoris_view';
-  AllCategoriesView({Key? key}) : super(key: key);
+  AllCategoriesView({super.key});
 
   ScrollController controller = ScrollController();
 

@@ -6,7 +6,7 @@ import '../../utils/responsive.dart';
 class PaymentGridTile extends StatelessWidget {
   final String imageUrl;
   bool isSelected;
-  PaymentGridTile(this.imageUrl, this.isSelected, {Key? key}) : super(key: key);
+  PaymentGridTile(this.imageUrl, this.isSelected, {super.key});
 
   @override
   Widget build(BuildContext context) {

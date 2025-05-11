@@ -40,7 +40,6 @@ class HomeCampaignsService with ChangeNotifier {
     if (!refreshing) {
       setCampaignLoading(value: true);
     }
-    print('fetching campaigns');
     try {
       var request =
           http.MultipartRequest('GET', Uri.parse('$baseApi/campaign'));
@@ -59,7 +58,6 @@ class HomeCampaignsService with ChangeNotifier {
       } else {
         campaigns = [];
         setCampaignLoading(value: false);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       campaigns = [];
@@ -68,18 +66,15 @@ class HomeCampaignsService with ChangeNotifier {
     } catch (err) {
       campaigns = [];
       setCampaignLoading(value: false);
-      print(err);
     }
   }
 
   fetchHomeCampaignProducts(BuildContext context, id) async {
     final haveConnection = await checkConnection(context);
     if (!haveConnection) {
-      print('NO connection');
       return;
     }
     setCampaignProductLoading(value: true);
-    print('fetching home campaign');
     try {
       var request = http.MultipartRequest(
           'GET', Uri.parse('$baseApi/campaign/product/$id'));
@@ -105,7 +100,6 @@ class HomeCampaignsService with ChangeNotifier {
     } catch (err) {
       campaigns = [];
       setCampaignProductLoading(value: false);
-      print(err);
     }
   }
 }

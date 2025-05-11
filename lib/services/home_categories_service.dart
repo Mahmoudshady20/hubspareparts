@@ -60,7 +60,6 @@ class HomeCategoriesService with ChangeNotifier {
       } else {
         categories ??= [];
         setCategoryLoading(value: false);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       categories ??= [];
@@ -69,12 +68,10 @@ class HomeCategoriesService with ChangeNotifier {
     } catch (err) {
       categories ??= [];
       setCategoryLoading(value: false);
-      print(err);
     }
   }
 
   fetchHomeCategoryProducts(name, {refreshing = false}) async {
-    print('$baseApi//product?category=$name');
     if (name == null && tempCatName == null) {
       return;
     }
@@ -84,7 +81,6 @@ class HomeCategoriesService with ChangeNotifier {
     try {
       final response =
           await http.get(Uri.parse('$baseApi/product?category=$name'));
-      print(response.statusCode);
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -94,8 +90,6 @@ class HomeCategoriesService with ChangeNotifier {
       } else {
         categoryProducts ??= [];
         setCategoryProductLoading(value: false);
-        print('category product fetch failed text');
-        print(response.body);
       }
     } on TimeoutException {
       categoryProducts ??= [];

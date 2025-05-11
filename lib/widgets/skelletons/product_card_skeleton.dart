@@ -21,7 +21,7 @@ class ProductCardSkeleton extends StatelessWidget {
           height: 230,
           width: 170,
           decoration: BoxDecoration(
-            color: cc.primaryColor.withOpacity(.60),
+            color: cc.primaryColor.withValues(alpha: .60),
             borderRadius: BorderRadius.circular(15),
           ),
         ),

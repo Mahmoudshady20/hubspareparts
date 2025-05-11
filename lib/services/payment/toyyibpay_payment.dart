@@ -51,7 +51,6 @@ class ToyyibPayPayment extends StatelessWidget {
                 return errorWidget(context);
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
 
@@ -178,12 +177,10 @@ class ToyyibPayPayment extends StatelessWidget {
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(await response.stream.bytesToString());
-      print(responseData);
       final billCode = responseData.first['BillCode'];
       url = 'https://dev.toyyibpay.com/$billCode';
     } else {
       return true;
-      print(response.reasonPhrase);
     }
   }
 }

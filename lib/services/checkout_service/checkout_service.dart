@@ -144,10 +144,8 @@ class CheckoutService with ChangeNotifier {
   }
 
   changeVendorShippingMethod(vendorId, shippingMethods, shippingMethodName) {
-    print(vendorId);
     debugPrint("$vendorId is vendor id........................".toString());
     if (vendorId == 'admin') {
-      print('returning early because its admin');
       var shippingMethod = vendorDetailsList!.defaultVendor.shippingMethods
           .firstWhere((element) => element.title == shippingMethodName);
       for (var element in vendorShippingCost) {
@@ -169,7 +167,6 @@ class CheckoutService with ChangeNotifier {
         .firstWhere((element) => element.id.toString() == vendorId.toString())
         .shippingMethod!
         .firstWhere((element) => element.title == shippingMethodName);
-    print(shippingMethod.title);
 
     bool priceUpdated = false;
     for (var element in vendorShippingCost) {
@@ -191,7 +188,6 @@ class CheckoutService with ChangeNotifier {
       }
     }
     calculateTotalShippingCost();
-    print(vendorShippingCost);
   }
 
   calculateTotalShippingCost() {
@@ -216,9 +212,7 @@ class CheckoutService with ChangeNotifier {
       );
       pickedImage = File(file!.paths.first!);
       notifyListeners();
-    } catch (error) {
-      print(error);
-    }
+    } catch (error) {}
   }
 
   Future<dynamic> fetchVendorDetails(BuildContext context,
@@ -248,12 +242,10 @@ class CheckoutService with ChangeNotifier {
       var url = Uri.parse('$baseApi/checkout-contents');
       final body = json.encode(
           {"vendor_ids": vendorsList, "default_vendor": hasDefaultVendor});
-      print(body);
       final response = await http.post(url, body: body, headers: headers);
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        print(data['default_vendor']);
         vendorDetailsList = VendorDetailListModel.fromJson(data);
         for (var vendor in vendorDetailsList!.vendors) {
           bool addedShipping = false;
@@ -281,14 +273,11 @@ class CheckoutService with ChangeNotifier {
             }
           }
         }
-        print(vendorShippingId);
-        print(vendorShippingCost);
 
         calculateTotalShippingCost();
         setLoadingVendorDetailsList(false);
         return;
       } else {
-        print(response.body);
         setLoadingVendorDetailsList(false);
       }
     } on TimeoutException {
@@ -297,7 +286,6 @@ class CheckoutService with ChangeNotifier {
     } catch (err) {
       showToast(asProvider.getString(err.toString()), cc.red);
       setLoadingVendorDetailsList(false);
-      print(err);
       rethrow;
     }
   }
@@ -317,8 +305,6 @@ class CheckoutService with ChangeNotifier {
       final cdProvider = Provider.of<CartDataService>(context, listen: false);
       final productIds = cdProvider.cartItemIds();
       final subtotal = cdProvider.calculateSubtotal().toDouble();
-      print(productIds);
-      print(subtotal);
       var headers = {'Content-Type': 'application/json'};
       var request = http.Request('POST', Uri.parse('$baseApi/apply-coupon'));
       request.body = json.encode({
@@ -332,7 +318,6 @@ class CheckoutService with ChangeNotifier {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(await response.stream.bytesToString());
-        print(data);
         if (data['type'] == 'success') {
           couponDiscount = data['coupon_amount'] is String
               ? double.parse(data['coupon_amount'])
@@ -347,7 +332,6 @@ class CheckoutService with ChangeNotifier {
         return;
       } else {
         setLoadingCouponApply(false);
-        print(await response.stream.bytesToString());
       }
     } on TimeoutException {
       setLoadingCouponApply(false);
@@ -355,7 +339,6 @@ class CheckoutService with ChangeNotifier {
     } catch (err) {
       setLoadingCouponApply(false);
       showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
-      print(err);
       rethrow;
     }
   }
@@ -367,9 +350,8 @@ class CheckoutService with ChangeNotifier {
     }
     setLoadingPlaceOrder(true);
     try {
-      final cdProvider = Provider.of<CartDataService>(context, listen: false);
-      final productIds = cdProvider.cartItemIds();
-      final subtotal = cdProvider.calculateSubtotal().toDouble();
+      Provider.of<CartDataService>(context, listen: false);
+
       final paymentGateway =
           Provider.of<PaymentGatewayService>(context, listen: false);
       final shippingAddress =
@@ -446,7 +428,6 @@ class CheckoutService with ChangeNotifier {
 
       if (pickedImage != null &&
           paymentGateway.selectedGateway?.name == 'manual_payment') {
-        print(pickedImage?.path);
         snackBar(
             context,
             AppLocalizations.of(context)!
@@ -486,7 +467,6 @@ class CheckoutService with ChangeNotifier {
       }
       final data = jsonDecode(resData);
       if (response.statusCode == 200 && data['success'] == true) {
-        print(data);
         cartData.emptyCart();
         final hashTwo = data['hash-two'];
         final orderSecretKey = data['secrete_key'];
@@ -508,7 +488,6 @@ class CheckoutService with ChangeNotifier {
       } else {
         showToast(asProvider.getString('$data'), cc.red);
         setLoadingPlaceOrder(false);
-        print(data);
       }
     } on TimeoutException {
       setLoadingPlaceOrder(false);
@@ -516,7 +495,6 @@ class CheckoutService with ChangeNotifier {
     } catch (err) {
       setLoadingPlaceOrder(false);
       showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
-      print(err);
       rethrow;
     }
   }
@@ -528,15 +506,12 @@ class CheckoutService with ChangeNotifier {
     }
     try {
       final cdProvider = Provider.of<CartDataService>(context, listen: false);
-      final productIds = cdProvider.cartItemIds();
-      final subtotal = cdProvider.calculateSubtotal().toDouble();
-      final paymentGateway =
-          Provider.of<PaymentGatewayService>(context, listen: false);
-      final shippingAddress =
-          Provider.of<ShippingAddressService>(context, listen: false);
-      final calculateTax =
-          Provider.of<CalculateTaxService>(context, listen: false);
-      final cartData = Provider.of<CartDataService>(context, listen: false);
+      cdProvider.cartItemIds();
+      cdProvider.calculateSubtotal().toDouble();
+      Provider.of<PaymentGatewayService>(context, listen: false);
+      Provider.of<ShippingAddressService>(context, listen: false);
+      Provider.of<CalculateTaxService>(context, listen: false);
+      Provider.of<CartDataService>(context, listen: false);
 
       Map shippingCost = {};
       for (var element in vendorShippingId) {
@@ -558,7 +533,6 @@ class CheckoutService with ChangeNotifier {
       debugPrint(json.encode(updatePaymentBody));
       dev.log(json.encode(updatePaymentBody));
       if (response.statusCode == 200 && data['data']?['success'] == true) {
-        print(data);
         showToast(AppLocalizations.of(context)!.payment_confirm_success,
             cc.primaryColor);
         ScaffoldMessenger.of(context).removeCurrentSnackBar();
@@ -574,7 +548,6 @@ class CheckoutService with ChangeNotifier {
             await updatePaymentStatus(context);
           },
         );
-        print(data);
       }
     } on TimeoutException {
       snackBar(
@@ -596,7 +569,6 @@ class CheckoutService with ChangeNotifier {
           await updatePaymentStatus(context);
         },
       );
-      print(err);
       rethrow;
     }
   }

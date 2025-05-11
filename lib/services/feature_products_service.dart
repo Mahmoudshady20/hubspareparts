@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:safecart/models/feature_products_model.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 
@@ -22,7 +22,6 @@ class FeatureProductsService with ChangeNotifier {
     if (!haveConnection) {
       featureProductsList = [];
       notifyListeners();
-      print('NO connection');
       return;
     }
     if (!refreshing) {
@@ -43,7 +42,6 @@ class FeatureProductsService with ChangeNotifier {
       } else {
         featureProductsList = [];
         setFeatureProductsLoading(value: false);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       featureProductsList = [];
@@ -52,7 +50,6 @@ class FeatureProductsService with ChangeNotifier {
     } catch (err) {
       featureProductsList = [];
       setFeatureProductsLoading(value: false);
-      print(err);
     }
   }
 }

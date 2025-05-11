@@ -53,7 +53,6 @@ class PaystackPayment extends StatelessWidget {
                 );
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
               _controller
@@ -112,10 +111,8 @@ class PaystackPayment extends StatelessWidget {
           "callback_url": "http://success.com",
           "metadata": {"cancel_action": "http://failed.com"}
         }));
-    print(response.body);
     if (response.statusCode == 200) {
       url = jsonDecode(response.body)['data']['authorization_url'];
-      print(url);
       return;
     }
     snackBar(context, AppLocalizations.of(context)!.payment_failed,

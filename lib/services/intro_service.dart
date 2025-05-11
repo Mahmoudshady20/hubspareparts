@@ -23,7 +23,6 @@ class IntroService with ChangeNotifier {
   fetchIntro(BuildContext context) async {
     final haveConnection = await checkConnection(context);
     if (!haveConnection) {
-      print('NO connection');
       return;
     }
     setIntroLoading(value: true);
@@ -36,16 +35,13 @@ class IntroService with ChangeNotifier {
       http.StreamedResponse response = await request.send();
 
       final data = jsonDecode(await response.stream.bytesToString());
-      print('got mobile intro');
       if (response.statusCode == 200) {
-        print(data);
         introList = data['data'];
 
         setIntroLoading(value: false);
       } else {
         introList = [];
         setIntroLoading(value: false);
-        print(data);
       }
     } on TimeoutException {
       introList = [];
@@ -54,7 +50,6 @@ class IntroService with ChangeNotifier {
     } catch (err) {
       introList = [];
       setIntroLoading(value: false);
-      print(err);
     }
   }
 }

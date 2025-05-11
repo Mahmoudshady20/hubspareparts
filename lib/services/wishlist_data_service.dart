@@ -80,7 +80,6 @@ class WishlistDataService with ChangeNotifier {
       'stock': stock,
       'random_secret': randomSecret
     });
-    print(isCartable);
     _wishListItems.putIfAbsent(
         id.toString(),
         () => WishlistItem(id, vendorId, title, price, originalPrice, imgUrl,
@@ -116,11 +115,9 @@ class WishlistDataService with ChangeNotifier {
     _wishListItems = dataList;
     notifyListeners();
     refreshFavList();
-    print('fetching wishlist');
   }
 
   void deleteWishlistItem(dynamic id, BuildContext context) async {
-    print(id);
     await DbHelper.deleteDbSI('wishlist', id);
     _wishListItems.removeWhere((key, value) {
       return value.id.toString() == id.toString();

@@ -145,7 +145,6 @@ class CartDataService with ChangeNotifier {
         'data': jsonEncode(_cartItems[rowId]),
       },
     );
-    final dbData = await DbHelper.fetchDb('cart');
 
     notifyListeners();
   }

@@ -123,7 +123,6 @@ class ProductDetailsService with ChangeNotifier {
         final mapData = {};
 
         if (setMatched) {
-          print('Inventory..............');
           selectedIndex = int.parse(selectedInventorySetIndex[i]);
 
           break;
@@ -221,7 +220,6 @@ class ProductDetailsService with ChangeNotifier {
   }
 
   clearProductDetails({pop = false}) {
-    print('clearing product details');
     productDetails = null;
     reviewing = false;
     productSalePrice = 0;
@@ -241,11 +239,9 @@ class ProductDetailsService with ChangeNotifier {
   }
 
   fetchProductDetails(id) async {
-    print('product id is- $id');
     var headers = {'Authorization': 'Bearer $getToken'};
     var request = http.Request('GET', Uri.parse('$baseApi/product/$id'));
     request.headers.addAll(headers);
-    print('$baseApi/${getToken.isNotEmpty ? "user/" : ""}product/$id');
 
     try {
       http.StreamedResponse response = await request.send();
@@ -254,9 +250,6 @@ class ProductDetailsService with ChangeNotifier {
       final data = jsonDecode(await response.stream.bytesToString());
       if (response.statusCode == 200) {
         productDetails = ProductDetailsModel.fromJson(data).product;
-        print('Product details data');
-        print(productDetails);
-        print('mahmoud shady ${productDetails!.image}');
         log('mahmoud shady ${productDetails!.image}');
         vendor = ProductDetailsModel.fromJson(data).product!.vendor;
         productUrl = ProductDetailsModel.fromJson(data).productUrl;
@@ -284,14 +277,12 @@ class ProductDetailsService with ChangeNotifier {
           inventoryHash.add(element['hash']);
           element.remove('color_code');
           element.remove('hash');
-          print(element);
           final keys = element.keys;
           for (var e in keys) {
             if (inventoryKeys.contains(e)) {
               continue;
             }
             if (e == 'Size' || e == 'Color') {
-              print('adding at index 0 $e');
               inventoryKeys.insert(0, e);
               continue;
             }
@@ -299,7 +290,6 @@ class ProductDetailsService with ChangeNotifier {
             inventoryKeys.add(e);
           }
         }
-        print(inventoryKeys);
         for (var e in inventoryKeys) {
           int index = 0;
           Map<String, List<String>> map = {};
@@ -318,10 +308,8 @@ class ProductDetailsService with ChangeNotifier {
           }
         }
 
-        print(allAttributes);
       } else {
         showToast(response.reasonPhrase.toString(), cc.red);
-        print(data);
       }
     } catch (e) {
       loadingFailed = true;

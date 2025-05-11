@@ -31,6 +31,7 @@ class Datum {
   Datum({
     this.prdId,
     this.title,
+    this.titleAr,
     this.imgUrl,
     this.campaignPercentage,
     this.price,
@@ -53,6 +54,7 @@ class Datum {
 
   dynamic prdId;
   String? title;
+  String? titleAr;
   String? imgUrl;
   dynamic campaignPercentage;
   dynamic price;
@@ -75,6 +77,7 @@ class Datum {
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         prdId: json["prd_id"],
         title: json["title"],
+        titleAr: json["title_ar"],
         imgUrl: json["img_url"],
         campaignPercentage: json["campaign_percentage"] is String
             ? double.tryParse(json["campaign_percentage"])
@@ -113,6 +116,7 @@ class Datum {
   Map<String, dynamic> toJson() => {
         "prd_id": prdId,
         "title": title,
+        "title_ar": titleAr,
         "img_url": imgUrl,
         "campaign_percentage": campaignPercentage,
         "price": price,

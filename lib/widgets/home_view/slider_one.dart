@@ -99,8 +99,6 @@ class SliderOne extends StatelessWidget {
                     CustomCommonButton(
                       onPressed: () {
                         if (capm != null) {
-                          print('camp $capm');
-
                           Provider.of<ProductByCampaignsService>(context,
                                   listen: false)
                               .clearProductByCampaignData();
@@ -113,7 +111,6 @@ class SliderOne extends StatelessWidget {
                         }
 
                         if (cat != null) {
-                          print('cat $cat');
                           Provider.of<SearchProductService>(context,
                                   listen: false)
                               .setFilterOptions(catVal: cat);

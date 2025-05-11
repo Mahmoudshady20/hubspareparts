@@ -51,7 +51,6 @@ class _HFAppBarState extends State<HFAppBar> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        print('opening drawer');
                         widget.scaffoldKey.currentState!.openDrawer();
                       },
                       child: Container(
@@ -94,7 +93,6 @@ class _HFAppBarState extends State<HFAppBar> {
                               if (textEditingController.text.isEmpty) {
                                 return;
                               }
-                              print(textEditingController.text);
                               Provider.of<SearchProductService>(context,
                                       listen: false)
                                   .setFilterOptions(

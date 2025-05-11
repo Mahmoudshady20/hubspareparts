@@ -48,7 +48,6 @@ class PayfastPayment extends StatelessWidget {
                 return errorWidget(context);
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
               _controller
@@ -100,7 +99,6 @@ class PayfastPayment extends StatelessWidget {
   Future<bool> verifyPayment(String url) async {
     final uri = Uri.parse(url);
     final response = await http.get(uri);
-    print(response.body.contains('successful'));
     return response.body.contains('successful');
   }
 }

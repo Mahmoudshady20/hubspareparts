@@ -102,23 +102,18 @@ class CalculateTaxService with ChangeNotifier {
       if (response.statusCode == 200) {
         final data = country_tax.CountryTaxModel.fromJson(
             jsonDecode(await response.stream.bytesToString()));
-        print(data.taxAmount);
         countryTax = data.taxAmount;
         states = data.states;
         tax = countryTax / 100;
 
         Provider.of<CheckoutService>(context, listen: false)
             .setTaxPercentage(tax);
-        print(countryNameList);
       } else {
-        print(response.reasonPhrase);
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
       showToast(asProvider.getString('Request timeout'), cc.red);
-    } catch (err) {
-      print(err);
-    }
+    } catch (err) {}
   }
 
   fetchStateTax(BuildContext context, id) async {
@@ -140,20 +135,16 @@ class CalculateTaxService with ChangeNotifier {
         double stateTax = data['tax_amount'] is String
             ? double.parse(data['tax_amount'])
             : data['tax_amount'].toDouble();
-        print(data);
         tax = (stateTax <= 0 ? countryTax / 100 : stateTax / 100);
         Provider.of<CheckoutService>(context, listen: false)
             .setTaxPercentage(tax);
         notifyListeners();
       } else {
-        print(response.reasonPhrase);
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
       showToast(asProvider.getString('Request timeout'), cc.red);
-    } catch (err) {
-      print(err);
-    }
+    } catch (err) {}
   }
 
   calculateAdvanceTax(BuildContext context) async {
@@ -192,14 +183,11 @@ class CalculateTaxService with ChangeNotifier {
         debugPrint(tempMap.toString());
         Provider.of<CheckoutService>(context, listen: false).setATData(tempMap);
       } else {
-        print(response.reasonPhrase);
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
       showToast(asProvider.getString('Request timeout'), cc.red);
-    } catch (err) {
-      print(err);
-    }
+    } catch (err) {}
   }
 }
 

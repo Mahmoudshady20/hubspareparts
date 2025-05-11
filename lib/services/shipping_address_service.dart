@@ -107,9 +107,7 @@ class SDFjlasjklfdjalfdj with ChangeNotifier {
       return;
     }
     currentAddress = false;
-    print('selecting $value');
     selectedAddress = value;
-    print('selection done $value');
     notifyListeners();
   }
 
@@ -157,18 +155,15 @@ class SDFjlasjklfdjalfdj with ChangeNotifier {
         final data = jsonDecode(await response.stream.bytesToString());
         final shippingAddresseList =
             ShippingAddressListModel.fromJson(jsonDecode(data)).data;
-        print(data);
         notifyListeners();
         return;
       } else {
-        print(response.reasonPhrase);
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 
@@ -191,22 +186,18 @@ class SDFjlasjklfdjalfdj with ChangeNotifier {
         'zip_code': zipCode,
         'address': address,
       });
-      print(response.body);
       debugPrint(response.body.toString());
       if (response.statusCode == 200) {
-        print(response.body);
         notifyListeners();
         return;
       }
       if (response.statusCode == 422) {
         final data = json.decode(response.body);
-        print(data['message']);
         return data['message'];
       }
 
       return asProvider.getString('Something went wrong');
     } catch (error) {
-      print(error);
 
       rethrow;
     }
@@ -222,7 +213,6 @@ class SDFjlasjklfdjalfdj with ChangeNotifier {
     try {
       final response = await http.get(url, headers: header);
       if (response.statusCode == 200) {
-        print(response.body);
         shippingAddresseList.removeWhere((element) => element.id == id);
         if (shippingAddresseList.isEmpty) {
           noData = true;
@@ -233,7 +223,6 @@ class SDFjlasjklfdjalfdj with ChangeNotifier {
       }
       if (response.statusCode == 422) {
         final data = json.decode(response.body);
-        print(data['message']);
         return data['message'];
       }
 

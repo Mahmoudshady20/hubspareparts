@@ -7,8 +7,8 @@ import '../../helpers/empty_space_helper.dart';
 
 class OrderTileSkeleton extends StatelessWidget {
   const OrderTileSkeleton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -13,8 +13,8 @@ import '../../utils/responsive.dart';
 import '../common/custom_icon_button.dart';
 
 class CartTile extends StatelessWidget {
-  final id;
-  final vendorId;
+  final dynamic id;
+  final dynamic vendorId;
   String title;
   String image;
   double salePrice;
@@ -45,7 +45,6 @@ class CartTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rtlProvider = Provider.of<RTLService>(context, listen: false);
-    print(inventorySet.values.toList().length);
     return Container(
       color: Colors.transparent,
       child: Row(
@@ -222,7 +221,6 @@ class CartTile extends StatelessWidget {
                                   EmptySpaceHelper.emptywidth(5),
                                   GestureDetector(
                                     onTap: () {
-                                      print(id);
                                       cProvider.addItem(context, vendorId, id,
                                           inventorySet: inventorySet,
                                           rowId: rowId);

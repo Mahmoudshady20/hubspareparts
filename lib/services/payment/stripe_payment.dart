@@ -59,7 +59,6 @@ class StripePayment {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => PaymentStatusView(true)),
           (Route<dynamic> route) => false);
-      print('exception:$e$s');
     }
   }
 
@@ -72,16 +71,13 @@ class StripePayment {
 
         paymentIntent = null;
       }).onError((error, stackTrace) async {
-        print('Error is:--->$error $stackTrace');
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => PaymentStatusView(true)),
             (Route<dynamic> route) => false);
       });
     } on StripeException catch (e) {
-      print('Error is:---> $e');
       await paymentFailedDialogue(context, null);
     } catch (e) {
-      print('$e');
       await paymentFailedDialogue(context, null);
     }
   }

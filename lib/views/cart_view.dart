@@ -110,7 +110,6 @@ class CartView extends StatelessWidget {
                               listen: false)
                           .setShippingAddressFromProfile(context);
                       Navigator.of(context).pushNamed(CheckoutView.routeName);
-                      print('Process to checkout');
                     },
                     color: cc.secondaryColor,
                   ),
@@ -129,7 +128,6 @@ class CartView extends StatelessWidget {
       if (e == null) {
         continue;
       }
-      print(e);
       list.add(GestureDetector(
         onTap: () {
           Provider.of<ProductDetailsService>(context, listen: false)

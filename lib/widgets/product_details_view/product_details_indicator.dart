@@ -25,7 +25,7 @@ class _ProductDetailsIndicatorState extends State<ProductDetailsIndicator> {
           borderRadius: BorderRadius.circular(6),
           color: widget.isActive
               ? cc.primaryColor
-              : cc.primaryColor.withOpacity(.5),
+              : cc.primaryColor.withValues(alpha: .5),
 
           // color: widget.isActive
           //     ? ConstantColors().primaryColor

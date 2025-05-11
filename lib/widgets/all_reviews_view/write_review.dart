@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 import '../../helpers/empty_space_helper.dart';
@@ -47,7 +47,6 @@ class WriteReview extends StatelessWidget {
                 color: cc.orangeRating,
               ),
               onRatingUpdate: (rating) {
-                print(rating);
                 srProvider.setRating(rating);
               },
             ),
@@ -65,7 +64,7 @@ class WriteReview extends StatelessWidget {
                 initialValue: srProvider.reviewText,
                 decoration: InputDecoration(
                   isDense: true,
-                  hintText:AppLocalizations.of(context)!.write_your_feedback,
+                  hintText: AppLocalizations.of(context)!.write_your_feedback,
                 ),
                 onChanged: (value) => srProvider.setReviewText(value),
               ),

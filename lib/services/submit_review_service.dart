@@ -61,19 +61,16 @@ class SubmitReviewService with ChangeNotifier {
             .fetchProductDetails(id);
         showToast(AppLocalizations.of(context)!.review_submitted, cc.primaryColor);
         setLoadingSubmitReview(false);
-        print(data);
         return;
       } else {
         showToast(AppLocalizations.of(context)!.review_submission_failed, cc.red);
         setLoadingSubmitReview(false);
-        print(data);
       }
     } on TimeoutException {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       setLoadingSubmitReview(false);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
       setLoadingSubmitReview(false);
     }
   }

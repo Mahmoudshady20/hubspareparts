@@ -51,18 +51,15 @@ class OrderListService with ChangeNotifier {
       if (response.statusCode == 200) {
         final data = jsonDecode(await response.stream.bytesToString());
         orderListModel = OrderListModel.fromJson(data);
-        print(orderListModel!.nextPageUrl);
         notifyListeners();
         return;
       } else {
-        print(response.reasonPhrase);
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 
@@ -94,7 +91,6 @@ class OrderListService with ChangeNotifier {
         return;
       } else {
         setLoadingNextPage(false);
-        print(data);
         showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
       }
     } on TimeoutException {
@@ -103,7 +99,6 @@ class OrderListService with ChangeNotifier {
     } catch (err) {
       setLoadingNextPage(false);
       showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
-      print(err);
     }
   }
 }

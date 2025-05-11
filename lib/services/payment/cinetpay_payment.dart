@@ -53,7 +53,6 @@ class CinetPayPayment extends StatelessWidget {
                 return errorWidget(context);
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
               return InAppWebView(
@@ -116,7 +115,6 @@ class CinetPayPayment extends StatelessWidget {
                 onLoadStop: (_, value) async {
                   // final title = await _controller.currentUrl();
                   // print(title);
-                  print('on finished......................... $value');
                   // if (value.contains('finish')) {
                   //   bool paySuccess = await verifyPayment(value);
                   //   print('closing payment......');
@@ -238,10 +236,8 @@ class CinetPayPayment extends StatelessWidget {
             //   "channels": "ALL"
             // }
             ));
-    print(response.body);
     if (response.statusCode == 200) {
       this.url = jsonDecode(response.body)['data']['payment_url'];
-      print(this.url);
       return;
     }
 
@@ -251,7 +247,6 @@ class CinetPayPayment extends StatelessWidget {
   Future<bool> verifyPayment(String url) async {
     final uri = Uri.parse(url);
     final response = await http.get(uri);
-    print(response.body.contains('successful'));
     return response.body.contains('successful');
   }
 }

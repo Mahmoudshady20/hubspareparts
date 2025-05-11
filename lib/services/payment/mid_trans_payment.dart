@@ -49,7 +49,6 @@ class MidtransPayment extends StatelessWidget {
                 return errorWidget(context);
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
               _controller
@@ -109,7 +108,6 @@ class MidtransPayment extends StatelessWidget {
             "phone": saProvider.phone,
           }
         }));
-    print(response.body);
     if (response.statusCode == 201) {
       this.url = jsonDecode(response.body)['redirect_url'];
       return;

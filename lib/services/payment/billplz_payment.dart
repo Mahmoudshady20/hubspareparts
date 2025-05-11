@@ -51,7 +51,6 @@ class BillplzPayment extends StatelessWidget {
                 return errorWidget(context);
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
 
@@ -154,7 +153,6 @@ class BillplzPayment extends StatelessWidget {
           "reference_1": "BP-FKR01",
           "callback_url": "http://www.gxenious.com"
         }));
-    print(response.body);
     if (response.statusCode == 200) {
       this.url = jsonDecode(response.body)["url"];
       return;

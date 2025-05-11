@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/home_categories_service.dart';
 import 'package:safecart/services/search_product_service.dart';
+import 'package:safecart/services/settings_services.dart';
 import 'package:safecart/views/product_by_category_view.dart';
 import 'package:safecart/widgets/home_view/category_card.dart';
 
@@ -18,6 +19,8 @@ class Categories extends StatelessWidget {
   Widget build(BuildContext context) {
     final hCatProvider =
         Provider.of<HomeCategoriesService>(context, listen: false);
+    final SettingsProvider settingsProvider =
+        Provider.of<SettingsProvider>(context);
     return SizedBox(
       child: Column(
         children: [
@@ -97,7 +100,11 @@ class Categories extends StatelessWidget {
                                         ]);
                                   },
                                   child: CategoryCard(
-                                    cProvider.categories![index]!.name!,
+                                    settingsProvider.myLocal == Locale('ar')
+                                        ? cProvider
+                                                .categories![index]!.nameAr ??
+                                            cProvider.categories![index]!.name!
+                                        : cProvider.categories![index]!.name!,
                                     cProvider.categories![index]!.imageUrl,
                                   ),
                                 );

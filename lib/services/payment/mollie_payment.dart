@@ -52,7 +52,6 @@ class MolliePayment extends StatelessWidget {
                 return errorWidget(context);
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
               _controller
@@ -62,7 +61,6 @@ class MolliePayment extends StatelessWidget {
                   onProgress: (int progress) {},
                   onNavigationRequest: (request) async {
                     if (request.url.contains('xgenious')) {
-                      print('preventing navigation');
                       String status = await verifyPayment(context);
                       if (status == 'paid') {
                         Navigator.of(context).pushAndRemoveUntil(
@@ -117,11 +115,9 @@ class MolliePayment extends StatelessWidget {
           "metadata": "creditcard",
           // "method": "creditcard",
         }));
-    print(response.body);
     if (response.statusCode == 201) {
       this.url = jsonDecode(response.body)['_links']['checkout']['href'];
       statusURl = jsonDecode(response.body)['_links']['self']['href'];
-      print(statusURl);
       return;
     }
 
@@ -140,7 +136,6 @@ class MolliePayment extends StatelessWidget {
       // Above is API server key for the Midtrans account, encoded to base64
     };
     final response = await http.get(url, headers: header);
-    print(jsonDecode(response.body));
     return jsonDecode(response.body)['status'].toString();
   }
 }

@@ -18,7 +18,6 @@ class SellerInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final pdProvider =
         Provider.of<ProductDetailsService>(context, listen: false);
-    print(pdProvider.productDetails!.vendor?.image);
     return pdProvider.vendor == null
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 36),

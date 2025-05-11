@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/product_by_campaigns_service.dart';
@@ -6,7 +7,6 @@ import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/common/product_card.dart';
 import 'package:safecart/widgets/skelletons/product_card_skeleton.dart';
 import 'package:slide_countdown/slide_countdown.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/product_details_service.dart';
@@ -53,117 +53,114 @@ class ProductByCampaignView extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 20),
-                      child: Container(
-                        child: FutureBuilder(
-                            future: !pbcProvider.campaignProductLoading &&
-                                    !pbcProvider.dataAlreadyLoaded &&
-                                    pbcProvider.campaignProducts == null
-                                ? pbcProvider.fetchCampaignProducts(context, id)
-                                : null,
-                            builder: (context, snapshot) {
-                              return !pbcProvider.campaignProductLoading &&
-                                      pbcProvider.campaignProducts != null
-                                  ? pbcProvider.campaignProducts!.isNotEmpty
-                                      ? Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 40,
-                                              left: 20,
-                                              right: 20,
-                                              bottom: 20),
-                                          child: StaggeredGridView.countBuilder(
-                                            crossAxisCount: 2,
-                                            controller: controller,
-                                            itemCount: pbcProvider
-                                                .campaignProducts!.length,
-                                            crossAxisSpacing: 12,
-                                            mainAxisSpacing: 12,
-                                            staggeredTileBuilder: (index) =>
-                                                const StaggeredTile.fit(1),
-                                            itemBuilder: (context, index) {
-                                              final element = pbcProvider
-                                                  .campaignProducts![index]!;
-                                              return GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.of(context).pop();
-                                                    Navigator.of(context).pop();
-                                                    Provider.of<ProductDetailsService>(
-                                                            context,
-                                                            listen: false)
-                                                        .clearProductDetails();
-                                                    Navigator.of(context)
-                                                        .pushNamed(
-                                                            ProductDetailsView
-                                                                .routeName,
-                                                            arguments: [
-                                                          element.title
-                                                        ]);
+                      child: FutureBuilder(
+                          future: !pbcProvider.campaignProductLoading &&
+                                  !pbcProvider.dataAlreadyLoaded &&
+                                  pbcProvider.campaignProducts == null
+                              ? pbcProvider.fetchCampaignProducts(context, id)
+                              : null,
+                          builder: (context, snapshot) {
+                            return !pbcProvider.campaignProductLoading &&
+                                    pbcProvider.campaignProducts != null
+                                ? pbcProvider.campaignProducts!.isNotEmpty
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 40,
+                                            left: 20,
+                                            right: 20,
+                                            bottom: 20),
+                                        child: StaggeredGridView.countBuilder(
+                                          crossAxisCount: 2,
+                                          controller: controller,
+                                          itemCount: pbcProvider
+                                              .campaignProducts!.length,
+                                          crossAxisSpacing: 12,
+                                          mainAxisSpacing: 12,
+                                          staggeredTileBuilder: (index) =>
+                                              const StaggeredTile.fit(1),
+                                          itemBuilder: (context, index) {
+                                            final element = pbcProvider
+                                                .campaignProducts![index]!;
+                                            return GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context).pop();
+                                                  Navigator.of(context).pop();
+                                                  Provider.of<ProductDetailsService>(
+                                                          context,
+                                                          listen: false)
+                                                      .clearProductDetails();
+                                                  Navigator.of(context)
+                                                      .pushNamed(
+                                                          ProductDetailsView
+                                                              .routeName,
+                                                          arguments: [
+                                                        element.title
+                                                      ]);
+                                                },
+                                                child: ProductCard(
+                                                  element.prdId,
+                                                  element.title ?? '',
+                                                  element.imgUrl,
+                                                  element.discountPrice ??
+                                                      element.price,
+                                                  element.discountPrice != null
+                                                      ? element.price
+                                                      : null,
+                                                  index,
+                                                  badge: element.badge,
+                                                  discPercentage: element
+                                                      .campaignPercentage
+                                                      ?.toStringAsFixed(2),
+                                                  cartable:
+                                                      element.isCartAble ??
+                                                          false,
+                                                  prodCatData: {
+                                                    "category":
+                                                        element.categoryId,
+                                                    "subcategory":
+                                                        element.subCategoryId,
+                                                    "childcategory":
+                                                        element.childCategoryIds
                                                   },
-                                                  child: ProductCard(
-                                                    element.prdId,
-                                                    element.title ?? '',
-                                                    element.imgUrl,
-                                                    element.discountPrice ??
-                                                        element.price,
-                                                    element.discountPrice !=
-                                                            null
-                                                        ? element.price
-                                                        : null,
-                                                    index,
-                                                    badge: element.badge,
-                                                    discPercentage: element
-                                                        .campaignPercentage
-                                                        ?.toStringAsFixed(2),
-                                                    cartable:
-                                                        element.isCartAble ??
-                                                            false,
-                                                    prodCatData: {
-                                                      "category":
-                                                          element.categoryId,
-                                                      "subcategory":
-                                                          element.subCategoryId,
-                                                      "childcategory": element
-                                                          .childCategoryIds
-                                                    },
-                                                    rating: element.avgRatting,
-                                                    randomKey:
-                                                        element.randomKey,
-                                                    randomSecret:
-                                                        element.randomSecret,
-                                                    stock: element.stockCount,
-                                                    campaignStock:
-                                                        element.campaignStock,
-                                                  ));
-                                            },
-                                          ),
-                                        )
-                                      : SizedBox(
-                                          height: screenHeight - 200,
-                                          width: double.infinity,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Text(AppLocalizations.of(context)!.no_item_found),
-                                            ],
-                                          ),
-                                        )
-                                  : StaggeredGridView.countBuilder(
-                                      crossAxisCount: 2,
-                                      controller: controller,
-                                      itemCount: 10,
-                                      crossAxisSpacing: 12,
-                                      mainAxisSpacing: 12,
-                                      padding: const EdgeInsets.all(20),
-                                      staggeredTileBuilder: (index) =>
-                                          const StaggeredTile.fit(1),
-                                      itemBuilder: (context, index) {
-                                        return ProductCardSkeleton();
-                                      },
-                                    );
-                            }),
-                      ),
+                                                  rating: element.avgRatting,
+                                                  randomKey: element.randomKey,
+                                                  randomSecret:
+                                                      element.randomSecret,
+                                                  stock: element.stockCount,
+                                                  campaignStock:
+                                                      element.campaignStock,
+                                                ));
+                                          },
+                                        ),
+                                      )
+                                    : SizedBox(
+                                        height: screenHeight - 200,
+                                        width: double.infinity,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(AppLocalizations.of(context)!
+                                                .no_item_found),
+                                          ],
+                                        ),
+                                      )
+                                : StaggeredGridView.countBuilder(
+                                    crossAxisCount: 2,
+                                    controller: controller,
+                                    itemCount: 10,
+                                    crossAxisSpacing: 12,
+                                    mainAxisSpacing: 12,
+                                    padding: const EdgeInsets.all(20),
+                                    staggeredTileBuilder: (index) =>
+                                        const StaggeredTile.fit(1),
+                                    itemBuilder: (context, index) {
+                                      return ProductCardSkeleton();
+                                    },
+                                  );
+                          }),
                     ),
                   ),
                 ),
@@ -220,7 +217,8 @@ class ProductByCampaignView extends StatelessWidget {
           .setNextLoading(true);
       Provider.of<SearchProductService>(context, listen: false)
           .setNextLoading(false);
-      showToast(AppLocalizations.of(context)!.no_more_order_found, cc.blackColor);
+      showToast(
+          AppLocalizations.of(context)!.no_more_order_found, cc.blackColor);
     }
   }
 }

@@ -13,9 +13,9 @@ import '../../services/rtl_service.dart';
 class TicketTile extends StatelessWidget {
   final String title;
   final int ticketId;
-  String priority;
-  String status;
-  TicketTile(
+  final String priority;
+  final String status;
+  const TicketTile(
     this.title,
     this.ticketId,
     this.priority,
@@ -131,7 +131,6 @@ class TicketTile extends StatelessWidget {
                                   ),
                                   onSelected: (value) {
                                     if (value != priority.capitalize()) {
-                                      print(value);
                                       tlProvider.priorityChange(
                                           context, ticketId, value.toString());
                                     }
@@ -191,7 +190,6 @@ class TicketTile extends StatelessWidget {
                               ),
                             ),
                             onSelected: (value) {
-                              print(value.toString() + status);
                               if (value != status) {
                                 tlProvider.statusChange(
                                     context, ticketId, value.toString());

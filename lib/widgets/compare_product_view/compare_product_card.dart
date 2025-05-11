@@ -106,7 +106,6 @@ class CompareProductCard extends StatelessWidget {
                           color: cc.orangeRating,
                         ),
                         onRatingUpdate: (rating) {
-                          print(rating);
                           // Provider.of<ReviewService>(context, listen: false)
                           //     .setRating(rating.toString());
                         },

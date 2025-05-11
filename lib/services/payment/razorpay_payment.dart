@@ -53,7 +53,6 @@ class RazorpayPayment extends StatelessWidget {
                 return errorWidget(context);
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
               _controller
@@ -123,11 +122,9 @@ class RazorpayPayment extends StatelessWidget {
           // "notify": {"sms": true, "email": true},
           "notes": {"policy_name": asProvider.getString('SafeCart')},
         }));
-    print(response.body);
     if (response.statusCode == 200) {
       url = jsonDecode(response.body)['short_url'];
       paymentID = jsonDecode(response.body)['id'];
-      print(url);
       return;
     }
     showToast(AppLocalizations.of(context)!.connection_failed, cc.red);
@@ -137,7 +134,6 @@ class RazorpayPayment extends StatelessWidget {
   Future<bool> verifyPayment(String url) async {
     final uri = Uri.parse(url);
     final response = await http.get(uri);
-    print(response.body.contains('Payment Completed'));
     return response.body.contains('Payment Completed');
   }
 }

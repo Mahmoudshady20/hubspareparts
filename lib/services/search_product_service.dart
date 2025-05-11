@@ -83,8 +83,6 @@ class SearchProductService with ChangeNotifier {
     if (powerRatingByIdFun == null || powerRatingByIdFun.isEmpty) {
       powerRatingById = '';
     }
-    print(
-        'mahmoud shady $voltageRatingById hi $controlVoltageById hi $powerRatingById');
   }
 
   resetFilterOptions() {
@@ -145,7 +143,6 @@ class SearchProductService with ChangeNotifier {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(await response.stream.bytesToString());
-        print(data);
         final tempPL = SearchProductModel.fromJson(data);
         searchedProduct = tempPL.data;
         nextPage = tempPL.currentPage < tempPL.lastPage
@@ -155,7 +152,6 @@ class SearchProductService with ChangeNotifier {
       } else {
         setLoading(false);
         searchedProduct ??= [];
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       setLoading(false);
@@ -164,7 +160,6 @@ class SearchProductService with ChangeNotifier {
     } catch (err) {
       setLoading(false);
       searchedProduct ??= [];
-      print(err);
     }
   }
 
@@ -176,9 +171,6 @@ class SearchProductService with ChangeNotifier {
       searchedProduct ??= [];
       return;
     }
-    print(selectedName);
-    print('searching products '
-        '$nextPage');
     try {
       var request = http.Request('GET', Uri.parse('$nextPage'));
 
@@ -187,7 +179,6 @@ class SearchProductService with ChangeNotifier {
       if (response.statusCode == 200) {
         final data = jsonDecode(await response.stream.bytesToString());
         final tempPL = SearchProductModel.fromJson(data);
-        print(data);
         for (var element in tempPL.data) {
           searchedProduct!.add(element);
         }
@@ -195,12 +186,10 @@ class SearchProductService with ChangeNotifier {
         nextPage = tempPL.currentPage < tempPL.lastPage
             ? "$url&page=${tempPL.currentPage + 1}"
             : null;
-        print(searchedProduct?.length);
         setNextLoading(false);
       } else {
         setNextLoading(false);
         searchedProduct ??= [];
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       setNextLoading(false);
@@ -209,7 +198,6 @@ class SearchProductService with ChangeNotifier {
     } catch (err) {
       setNextLoading(false);
       searchedProduct ??= [];
-      print(err);
     }
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/product_details_service.dart';
 import 'package:safecart/views/all_reviews_view.dart';
 import 'package:safecart/widgets/all_reviews_view/review_tile.dart';
 import 'package:safecart/widgets/all_reviews_view/write_review.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 
@@ -47,7 +47,7 @@ class Reviews extends StatelessWidget {
               ));
             },
             style: OutlinedButton.styleFrom(
-                backgroundColor: cc.primaryColor.withOpacity(0.03),
+                backgroundColor: cc.primaryColor.withValues(alpha: 0.03),
                 foregroundColor: cc.primaryColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4))),

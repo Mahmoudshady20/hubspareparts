@@ -22,10 +22,7 @@ class EditProfileView extends StatelessWidget {
   String? countryCode;
   setCountryCode() async {
     final timeZone = await TimeZoneToCountry.getLocalCountryCode();
-    print(timeZone);
     countryCode = timeZone;
-
-    print('currentTimeZone ${TimeZoneToCountry.getCountryCode(timeZone)} ');
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey();

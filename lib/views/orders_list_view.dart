@@ -108,7 +108,6 @@ class OrdersListView extends StatelessWidget {
 
                               return Consumer<OrderListService>(
                                   builder: (context, olProvider, child) {
-                                print(olProvider.orderListModel?.data.length);
                                 return olProvider.orderListModel != null &&
                                         olProvider
                                             .orderListModel!.data.isNotEmpty

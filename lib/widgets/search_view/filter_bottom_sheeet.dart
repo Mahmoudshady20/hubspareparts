@@ -279,11 +279,6 @@ class FilterBottomSheet extends StatelessWidget {
                         onTap: () {
                           filterOption.setSelectedBrand(filterOption
                               .filterOprions!.allBrands![index].name);
-                          print(
-                            spProvider.selectedBrand ==
-                                filterOption
-                                    .filterOprions!.allBrands![index].name,
-                          );
                         },
                         child: filterOptions(
                           filterOption.filterOprions!.allBrands![index].name,

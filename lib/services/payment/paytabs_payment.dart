@@ -50,7 +50,6 @@ class PaytabsPayment extends StatelessWidget {
                 return errorWidget(context);
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
 
@@ -111,10 +110,7 @@ class PaytabsPayment extends StatelessWidget {
                         }),
                 initialUrlRequest: URLRequest(url: WebUri(url!)),
                 onLoadStop: (c, value) async {
-                  print('load finish url');
-                  print(value);
                   _controller!.getHtml().then((value) {
-                    print(value);
                     if (value!.contains('transaction successful')) {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
@@ -168,10 +164,7 @@ class PaytabsPayment extends StatelessWidget {
     http.StreamedResponse response = await request.send();
 
     final responseData = jsonDecode(await response.stream.bytesToString());
-    print(responseData);
-    print(response.statusCode);
     if (response.statusCode == 200) {
-      print(responseData['redirect_url']);
       // final billCode = responseData.first['BillCode'];
       url = responseData['redirect_url'];
     } else {

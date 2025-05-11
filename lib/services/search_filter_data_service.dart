@@ -79,7 +79,6 @@ class SearchFilterDataService with ChangeNotifier {
     selectedChildCats = '';
     selectedSubcategoryChildList =
         selectedCategorySubList.firstWhere((element) {
-              print(element.name == subCat);
               return element.name == subCat;
             }).childCategories ??
             [];
@@ -88,7 +87,6 @@ class SearchFilterDataService with ChangeNotifier {
   }
 
   setSelectedChildCats(childCat) {
-    print(childCat);
     if (selectedChildCats == childCat || (childCat ?? '').isEmpty) {
       selectedChildCats = '';
       notifyListeners();
@@ -125,7 +123,6 @@ class SearchFilterDataService with ChangeNotifier {
       notifyListeners();
       return;
     }
-    print(value);
     selectedBrand = value;
     notifyListeners();
   }
@@ -214,7 +211,6 @@ class SearchFilterDataService with ChangeNotifier {
     if (subCat.isNotEmpty) {
       selectedSubcategoryChildList =
           selectedCategorySubList.firstWhere((element) {
-                print(element.name == subCat);
                 return element.name == subCat;
               }).childCategories ??
               [];
@@ -263,12 +259,10 @@ class SearchFilterDataService with ChangeNotifier {
         Future.delayed(const Duration(seconds: 10))
             .then((value) => isolate.close);
       } else {
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
-      print(err);
     }
   }
 
@@ -305,7 +299,6 @@ void isolateTask(payLoad, send) async {
     final filterOptions = SearchFilterDataModel.fromJson(data);
     send(filterOptions);
   } catch (err) {
-    print(err);
   }
 }
 

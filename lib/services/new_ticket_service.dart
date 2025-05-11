@@ -75,7 +75,6 @@ class NewTicketService with ChangeNotifier {
     if (!haveConnection) {
       return;
     }
-    print('fetching departments');
     setIsLoading(true);
     try {
       var headers = {
@@ -91,21 +90,12 @@ class NewTicketService with ChangeNotifier {
         'description': description!,
         'departments': selectedDepartment!.id.toString()
       });
-      print({
-        'title': title!,
-        'subject': subject!,
-        'priority': selectedPriority!,
-        'description': description!,
-        'departments': selectedDepartment.toString()
-      });
 
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
-      print(response.statusCode);
       if (response.statusCode == 200) {
         final data = jsonDecode(await response.stream.bytesToString());
-        print(data);
 
         await Provider.of<TicketListService>(context, listen: false)
             .fetchAllTickets(context);
@@ -115,7 +105,6 @@ class NewTicketService with ChangeNotifier {
       } else {
         setIsLoading(false);
         showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       setIsLoading(false);
@@ -123,7 +112,6 @@ class NewTicketService with ChangeNotifier {
     } catch (err) {
       setIsLoading(false);
       showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
-      print(err);
     }
   }
 
@@ -134,7 +122,6 @@ class NewTicketService with ChangeNotifier {
       notifyListeners();
       return;
     }
-    print('fetching departments');
 
     try {
       var headers = {
@@ -147,10 +134,8 @@ class NewTicketService with ChangeNotifier {
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
-      print(response.statusCode);
       if (response.statusCode == 200) {
         final data = jsonDecode(await response.stream.bytesToString());
-        print(data);
 
         allDepartment = DeparmentModel.fromJson(data).data;
 
@@ -159,7 +144,6 @@ class NewTicketService with ChangeNotifier {
           nameData.add(element.name);
         }
         departmentNames = nameData;
-        print(departmentNames);
         selectedDepartment = allDepartment![0];
         notifyListeners();
         return;
@@ -167,7 +151,6 @@ class NewTicketService with ChangeNotifier {
         allDepartment = [];
         notifyListeners();
         showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       allDepartment = [];
@@ -177,7 +160,6 @@ class NewTicketService with ChangeNotifier {
       allDepartment = [];
       notifyListeners();
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 }

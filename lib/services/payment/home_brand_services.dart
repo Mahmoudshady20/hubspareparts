@@ -26,14 +26,12 @@ class HomeBrandService with ChangeNotifier {
         final data = jsonDecode(await response.stream.bytesToString());
         brandModel = BrandModel.fromJson(data);
       } else {
-        print(response.reasonPhrase);
         throw Exception('Failed to load Brands');
       }
     } on TimeoutException {
       showToast(asProvider.getString('Request timeout'), cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 }

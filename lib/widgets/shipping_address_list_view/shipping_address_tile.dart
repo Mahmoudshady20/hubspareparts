@@ -8,9 +8,9 @@ import 'package:safecart/utils/custom_preloader.dart';
 import '../../helpers/common_helper.dart';
 
 class ShippingAddressTile extends StatelessWidget {
-  final id;
-  final title;
-  final address;
+  final dynamic id;
+  final dynamic title;
+  final dynamic address;
 
   const ShippingAddressTile({this.id, this.title, this.address, super.key});
 
@@ -60,9 +60,8 @@ class ShippingAddressTile extends StatelessWidget {
                           actions: [
                             TextButton(
                               style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        cc.primaryColor),
+                                foregroundColor: WidgetStateProperty.all<Color>(
+                                    cc.primaryColor),
                               ),
                               onPressed: () {
                                 Navigator.pop(context);
@@ -74,7 +73,7 @@ class ShippingAddressTile extends StatelessWidget {
                               return TextButton(
                                 style: ButtonStyle(
                                   foregroundColor:
-                                      MaterialStateProperty.all<Color>(
+                                      WidgetStateProperty.all<Color>(
                                           cc.primaryColor),
                                 ),
                                 onPressed: saProvider.loadingDeleteAddress

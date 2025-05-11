@@ -17,7 +17,6 @@ class PaymentGatewayService with ChangeNotifier {
 
   setSelectedGareaway(value) {
     selectedGateway = value;
-    print(selectedGateway?.name);
     notifyListeners();
   }
 
@@ -76,13 +75,11 @@ class PaymentGatewayService with ChangeNotifier {
         notifyListeners();
         return;
       } else {
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 }

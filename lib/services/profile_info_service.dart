@@ -75,7 +75,6 @@ class ProfileInfoService with ChangeNotifier {
     try {
       var headers = {'Authorization': 'Bearer ${token ?? getToken}'};
       var request = http.Request('GET', Uri.parse('$baseApi/user/profile'));
-
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
@@ -86,7 +85,6 @@ class ProfileInfoService with ChangeNotifier {
         // print(data);
         notifyListeners();
       } else {
-        print(response.reasonPhrase);
         // showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
@@ -143,7 +141,6 @@ class ProfileInfoService with ChangeNotifier {
       });
 
       if (selectedImage != null) {
-        print('Uploading image, this might take some time');
         snackBar(
             context,
             asProvider
@@ -161,8 +158,6 @@ class ProfileInfoService with ChangeNotifier {
       ScaffoldMessenger.of(context).removeCurrentSnackBar();
       if (response.statusCode == 200) {
         await fetchProfileInfo(context);
-        print('profile update response');
-        print(await response.stream.bytesToString());
         showToast(
             AppLocalizations.of(context)!.profile_info_successfully_updated,
             cc.green);
@@ -171,7 +166,6 @@ class ProfileInfoService with ChangeNotifier {
       } else {
         showToast(AppLocalizations.of(context)!.profile_info_updated_failed,
             cc.green);
-        print(response.reasonPhrase);
         setLoadingProfileUpdate(false);
       }
     } on TimeoutException {
@@ -179,7 +173,6 @@ class ProfileInfoService with ChangeNotifier {
       setLoadingProfileUpdate(false);
     } catch (err) {
       showToast(asProvider.getString(err.toString()), cc.red);
-      print(err);
       setLoadingProfileUpdate(false);
     }
   }

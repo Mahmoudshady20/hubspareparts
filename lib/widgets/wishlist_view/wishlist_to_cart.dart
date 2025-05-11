@@ -16,7 +16,7 @@ class WishlistToCart extends StatelessWidget {
   final dynamic id;
   bool fetchAttribute = true;
 
-  WishlistToCart(this.id, {Key? key}) : super(key: key);
+  WishlistToCart(this.id, {super.key});
 
   TextStyle attributeTitleTheme =
       const TextStyle(fontSize: 15, fontWeight: FontWeight.bold);

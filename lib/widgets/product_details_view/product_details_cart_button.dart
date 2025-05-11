@@ -189,7 +189,6 @@ class _ProductDetailsCartButtonState extends State<ProductDetailsCartButton> {
                                 0;
                           }
 
-                          print(pdProvider.selectedInventorySet);
                           Provider.of<CartDataService>(context, listen: false)
                               .addCartItem(
                                   context,

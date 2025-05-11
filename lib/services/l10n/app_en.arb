@@ -354,5 +354,6 @@
   "unit": "Unit",
   "language": "language",
   "arabic": "arabic",
-  "english": "English"
+  "english": "English",
+  "my_points": "My Points : "
 }

@@ -194,7 +194,6 @@ class ProductCard extends StatelessWidget {
                               wProvider.isWishlist(id.toString()),
                               size: 15,
                               onPressed: () {
-                                print(stock);
                                 wProvider.toggleWishlist(
                                     context,
                                     id,
@@ -318,7 +317,6 @@ class ProductCard extends StatelessWidget {
                                   cc.blackColor);
                             }
                             if (cartable) {
-                              print(vendorId);
                               Provider.of<CartDataService>(context,
                                       listen: false)
                                   .addCartItem(

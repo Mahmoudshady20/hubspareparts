@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/new_ticket_service.dart';
 import 'package:safecart/services/ticket_list_service.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/views/new_ticket_view.dart';
 import 'package:safecart/widgets/common/custom_common_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../utils/responsive.dart';
 import '../widgets/common/boxed_back_button.dart';
-import '../widgets/ticket_view/ticket_tile.dart';
 import '../widgets/skelletons/tickets_list_shimmer.dart';
+import '../widgets/ticket_view/ticket_tile.dart';
 
 class TicketListView extends StatelessWidget {
   static const routeName = 'ticket_list_view';
@@ -101,11 +101,9 @@ class TicketListView extends StatelessWidget {
                                 // return LoadingSpinner();
                                 return Column(
                                   children: [
-                                    ...Iterable.generate(2)
-                                        .map(
-                                          (e) => const TicketTileSkeleton(),
-                                        )
-                                        .toList(),
+                                    ...Iterable.generate(2).map(
+                                      (e) => const TicketTileSkeleton(),
+                                    ),
                                   ],
                                 );
                               }
@@ -114,8 +112,8 @@ class TicketListView extends StatelessWidget {
                               // }
                               if (snapshot.hasData) {
                                 return Center(
-                                  child: Text(
-                                      AppLocalizations.of(context)!.no_ticket_found),
+                                  child: Text(AppLocalizations.of(context)!
+                                      .no_ticket_found),
                                 );
                               }
 
@@ -175,16 +173,14 @@ class TicketListView extends StatelessWidget {
             )
           : Column(
               children: [
-                ...tlProvider.ticketsList
-                    .map(
-                      (e) => TicketTile(
-                        e.title,
-                        e.id,
-                        e.priority,
-                        e.status,
-                      ),
-                    )
-                    .toList(),
+                ...tlProvider.ticketsList.map(
+                  (e) => TicketTile(
+                    e.title,
+                    e.id,
+                    e.priority,
+                    e.status,
+                  ),
+                ),
               ],
             );
     });
@@ -195,7 +191,8 @@ class TicketListView extends StatelessWidget {
     if (controller.offset >= controller.position.maxScrollExtent &&
         !controller.position.outOfRange) {
       if (tProvider.nextPage == null) {
-        showToast(AppLocalizations.of(context)!.no_more_ticket_found, cc.blackColor);
+        showToast(
+            AppLocalizations.of(context)!.no_more_ticket_found, cc.blackColor);
         return;
       }
       if (tProvider.nextPage != null && !tProvider.isLoadingNextPage) {

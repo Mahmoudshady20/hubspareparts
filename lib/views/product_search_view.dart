@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterzilla_fixed_grid/flutterzilla_fixed_grid.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/search_filter_data_service.dart';
+import 'package:safecart/services/settings_services.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/empty_space_helper.dart';
@@ -30,6 +31,7 @@ class ProductSearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     controller.addListener((() => scrollListener(context)));
+    final SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Scaffold(
       key: scaffoldKey,
       appBar: CustomAppBar().appBarTitled(context, '', () {
@@ -251,7 +253,9 @@ class ProductSearchView extends StatelessWidget {
                                         },
                                         child: ProductCard(
                                           element.prdId,
-                                          element.title ?? "",
+                                          settingsProvider.myLocal == Locale('ar')
+                                              ? element.titleAr ?? element.title ?? ''
+                                              : element.title ?? '',
                                           element.imgUrl,
                                           element.discountPrice ??
                                               element.price,

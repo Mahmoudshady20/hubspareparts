@@ -52,7 +52,6 @@ class MercadopagoPayment extends StatelessWidget {
                 return errorWidget(context);
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
               _controller
@@ -131,10 +130,8 @@ class MercadopagoPayment extends StatelessWidget {
         headers: header,
         body: data);
 
-    print(response.body);
     if (response.statusCode == 201) {
       url = jsonDecode(response.body)['init_point'];
-      print(response.body);
 
       return;
     }

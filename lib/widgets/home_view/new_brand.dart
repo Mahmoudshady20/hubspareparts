@@ -7,6 +7,7 @@ import 'package:safecart/widgets/home_view/brand_card.dart';
 
 import '../../helpers/empty_space_helper.dart';
 import '../../services/payment/home_brand_services.dart';
+import '../../services/settings_services.dart';
 import '../common/title_common.dart';
 import '../skelletons/category_card_skeleton.dart';
 
@@ -17,6 +18,8 @@ class NewBrand extends StatelessWidget {
   Widget build(BuildContext context) {
     final hBrandProvider =
         Provider.of<HomeBrandService>(context, listen: false);
+    final SettingsProvider settingsProvider =
+        Provider.of<SettingsProvider>(context);
     return SizedBox(
       child: Column(
         children: [
@@ -84,7 +87,13 @@ class NewBrand extends StatelessWidget {
                                       ]);
                                 },
                                 child: BrandCard(
-                                  cProvider.brandModel!.brands![index].name!,
+                                  settingsProvider.myLocal == Locale('ar')
+                                      ? cProvider.brandModel!.brands![index]
+                                              .nameAr ??
+                                          cProvider
+                                              .brandModel!.brands![index].name!
+                                      : cProvider
+                                          .brandModel!.brands![index].name!,
                                   cProvider
                                       .brandModel!.brands![index].imageUrl!,
                                 ),

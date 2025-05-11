@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:flutterzilla_fixed_grid/flutterzilla_fixed_grid.dart';
+import 'package:safecart/services/settings_services.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/widgets/common/product_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,6 +24,7 @@ class ProductByCategoryView extends StatelessWidget {
     controller.addListener((() => scrollListener(context)));
     final routeData = ModalRoute.of(context)!.settings.arguments as List;
     final title = routeData.first;
+    final SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Scaffold(
       appBar: CustomAppBar().appBarTitled(context, title, () {
         Provider.of<SearchProductService>(context, listen: false)
@@ -93,7 +95,9 @@ class ProductByCategoryView extends StatelessWidget {
                                   },
                                   child: ProductCard(
                                     element.prdId,
-                                    element.title ?? "",
+                                    settingsProvider.myLocal == Locale('ar')
+                                        ? element.titleAr ?? element.title ?? ''
+                                        : element.title ?? '',
                                     element.imgUrl,
                                     element.discountPrice ?? element.price,
                                     element.discountPrice != null

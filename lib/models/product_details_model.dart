@@ -873,6 +873,7 @@ class ProductElement {
   ProductElement({
     required this.prdId,
     required this.title,
+    this.titleAr,
     required this.imgUrl,
     required this.campaignPercentage,
     required this.price,
@@ -895,6 +896,7 @@ class ProductElement {
 
   dynamic prdId;
   String? title;
+  String? titleAr;
   String? imgUrl;
   double? campaignPercentage;
   double price;

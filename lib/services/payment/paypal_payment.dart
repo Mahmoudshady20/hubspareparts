@@ -72,7 +72,6 @@ class PaypalPaymentState extends State<PaypalPayment> {
             if (request.url.contains(returnURL)) {
               final uri = Uri.parse(request.url);
               final payerID = uri.queryParameters['PayerID'];
-              print(payerID);
               if (payerID != null) {
                 services
                     .executePayment(executeUrl, payerID, accessToken)
@@ -135,7 +134,6 @@ class PaypalPaymentState extends State<PaypalPayment> {
 
   @override
   Widget build(BuildContext context) {
-    print(checkoutUrl);
 
     if (checkoutUrl != null) {
       return Scaffold(

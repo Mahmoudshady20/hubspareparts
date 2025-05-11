@@ -22,13 +22,11 @@ class HomeCampaignProductsService with ChangeNotifier {
     if (!haveConnection) {
       homeCampaignProductsList ??= [];
       notifyListeners();
-      print('NO connection');
       return;
     }
     if (!refreshing) {
       setHomeCampaignProductsLoading(value: true);
     }
-    print('fetching home campaign');
     try {
       var request =
           http.MultipartRequest('GET', Uri.parse('$baseApi/campaign/product'));
@@ -45,7 +43,6 @@ class HomeCampaignProductsService with ChangeNotifier {
       } else {
         homeCampaignProductsList = [];
         setHomeCampaignProductsLoading(value: false);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       homeCampaignProductsList = [];
@@ -54,7 +51,6 @@ class HomeCampaignProductsService with ChangeNotifier {
     } catch (err) {
       homeCampaignProductsList = [];
       setHomeCampaignProductsLoading(value: false);
-      print(err);
     }
   }
 }

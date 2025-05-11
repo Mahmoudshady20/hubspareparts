@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/feature_products_service.dart';
+import 'package:safecart/services/settings_services.dart';
 import 'package:safecart/widgets/common/product_card.dart';
 
 import '../services/product_details_service.dart';
@@ -17,6 +18,8 @@ class FeatureProductsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // controller.addListener((() => scrollListener(context)));
+    final SettingsProvider settingsProvider =
+        Provider.of<SettingsProvider>(context);
     return Scaffold(
       appBar: CustomAppBar().appBarTitled(
           context, AppLocalizations.of(context)!.feature_Items, () {
@@ -49,7 +52,9 @@ class FeatureProductsView extends StatelessWidget {
                     },
                     child: ProductCard(
                       element.prdId,
-                      element.title ?? '',
+                      settingsProvider.myLocal == Locale('ar')
+                          ? element.titleAr ?? element.title ?? ''
+                          : element.title ?? '',
                       element.imgUrl,
                       element.discountPrice ?? element.price,
                       element.discountPrice != null ? element.price : null,

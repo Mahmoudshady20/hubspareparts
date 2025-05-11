@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -31,7 +32,7 @@ class ProfileInfo extends StatelessWidget {
             .setSelectedImage(File(file?.files.first.path ?? ''));
       }
     } catch (error) {
-      print(error);
+      log(error.toString());
     }
   }
 
@@ -43,13 +44,49 @@ class ProfileInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 10),
+          Consumer<ProfileInfoService>(
+            builder: (context, pProvider, child) => Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+              ),
+              child: Container(
+                padding: EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.white, width: 1.5),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.my_points,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            color: cc.pureWhite,
+                          ),
+                    ),
+                    Text(
+                      pProvider.profileInfo!.userDetails.userPoints
+                              .toString() ??
+                          'shady',
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: cc.pureWhite,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          EmptySpaceHelper.emptyHight(10),
           Stack(
             alignment: Alignment.bottomRight,
             children: [
               GestureDetector(
                 onTap: () {
-                  print('Dp clicked');
                   if (!editing) {
                     // final pProvider =
                     //     Provider.of<ProfileInfoService>(context, listen: false);

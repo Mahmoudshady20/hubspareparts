@@ -17,19 +17,19 @@ import '../common/custom_icon_button.dart';
 import '../common/image_loading_failed.dart';
 
 class WishlistTile extends StatelessWidget {
-  dynamic id;
-  String title;
-  String image;
-  double salePrice;
-  double? originalPrice;
-  bool? inventorySet;
-  int index;
-  dynamic vendorId;
-  dynamic prodCatData;
-  double rating;
-  dynamic randomKey;
-  dynamic randomSecret;
-  dynamic stock;
+  final dynamic id;
+  final String title;
+  final String image;
+  final double salePrice;
+  final double? originalPrice;
+  final bool? inventorySet;
+  final int index;
+  final dynamic vendorId;
+  final dynamic prodCatData;
+  final double rating;
+  final dynamic randomKey;
+  final dynamic randomSecret;
+  final dynamic stock;
 
   WishlistTile(
       this.id,
@@ -46,7 +46,7 @@ class WishlistTile extends StatelessWidget {
       this.randomSecret,
       this.stock,
       {super.key});
-  List colors = [
+  final List colors = [
     const Color(0xffFFE3F0),
     const Color(0xffD6EFFF),
     const Color(0xffF2F3F5),
@@ -55,7 +55,6 @@ class WishlistTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rtlProvider = Provider.of<RTLService>(context, listen: false);
-    print((screenWidth / 4 + 50));
     return Container(
       color: Colors.transparent,
       child: Row(
@@ -188,13 +187,10 @@ class WishlistTile extends StatelessWidget {
                       CustomIconButton(
                         SvgPicture.asset('assets/icons/bag.svg'),
                         onPressed: () async {
-                          print(inventorySet);
                           if (inventorySet == false) {
-                            print('fetching product details');
                             Provider.of<ProductDetailsService>(context,
                                     listen: false)
                                 .clearProductDetails();
-                            print(inventorySet);
                             await showModalBottomSheet(
                                 context: context,
                                 enableDrag: false,
@@ -204,7 +200,6 @@ class WishlistTile extends StatelessWidget {
                                   topRight: Radius.circular(25),
                                 )),
                                 builder: (context) {
-                                  bool fetchAttribute = true;
                                   return SingleChildScrollView(
                                     child: WishlistToCart(id),
                                   );
@@ -263,27 +258,24 @@ class WishlistTile extends StatelessWidget {
 
   Widget wishListIcon(bool isFavorite,
       {double size = 15, required void Function()? onPressed}) {
-    return Container(
-      // margin: const EdgeInsets.only(top: 9, right: 5, left: 5),
-      child: CircleAvatar(
-        radius: 20,
-        backgroundColor: cc.productBackground,
-        child: IconButton(
-          onPressed: onPressed,
-          splashColor: Colors.transparent,
-          style: IconButton.styleFrom(
-            highlightColor: Colors.transparent,
-            splashFactory: NoSplash.splashFactory,
-            shadowColor: Colors.transparent,
-            surfaceTintColor: Colors.transparent,
-            elevation: 0,
-            focusColor: Colors.transparent,
-          ),
-          icon: SvgPicture.asset(
-            'assets/icons/${isFavorite ? 'wishlist_fill' : 'wishlist'}.svg',
-            height: 20,
-            color: cc.primaryColor,
-          ),
+    return CircleAvatar(
+      radius: 20,
+      backgroundColor: cc.productBackground,
+      child: IconButton(
+        onPressed: onPressed,
+        splashColor: Colors.transparent,
+        style: IconButton.styleFrom(
+          highlightColor: Colors.transparent,
+          splashFactory: NoSplash.splashFactory,
+          shadowColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+          focusColor: Colors.transparent,
+        ),
+        icon: SvgPicture.asset(
+          'assets/icons/${isFavorite ? 'wishlist_fill' : 'wishlist'}.svg',
+          height: 20,
+          color: cc.primaryColor,
         ),
       ),
     );

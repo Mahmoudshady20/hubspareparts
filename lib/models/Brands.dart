@@ -18,6 +18,7 @@ class Brands {
   Brands({
     this.id,
     this.name,
+    this.nameAr,
     this.slug,
     this.bannerId,
     this.title,
@@ -33,6 +34,7 @@ class Brands {
   Brands.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
+    nameAr = json['name_ar'];
     slug = json['slug'];
     bannerId = json['banner_id'];
     title = json['title'];
@@ -46,6 +48,7 @@ class Brands {
   }
   num? id;
   String? name;
+  String? nameAr;
   String? slug;
   num? bannerId;
   String? title;
@@ -61,6 +64,7 @@ class Brands {
     final map = <String, dynamic>{};
     map['id'] = id;
     map['name'] = name;
+    map['name_ar'] = nameAr;
     map['slug'] = slug;
     map['banner_id'] = bannerId;
     map['title'] = title;

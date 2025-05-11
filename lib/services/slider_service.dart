@@ -32,12 +32,10 @@ class SliderService with ChangeNotifier {
   }
 
   fetchSliderOne(BuildContext context, {refreshing = false}) async {
-    print('fetching slider one');
     final haveConnection = await checkConnection(context);
     if (!haveConnection) {
       sliderOneList ??= [];
       notifyListeners();
-      print('NO connection');
       return;
     }
     // setSliderOneLoading(value: true);
@@ -53,14 +51,12 @@ class SliderService with ChangeNotifier {
       if (response.statusCode == 200) {
         final data = jsonDecode(await response.stream.bytesToString());
         sliderOneList = SliderModel.fromJson(data).data;
-        print(sliderOneList);
         setSliderOneLoading(value: false);
 
         // notifyListeners();
       } else {
         sliderOneList = [];
         setSliderOneLoading(value: false);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       sliderOneList = [];
@@ -69,17 +65,14 @@ class SliderService with ChangeNotifier {
     } catch (err) {
       sliderOneList = [];
       setSliderOneLoading(value: false);
-      print(err);
     }
   }
 
   fetchSliderTwo(BuildContext context, {refreshing = false}) async {
-    print('fetching slider two');
     final haveConnection = await checkConnection(context);
     if (!haveConnection) {
       sliderTwoList = [];
       notifyListeners();
-      print('NO connection');
       return;
     }
     if (!refreshing) {
@@ -101,7 +94,6 @@ class SliderService with ChangeNotifier {
       } else {
         sliderOneList = [];
         setSliderTwoLoading(value: false);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       sliderOneList = [];
@@ -110,12 +102,10 @@ class SliderService with ChangeNotifier {
     } catch (err) {
       sliderOneList = [];
       setSliderTwoLoading(value: false);
-      print(err);
     }
   }
 
   fetchSliderThree(BuildContext context, {refreshing = false}) async {
-    print('fetching slider three');
     final haveConnection = await checkConnection(context);
     if (!haveConnection) {
       sliderThreeList = [];
@@ -141,7 +131,6 @@ class SliderService with ChangeNotifier {
       } else {
         sliderOneList = [];
         setSliderThreeLoading(value: false);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       sliderOneList = [];
@@ -150,7 +139,6 @@ class SliderService with ChangeNotifier {
     } catch (err) {
       sliderOneList = [];
       setSliderThreeLoading(value: false);
-      print(err);
     }
   }
 }

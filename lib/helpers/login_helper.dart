@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import '../services/app_strings_service.dart';
 import 'common_helper.dart';
 
 class LogInHelper {
   loginPopup(BuildContext context, {title, description}) async {
-    final asProvider = Provider.of<AppStringService>(context, listen: false);
     bool loggedIn = false;
     await Alert(
         context: context,

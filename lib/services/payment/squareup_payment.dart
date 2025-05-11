@@ -52,7 +52,6 @@ class SquareUpPayment extends StatelessWidget {
                 return errorWidget(context);
               }
               if (snapshot.hasError) {
-                print(snapshot.error);
                 return errorWidget(context);
               }
               _controller
@@ -116,10 +115,8 @@ class SquareUpPayment extends StatelessWidget {
             "buyer_email": saProvider.email,
           }
         }));
-    print(response.body);
     if (response.statusCode == 200) {
       this.url = jsonDecode(response.body)['payment_link']['url'];
-      print(this.url);
       return;
     }
 
@@ -129,7 +126,6 @@ class SquareUpPayment extends StatelessWidget {
   Future<bool> verifyPayment(String url) async {
     final uri = Uri.parse(url);
     final response = await http.get(uri);
-    print(response.body.contains('successful'));
     return response.body.contains('successful');
   }
 }

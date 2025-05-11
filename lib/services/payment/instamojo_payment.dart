@@ -90,7 +90,6 @@ class InstamojoPayment extends StatelessWidget {
                           return NavigationDecision.navigate;
                         }));
 
-                  print(selectedUrl);
                   return selectedUrl == null || selectedUrl == ''
                       ? errorWidget(context)
                       : WebViewWidget(
@@ -139,7 +138,6 @@ class InstamojoPayment extends StatelessWidget {
         Uri.parse("https://test.instamojo.com/api/1.1/payment-requests/"),
         headers: header,
         body: body);
-    print(resp.body);
     if (jsonDecode(resp.body)['success'] == true) {
 //If request is successful take the longurl.
 

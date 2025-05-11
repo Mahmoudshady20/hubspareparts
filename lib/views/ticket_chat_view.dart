@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/ticket_chat_service.dart';
 import 'package:safecart/widgets/common/boxed_back_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/rtl_service.dart';
@@ -31,6 +31,7 @@ class _TicketChatViewState extends State<TicketChatView> {
     textFieldKey = const Key('key');
     super.initState();
   }
+
   late Key textFieldKey;
 
   late TextEditingController _controller;
@@ -40,6 +41,7 @@ class _TicketChatViewState extends State<TicketChatView> {
     _controller.dispose();
     super.dispose();
   }
+
   Future<void> imageSelector(
     BuildContext context,
   ) async {
@@ -50,9 +52,7 @@ class _TicketChatViewState extends State<TicketChatView> {
       );
       Provider.of<TicketChatService>(context, listen: false)
           .setPickedImage(File(file!.files.single.path as String));
-    } catch (error) {
-      print(error);
-    }
+    } catch (error) {}
   }
 
   @override
@@ -215,7 +215,7 @@ class _TicketChatViewState extends State<TicketChatView> {
                         RichText(
                           softWrap: true,
                           text: TextSpan(
-                            text:AppLocalizations.of(context)!.notify_via_mail,
+                            text: AppLocalizations.of(context)!.notify_via_mail,
                             style: TextStyle(color: cc.greyHint, fontSize: 13
                                 // fontWeight: FontWeight.w600,
                                 ),
@@ -387,7 +387,6 @@ class _TicketChatViewState extends State<TicketChatView> {
   Widget showFile(
       BuildContext context, String? url, int id, AlignmentGeometry alignment) {
     screenSizeAndPlatform(context);
-    print('Url is: $url');
     if (url != null &&
         (!url.contains('.png') &&
             !url.contains('.jpg') &&

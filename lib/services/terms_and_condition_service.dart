@@ -30,7 +30,6 @@ class TermsAndCondition with ChangeNotifier {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 }

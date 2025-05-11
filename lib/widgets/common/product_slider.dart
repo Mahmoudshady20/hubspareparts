@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:safecart/services/settings_services.dart';
 import 'package:safecart/utils/responsive.dart';
 import 'package:safecart/widgets/common/product_card.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/empty_space_helper.dart';
 
@@ -14,6 +15,8 @@ class ProductSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int index = 0;
+    final SettingsProvider settingsProvider =
+        Provider.of<SettingsProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,7 +35,9 @@ class ProductSlider extends StatelessWidget {
                     children: [
                       ProductCard(
                         element!.prdId,
-                        element.title ?? "",
+                        settingsProvider.myLocal == Locale('ar')
+                            ? element.titleAr ?? element.title ?? ''
+                            : element.title ?? '',
                         element.imgUrl,
                         element.discountPrice ?? element.price,
                         element.discountPrice != null ? (element.price) : null,

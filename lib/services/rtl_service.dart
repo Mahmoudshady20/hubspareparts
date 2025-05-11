@@ -49,23 +49,18 @@ class RTLService with ChangeNotifier {
             await http.get(Uri.parse('$baseApi/site_currency_symbol'));
         scheduleTimeout.cancel();
         if (response.statusCode == 200) {
-          print(response.body);
           currency = jsonDecode(response.body)['symbol'];
           curRtl = jsonDecode(response.body)['currencyPosition'] == 'right';
           currencyCode = jsonDecode(response.body)['currency_code'];
           taxType = jsonDecode(response.body)['tax_type'];
           taxSystem = jsonDecode(response.body)['tax_system'];
-          print(currency);
           alreadyLoaded == true;
           notifyListeners();
         } else {
-          print('failed loading currency');
-          print(response.body);
         }
       } on TimeoutException {
         showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       } catch (err) {
-        print(err);
       }
     }
   }
@@ -75,24 +70,19 @@ class RTLService with ChangeNotifier {
       try {
         var response = await http.get(Uri.parse('$baseApi/language'));
         if (response.statusCode == 200) {
-          print(response.body);
           name = jsonDecode(response.body)['language']['name'];
           slug = jsonDecode(response.body)['language']['slug'];
           langRtl = jsonDecode(response.body)['language']['direction'] == 'rtl';
-          print(currency);
           final srf = await SharedPreferences.getInstance();
           if (!srf.containsKey('langId')) {
-            print('Translating string for the first time');
             srf.setString('langId', slug!);
             await Provider.of<AppStringService>(context, listen: false)
                 .fetchTranslatedStrings(context);
           } else if (srf.getString('langId') != slug) {
-            print('Updating translated Strings');
             srf.setString('langId', slug!);
             await Provider.of<AppStringService>(context, listen: false)
                 .fetchTranslatedStrings(context);
           } else {
-            print('Loading translations from local');
             await Provider.of<AppStringService>(context, listen: false)
                 .fetchTranslatedStrings(context, doNotLoad: true);
           }
@@ -101,15 +91,12 @@ class RTLService with ChangeNotifier {
           notifyListeners();
         } else {
           initiateAppStringProvider(context);
-          print('failed loading language');
-          print(response.body);
         }
       } on TimeoutException {
         initiateAppStringProvider(context);
         showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
       } catch (err) {
         initiateAppStringProvider(context);
-        print(err);
       }
     }
   }

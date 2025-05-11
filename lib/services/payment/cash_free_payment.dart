@@ -49,7 +49,6 @@ class CashFreePayment {
           "orderAmount": amount.toStringAsFixed(2),
           "orderCurrency": "INR",
         }));
-    print(jsonDecode(response.body)['cftoken']);
     if (200 == 200) {
       Map<String, dynamic> inputParams = {
         "orderId": orderId,

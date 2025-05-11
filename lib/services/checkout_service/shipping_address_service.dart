@@ -129,7 +129,6 @@ class ShippingAddressService with ChangeNotifier {
       return;
     }
     currentAddress = false;
-    print('selecting $value');
     selectedShippingAddress = value;
     notifyListeners();
     title = selectedShippingAddress!.shippingAddressName ?? "";
@@ -165,7 +164,6 @@ class ShippingAddressService with ChangeNotifier {
         id: selectedShippingAddress!.state?.id,
       ),
     );
-    print('selection done $value');
   }
 
   bool get allDataGiven {
@@ -217,7 +215,6 @@ class ShippingAddressService with ChangeNotifier {
     if (fetchWithoutNew &&
         shippingAddressList != null &&
         shippingAddressList!.isNotEmpty) {
-      print('Shipping address already fetched');
       return;
     }
     shippingAddressList = null;
@@ -242,7 +239,6 @@ class ShippingAddressService with ChangeNotifier {
         return;
       } else {
         shippingAddressList = [];
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       shippingAddressList = [];
@@ -250,7 +246,6 @@ class ShippingAddressService with ChangeNotifier {
     } catch (err) {
       shippingAddressList = [];
       showToast(asProvider.getString(err.toString()), cc.red);
-      print(err);
       rethrow;
     }
   }
@@ -302,7 +297,6 @@ class ShippingAddressService with ChangeNotifier {
         'address': address,
         'shipping_address_name': name ?? "",
       }.toString());
-      print(response.statusCode);
       var resData = await response.stream.bytesToString();
       debugPrint(resData.toString());
       if (response.statusCode == 200) {
@@ -311,12 +305,9 @@ class ShippingAddressService with ChangeNotifier {
             AppLocalizations.of(context)!.address_added_successfully, cc.green);
         Navigator.of(context).pop();
         setLoadingNewAddress(false);
-        print(resData);
       } else {
         showToast(AppLocalizations.of(context)!.failed_to_add_Address, cc.red);
         setLoadingNewAddress(false);
-        print(response.reasonPhrase);
-        print(resData);
       }
     } on TimeoutException {
       setLoadingNewAddress(false);
@@ -324,7 +315,6 @@ class ShippingAddressService with ChangeNotifier {
     } catch (err) {
       setLoadingNewAddress(false);
       showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
-      print(err);
       rethrow;
     }
   }
@@ -357,7 +347,6 @@ class ShippingAddressService with ChangeNotifier {
       } else {
         showToast(AppLocalizations.of(context)!.address_delete_failed, cc.red);
         setLoadingDeleteAddress(false);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       setLoadingDeleteAddress(false);
@@ -365,7 +354,6 @@ class ShippingAddressService with ChangeNotifier {
     } catch (err) {
       setLoadingDeleteAddress(false);
       showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
-      print(err);
       rethrow;
     }
   }

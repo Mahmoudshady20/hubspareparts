@@ -17,7 +17,7 @@ import 'home_front_view.dart';
 class PaymentStatusView extends StatelessWidget {
   static const routeName = 'payment_status_view';
   bool isError;
-  PaymentStatusView(this.isError, {Key? key}) : super(key: key);
+  PaymentStatusView(this.isError, {super.key});
 
   @override
   Widget build(BuildContext context) {

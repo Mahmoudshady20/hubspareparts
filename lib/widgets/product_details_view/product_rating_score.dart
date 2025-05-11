@@ -38,9 +38,7 @@ class ProductRatingScore extends StatelessWidget {
                   'assets/icons/star.svg',
                   color: cc.orangeRating,
                 ),
-                onRatingUpdate: (rating) {
-                  print(rating);
-                },
+                onRatingUpdate: (rating) {},
               ),
             if (pdProvider.productDetails!.reviewsCount != null &&
                 pdProvider.productDetails!.reviewsCount != 0.0)
@@ -64,7 +62,7 @@ class ProductRatingScore extends StatelessWidget {
                       color: cc.greyBorder,
                     )),
                 style: TextStyle(
-                    color: cc.blackColor.withOpacity(.8),
+                    color: cc.blackColor.withValues(alpha: .8),
                     fontWeight: FontWeight.bold),
                 duration: (pdProvider.productDetails!.campaignProduct!.endDate
                             ?.isAfter(now) ??

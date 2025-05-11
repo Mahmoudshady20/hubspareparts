@@ -30,7 +30,6 @@ class OrderDetailsService with ChangeNotifier {
     }
 
     try {
-      print(getToken);
       var headers = {
         // 'x-api-key': 'b8f4a0ba4537ad6c3ee41ec0a43549d1',
         'Authorization': 'Bearer $getToken'
@@ -39,7 +38,6 @@ class OrderDetailsService with ChangeNotifier {
           Uri.parse('$baseApi/user/order-detail/${id.replaceAll('#', '')}'));
 
       request.headers.addAll(headers);
-      print('$baseApi/user/order-detail/${id.replaceAll('#', '')}');
 
       http.StreamedResponse response = await request.send();
       final data = jsonDecode(await response.stream.bytesToString());
@@ -47,14 +45,11 @@ class OrderDetailsService with ChangeNotifier {
         orderDetailsModel = OrderDetailsModel.fromJson(data);
         notifyListeners();
         return;
-      } else {
-        print(data);
-      }
+      } else {}
     } on TimeoutException {
       showToast(asProvider.getString('Request timeout'), cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 }

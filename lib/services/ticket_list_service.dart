@@ -116,14 +116,12 @@ class TicketListService with ChangeNotifier {
         notifyListeners();
         return;
       } else {
-        print(response.reasonPhrase);
         showToast(response.reasonPhrase.toString().capitalize(), cc.red);
       }
     } on TimeoutException {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 
@@ -155,7 +153,6 @@ class TicketListService with ChangeNotifier {
         return;
       } else {
         setLoadingNextPage(false);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       setLoadingNextPage(false);
@@ -163,7 +160,6 @@ class TicketListService with ChangeNotifier {
     } catch (err) {
       setLoadingNextPage(false);
       showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
-      print(err);
     }
   }
 
@@ -198,13 +194,11 @@ class TicketListService with ChangeNotifier {
         return;
       } else {
         showToast(AppLocalizations.of(context)!.status_Change_failed, cc.red);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 
@@ -235,18 +229,15 @@ class TicketListService with ChangeNotifier {
         ticketsList.firstWhere((element) => element.id == id).priority =
             value.toLowerCase();
         showToast(AppLocalizations.of(context)!.priority_Change_successful, cc.green);
-        print(data);
         notifyListeners();
         return;
       } else {
         showToast(AppLocalizations.of(context)!.priority_Change_failed, cc.red);
-        print(response.reasonPhrase);
       }
     } on TimeoutException {
       showToast(AppLocalizations.of(context)!.request_timeout, cc.red);
     } catch (err) {
       showToast(err.toString(), cc.red);
-      print(err);
     }
   }
 }

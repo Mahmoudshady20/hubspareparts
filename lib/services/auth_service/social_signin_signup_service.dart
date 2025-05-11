@@ -29,8 +29,6 @@ class SocialSignInSignUpService with ChangeNotifier {
   Future facebookSignInSignUp(BuildContext context, toastText) async {
     setLoadingFacebookSignInSignUp(value: true);
     try {
-      final AccessToken? accessToken = await FacebookAuth.instance.accessToken;
-
       final response = await FacebookAuth.i.login(
         permissions: [
           'email',

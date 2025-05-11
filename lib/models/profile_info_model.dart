@@ -24,6 +24,7 @@ class UserDetails {
     required this.username,
     required this.emailVerified,
     this.emailVerifyToken,
+    this.userPoints,
     required this.phone,
     this.address,
     required this.state,
@@ -51,6 +52,7 @@ class UserDetails {
   dynamic address;
   String? state;
   dynamic city;
+  dynamic userPoints;
   dynamic zipcode;
   String? country;
   dynamic image;
@@ -74,6 +76,7 @@ class UserDetails {
         address: json["address"],
         state: json["state"],
         city: json["city"],
+        userPoints: json["user_points"],
         zipcode: json["zipcode"],
         country: json["country"],
         image: json["image"],
