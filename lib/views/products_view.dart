@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutterzilla_fixed_grid/flutterzilla_fixed_grid.dart';
 import 'package:safecart/helpers/empty_space_helper.dart';
 import 'package:safecart/services/all_product_service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 
 import '../../utils/responsive.dart';
 import '../../widgets/common/product_card.dart';

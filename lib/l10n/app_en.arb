@@ -355,5 +355,16 @@
   "language": "language",
   "arabic": "arabic",
   "english": "English",
-  "my_points": "My Points : "
+  "my_points": "My Points : ",
+  "refund_status": "Refund Status",
+  "my_refund": "My Refund",
+  "refund_requests": "Refund Requests",
+  "no_refund_found": "No refund found",
+  "no_more_refund_found": "No more refund requests",
+  "number_of_products": "Number of products",
+  "refund"  : "Refund",
+  "refund_info"  : " Refund Info",
+  "items"  : "Items",
+  "status_history"  : "Status History",
+
 }

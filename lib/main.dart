@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import  'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/helpers/settings_helper.dart';
@@ -9,8 +9,11 @@ import 'package:safecart/services/location/city_dropdown_service.dart';
 import 'package:safecart/services/location/country_dropdown_service.dart';
 import 'package:safecart/services/location/state_dropdown_service.dart';
 import 'package:safecart/services/payment/home_brand_services.dart';
+import 'package:safecart/services/refund_services/refund_details_services.dart';
+import 'package:safecart/services/refund_services/refund_list_services.dart';
 import 'package:safecart/services/settings_services.dart';
 import 'package:safecart/views/product_by_brand_view.dart';
+import 'package:safecart/views/refund_list_view.dart';
 import 'package:safecart/views/settings_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -148,6 +151,7 @@ class MyApp extends StatelessWidget {
             create: (context) => AppStringService()),
         ChangeNotifierProvider<HomeBrandService>(
             create: (context) => HomeBrandService()),
+        ChangeNotifierProvider(create: (_) => RefundService()),
         ChangeNotifierProvider<IntroHelper>(create: (context) => IntroHelper()),
         ChangeNotifierProvider<CommonServices>(
             create: (context) => CommonServices()),
@@ -183,6 +187,8 @@ class MyApp extends StatelessWidget {
             create: (context) => OrderListService()),
         ChangeNotifierProvider<OrderDetailsService>(
             create: (context) => OrderDetailsService()),
+        ChangeNotifierProvider<RefundDetailsService>(
+            create: (context) => RefundDetailsService()),
         ChangeNotifierProvider<TermsAndCondition>(
             create: (context) => TermsAndCondition()),
         ChangeNotifierProvider<FiltersService>(
@@ -309,6 +315,7 @@ class MyApp extends StatelessWidget {
                 ProductByCategoryView(),
             ChangePasswordView.routeName: (context) => ChangePasswordView(),
             SettingsView.routeName: (context) => SettingsView(),
+            RefundListView.routeName: (context) => RefundListView(),
           },
         );
       }),

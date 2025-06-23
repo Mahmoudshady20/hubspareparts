@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:safecart/helpers/common_helper.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/utils/responsive.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 
 import '../helpers/empty_space_helper.dart';
 import '../services/location/state_dropdown_service.dart';

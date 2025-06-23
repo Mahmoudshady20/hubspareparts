@@ -7,7 +7,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:safecart/models/vendor_details_list_model.dart';

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutterzilla_fixed_grid/flutterzilla_fixed_grid.dart';
 import 'package:safecart/services/home_campaigns_service.dart';
 import 'package:safecart/widgets/home_view/campaign_card.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../services/product_by_campaigns_service.dart';

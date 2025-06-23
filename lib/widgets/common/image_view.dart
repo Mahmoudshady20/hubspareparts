@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/widgets/common/custom_app_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 
 import '../../helpers/common_helper.dart';
 

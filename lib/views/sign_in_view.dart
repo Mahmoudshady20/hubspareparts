@@ -6,7 +6,7 @@ import 'package:safecart/services/auth_service/sign_up_service.dart';
 import 'package:safecart/services/auth_service/social_signin_signup_service.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 import 'package:safecart/utils/responsive.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 
 import '../helpers/common_helper.dart';
 import '../helpers/empty_space_helper.dart';

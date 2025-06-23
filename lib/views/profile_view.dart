@@ -4,9 +4,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:safecart/views/refund_list_view.dart';
 import 'package:safecart/views/settings_view.dart';
 
 import '../../services/auth_service/sign_in_service.dart';
@@ -115,6 +116,17 @@ class ProfileView extends StatelessWidget {
                                               OrdersListView.routeName);
                                         },
                                       ),
+                                      profileItem(
+                                        context,
+                                        AppLocalizations.of(context)!.refund_status,
+                                        'assets/icons/refund.svg',
+                                        onTap: () {
+                                          Navigator.of(context).pushNamed(
+                                              RefundListView
+                                                  .routeName);
+                                        },
+                                      ),
+                                      EmptySpaceHelper.emptyHight(10),
                                       EmptySpaceHelper.emptyHight(10),
                                       profileItem(
                                         context,

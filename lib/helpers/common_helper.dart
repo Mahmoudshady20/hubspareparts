@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/payment_gateway_service.dart';
@@ -17,7 +17,7 @@ import '../views/payment_status_view.dart';
 import 'empty_space_helper.dart';
 
 ConstantColors cc = ConstantColors();
-const String baseApi = 'https://hubspareparts.com/api/v1';
+const String  baseApi = 'https://hubspareparts.com/api/v1';
 String _globalToken = '';
 String imageLoadingAppIcon =
     'https://i.postimg.cc/85gKpbT5/shopcartappicon.png';

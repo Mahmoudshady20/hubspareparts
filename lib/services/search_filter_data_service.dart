@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:isolate';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:safecart/models/Filter_Category.dart';
 import 'package:safecart/models/search_filter_data_model.dart';

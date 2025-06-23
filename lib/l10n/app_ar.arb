@@ -355,5 +355,15 @@
   "language": "اللغة",
   "arabic": "العربية",
   "english": "الانجليزية",
-  "my_points": "نقاطي :"
+  "my_points": "نقاطي :",
+  "refund_status": "حالة الاسترجاع",
+  "my_refund": "استرجاعي",
+  "refund_requests": "طلبات الاسترجاع",
+  "no_refund_found": "لا يوجد استرجاعات",
+  "no_more_refund_found": "لا يوجد استرجاعات إضافية",
+  "number_of_products": "عدد المنتجات",
+  "refund"  : "استرجاع",
+  "refund_info"  : "معلومات الاسترجاع",
+  "items"  : "العناصر",
+  "status_history"  : "سجل الحالة"
 }

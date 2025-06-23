@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:safecart/helpers/common_helper.dart';
 import 'package:safecart/services/cart_data_service.dart';
 import 'package:safecart/services/wishlist_data_service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:safecart/l10n/generated/app_localizations.dart';
 
 import '../../helpers/navigation_helper.dart';
 
