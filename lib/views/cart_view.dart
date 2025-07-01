@@ -88,31 +88,39 @@ class CartView extends StatelessWidget {
                   ],
                 )),
               if (cProvider.cartList.isNotEmpty)
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  padding: const EdgeInsets.all(20.0),
-                  child: CustomCommonButton(
-                    btText:
-                        AppLocalizations.of(context)!.complete_Your_Purchase,
-                    isLoading: false,
-                    onPressed: () async {
-                      Provider.of<PaymentGatewayService>(context, listen: false)
-                          .resetGateway();
-                      Provider.of<ShippingAddressService>(context,
-                              listen: false)
-                          .resetShippingInfo();
-                      Provider.of<ShippingAddressService>(context,
-                              listen: false)
-                          .fetchShippingAddress(context, fetchWithoutNew: true);
-                      Provider.of<CheckoutService>(context, listen: false)
-                          .fetchVendorDetails(context);
-                      Provider.of<ShippingAddressService>(context,
-                              listen: false)
-                          .setShippingAddressFromProfile(context);
-                      Navigator.of(context).pushNamed(CheckoutView.routeName);
-                    },
-                    color: cc.secondaryColor,
-                  ),
+                Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.sizeOf(context).height * 0.1,
+                      margin: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(20.0),
+                      child: CustomCommonButton(
+                        btText:
+                            AppLocalizations.of(context)!.complete_Your_Purchase,
+                        isLoading: false,
+                        onPressed: () async {
+                          Provider.of<PaymentGatewayService>(context, listen: false)
+                              .resetGateway();
+                          Provider.of<ShippingAddressService>(context,
+                                  listen: false)
+                              .resetShippingInfo();
+                          Provider.of<ShippingAddressService>(context,
+                                  listen: false)
+                              .fetchShippingAddress(context, fetchWithoutNew: true);
+                          Provider.of<CheckoutService>(context, listen: false)
+                              .fetchVendorDetails(context);
+                          Provider.of<ShippingAddressService>(context,
+                                  listen: false)
+                              .setShippingAddressFromProfile(context);
+                          Navigator.of(context).pushNamed(CheckoutView.routeName);
+                        },
+                        color: cc.secondaryColor,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                  ],
                 ),
             ],
           ),
