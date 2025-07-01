@@ -60,8 +60,8 @@ class SearchFilterDataService with ChangeNotifier {
     selectedChildCats = '';
     selectedSubCategory = null;
     lodingCategoryProducts = true;
-    selectedCategorySubList = filterOprions?.allCategory
-            ?.firstWhere((element) => element.name == value)
+    selectedCategorySubList = filterCategory?.categories
+            ?.firstWhere((element) => element.name_en == value)
             .subCategories ??
         [];
     selectedCategory = value;
@@ -201,8 +201,8 @@ class SearchFilterDataService with ChangeNotifier {
       selectedChildCats = '';
       selectedSubCategory = null;
       lodingCategoryProducts = true;
-      selectedCategorySubList = filterOprions?.allCategory
-              ?.firstWhere((element) => element.name == cat)
+      selectedCategorySubList = filterCategory?.categories
+              ?.firstWhere((element) => element.name_en == cat)
               .subCategories ??
           [];
       selectedCategory = cat;
@@ -268,8 +268,8 @@ class SearchFilterDataService with ChangeNotifier {
 
   String responseString = "";
   setFilterOptions(value) {
-    filterOprions = value;
-    debugPrint("updating filter options $filterOprions".toString());
+    filterCategory = value;
+    debugPrint("updating filter options $filterCategory".toString());
   }
 
   void setSelectedVoltageRating(int? value) {

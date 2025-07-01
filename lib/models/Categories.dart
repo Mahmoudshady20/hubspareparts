@@ -8,14 +8,16 @@ import 'SubCategories.dart';
 class Categories {
   Categories({
     this.id,
-    this.name,
+    this.name_en,
+    this.name_ar,
     this.image,
     this.subCategories,
   });
 
   Categories.fromJson(dynamic json) {
     id = json['id'];
-    name = json['name'];
+    name_ar = json['name_ar'];
+    name_en = json['name_en'];
     image = json['image'];
     if (json['sub_categories'] != null) {
       subCategories = [];
@@ -25,14 +27,16 @@ class Categories {
     }
   }
   num? id;
-  String? name;
+  String? name_ar;
+  String? name_en;
   String? image;
   List<SubCategories>? subCategories;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
-    map['name'] = name;
+    map['name_ar'] = name_ar;
+    map['name_en'] = name_en;
     map['image'] = image;
     if (subCategories != null) {
       map['sub_categories'] = subCategories?.map((v) => v.toJson()).toList();

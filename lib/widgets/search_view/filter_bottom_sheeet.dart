@@ -3,6 +3,7 @@ import 'package:safecart/l10n/generated/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/search_filter_data_service.dart';
 import 'package:safecart/services/search_product_service.dart';
+import 'package:safecart/services/settings_services.dart';
 import 'package:safecart/utils/custom_row_button.dart';
 import 'package:safecart/utils/responsive.dart';
 
@@ -22,6 +23,8 @@ class FilterBottomSheet extends StatelessWidget {
     final rtl = Provider.of<RTLService>(context, listen: false);
     final filterOption =
         Provider.of<SearchFilterDataService>(context, listen: false);
+    final SettingsProvider settingsProvider =
+        Provider.of<SettingsProvider>(context);
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         EmptySpaceHelper.emptyHight(MediaQuery.of(context).padding.top + 20),
@@ -34,8 +37,8 @@ class FilterBottomSheet extends StatelessWidget {
             ),
           ],
         ),
-        if (filterOption.filterOprions?.allCategory != null &&
-            filterOption.filterOprions!.allCategory!.isNotEmpty)
+        if (filterOption.filterCategory?.categories != null &&
+            filterOption.filterCategory!.categories!.isNotEmpty)
           FilterRtlPadding(
             child: Text(
               AppLocalizations.of(context)!.categories,
@@ -45,8 +48,8 @@ class FilterBottomSheet extends StatelessWidget {
                   color: cc.greyParagraph),
             ),
           ),
-        if (filterOption.filterOprions?.allCategory != null &&
-            filterOption.filterOprions!.allCategory!.isNotEmpty)
+        if (filterOption.filterCategory?.categories != null &&
+            filterOption.filterCategory!.categories!.isNotEmpty)
           Consumer<SearchFilterDataService>(
               builder: (context, foProvider, child) {
             return SizedBox(
@@ -57,16 +60,16 @@ class FilterBottomSheet extends StatelessWidget {
                     right: rtl.langRtl ? 25 : 0,
                   ),
                   scrollDirection: Axis.horizontal,
-                  itemCount: foProvider.filterOprions!.allCategory!.length,
+                  itemCount: foProvider.filterCategory!.categories!.length,
                   itemBuilder: ((context, index) {
                     final category =
-                        foProvider.filterOprions!.allCategory![index];
+                        foProvider.filterCategory!.categories![index];
                     // print(e.title);
                     final isSelected =
-                        category.name.toString() == foProvider.selectedCategory;
+                        category.name_en.toString() == foProvider.selectedCategory;
                     return GestureDetector(
                         onTap: () {
-                          foProvider.setSelectedCategory(category.name);
+                          foProvider.setSelectedCategory(category.name_en);
                           // if (isSelected) {
                           //   catData.setSelectedCategory('');
                           //   catData.setSelectedSubCategory('');
@@ -74,7 +77,7 @@ class FilterBottomSheet extends StatelessWidget {
                           // }
                           // catData.setSelectedCategory(e.id.toString());
                         },
-                        child: filterOptions(category.name, isSelected));
+                        child: filterOptions(settingsProvider.myLocal == Locale('ar') ? category.name_ar ?? '' : category.name_en ?? '', isSelected));
                   })),
             );
           }),
@@ -256,7 +259,7 @@ class FilterBottomSheet extends StatelessWidget {
               ),
             );
           }),
-        if (filterOption.filterOprions?.allBrands?.isNotEmpty ?? false)
+        if (filterOption.filterCategory?.brands?.isNotEmpty ?? false)
           FilterRtlPadding(
             child: Text(
               AppLocalizations.of(context)!.brands,
@@ -266,7 +269,7 @@ class FilterBottomSheet extends StatelessWidget {
                   color: cc.greyParagraph),
             ),
           ),
-        if (filterOption.filterOprions?.allBrands?.isNotEmpty ?? false)
+        if (filterOption.filterCategory?.brands?.isNotEmpty ?? false)
           Consumer<SearchFilterDataService>(
               builder: (context, spProvider, child) {
             return FilterRtlPadding(
@@ -278,19 +281,19 @@ class FilterBottomSheet extends StatelessWidget {
                       return GestureDetector(
                         onTap: () {
                           filterOption.setSelectedBrand(filterOption
-                              .filterOprions!.allBrands![index].name);
+                              .filterCategory!.brands![index].name);
                         },
                         child: filterOptions(
-                          filterOption.filterOprions!.allBrands![index].name,
+                          filterOption.filterCategory!.brands![index].name ?? '',
                           filterOption.selectedBrand ==
                               filterOption
-                                  .filterOprions!.allBrands![index].name,
+                                  .filterCategory!.brands![index].name,
                         ),
                       );
                     },
                     separatorBuilder: (context, index) =>
                         EmptySpaceHelper.emptywidth(5),
-                    itemCount: filterOption.filterOprions!.allBrands!.length),
+                    itemCount: filterOption.filterCategory!.brands!.length),
               ),
             );
           }),
