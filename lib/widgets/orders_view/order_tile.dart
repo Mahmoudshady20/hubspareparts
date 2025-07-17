@@ -3,6 +3,7 @@ import 'package:safecart/l10n/generated/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:safecart/services/orders_service/order_details_service.dart';
 import 'package:safecart/utils/responsive.dart';
+import 'package:safecart/views/refund_request_view.dart';
 import 'package:safecart/views/order_details_view.dart';
 
 import '../../helpers/common_helper.dart';
@@ -16,6 +17,7 @@ class OrderTile extends StatelessWidget {
   final String? order;
   final String? payment;
   final String? createdAt;
+
   const OrderTile(
     this.totalAmount,
     this.trackingCode,
@@ -31,79 +33,111 @@ class OrderTile extends StatelessWidget {
     screenSizeAndPlatform(context);
     final rtlProvider = Provider.of<RTLService>(context, listen: false);
     final odProvider = Provider.of<OrderDetailsService>(context, listen: false);
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute<void>(
-          builder: (BuildContext context) => OrderDetailsView(
+    return Container(
+      color: Colors.transparent,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
             trackingCode,
-            goHome: false,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: cc.blackColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
-        ));
-      },
-      child: Container(
-        color: Colors.transparent,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              trackingCode,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: cc.blackColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+          EmptySpaceHelper.emptyHight(4),
+          Row(
+            children: [
+              Text(
+                rtlProvider.curRtl
+                    ? totalAmount.toStringAsFixed(2) + rtlProvider.currency
+                    : rtlProvider.currency + totalAmount.toStringAsFixed(2),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: cc.primaryColor,
+                    ),
+              ),
+              Spacer(),
+              Text(
+                rtlProvider.curRtl
+                    ? createdAt.toString()
+                    : createdAt.toString(),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: cc.primaryColor,
+                    ),
+              ),
+            ],
+          ),
+          EmptySpaceHelper.emptyHight(4),
+          Row(
+            children: [
+              Text('${AppLocalizations.of(context)!.payment} : ',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(color: cc.greyParagraph, fontSize: 14)),
+              Text(payment?.capitalize() ?? '',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: odProvider.statusColor(order ?? ''),
+                      fontSize: 14)),
+              EmptySpaceHelper.emptywidth(8),
+              Text('${AppLocalizations.of(context)!.order} : ',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(color: cc.greyParagraph, fontSize: 14)),
+              Text(order?.capitalize() ?? '',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: odProvider.statusColor(order ?? ''),
+                      fontSize: 14)),
+              const Spacer(),
+              Visibility(
+                visible: (payment == 'complete' && (order == 'Delivered' || order == 'delivered')) || (payment == 'Complete' && (order == 'Delivered' || order == 'delivered')),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute<void>(
+                      builder: (BuildContext context) => RefundRequestView(
+                        trackingCode,
+                        goHome: false,
+                      ),
+                    ));
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                        text: AppLocalizations.of(context)!.request_refund,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Colors.transparent,
+                          fontSize: 14,
+                          shadows: [
+                            Shadow(
+                                offset: const Offset(0, -5), color: cc.red)
+                          ],
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                          decorationColor: cc.red,
+                          decorationThickness: 2,
+                        )),
                   ),
-            ),
-            EmptySpaceHelper.emptyHight(4),
-            Row(
-              children: [
-                Text(
-                  rtlProvider.curRtl
-                      ? totalAmount.toStringAsFixed(2) + rtlProvider.currency
-                      : rtlProvider.currency + totalAmount.toStringAsFixed(2),
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: cc.primaryColor,
-                      ),
                 ),
-                Spacer(),
-                Text(
-                  rtlProvider.curRtl
-                      ? createdAt.toString()
-                      : createdAt.toString(),
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: cc.primaryColor,
-                      ),
-                ),
-              ],
-            ),
-            EmptySpaceHelper.emptyHight(4),
-            Row(
-              children: [
-                Text('${AppLocalizations.of(context)!.payment} : ',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(color: cc.greyParagraph, fontSize: 14)),
-                Text(payment?.capitalize() ?? '',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: odProvider.statusColor(order ?? ''),
-                        fontSize: 14)),
-                EmptySpaceHelper.emptywidth(8),
-                Text('${AppLocalizations.of(context)!.order} : ',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(color: cc.greyParagraph, fontSize: 14)),
-                Text(order?.capitalize() ?? '',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: odProvider.statusColor(order ?? ''),
-                        fontSize: 14)),
-                const Spacer(),
-                RichText(
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute<void>(
+                    builder: (BuildContext context) => OrderDetailsView(
+                      trackingCode,
+                      goHome: false,
+                    ),
+                  ));
+                },
+                child: RichText(
                   text: TextSpan(
                       text: AppLocalizations.of(context)!.view,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -119,12 +153,12 @@ class OrderTile extends StatelessWidget {
                             decorationThickness: 2,
                           )),
                 ),
-              ],
-            ),
-            EmptySpaceHelper.emptyHight(4),
-            const Divider(),
-          ],
-        ),
+              ),
+            ],
+          ),
+          EmptySpaceHelper.emptyHight(4),
+          const Divider(),
+        ],
       ),
     );
   }

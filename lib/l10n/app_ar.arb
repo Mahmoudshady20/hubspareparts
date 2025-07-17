@@ -365,5 +365,6 @@
   "refund"  : "استرجاع",
   "refund_info"  : "معلومات الاسترجاع",
   "items"  : "العناصر",
-  "status_history"  : "سجل الحالة"
+  "status_history"  : "سجل الحالة",
+  "request_refund"  : "طلب استرداد"
 }

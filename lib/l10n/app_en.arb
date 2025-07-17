@@ -366,5 +366,6 @@
   "refund_info"  : " Refund Info",
   "items"  : "Items",
   "status_history"  : "Status History",
+  "request_refund"  : "Request Refund"
 
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:safecart/helpers/font_size/font_size_responsive.dart';
 import 'package:safecart/utils/custom_preloader.dart';
 
 class CustomCommonButton extends StatelessWidget {
@@ -41,6 +42,9 @@ class CustomCommonButton extends StatelessWidget {
                 child: Text(
                   btText,
                   maxLines: 1,
+                  style: TextStyle(
+                    fontSize: AppStyles.getResponsiveFontSize(context, fontSize: 24),
+                  ),
                 ),
               ),
       ),

@@ -9,6 +9,7 @@ import 'package:safecart/services/location/city_dropdown_service.dart';
 import 'package:safecart/services/location/country_dropdown_service.dart';
 import 'package:safecart/services/location/state_dropdown_service.dart';
 import 'package:safecart/services/payment/home_brand_services.dart';
+import 'package:safecart/services/refund_services/make_refund_request_services.dart';
 import 'package:safecart/services/refund_services/refund_details_services.dart';
 import 'package:safecart/services/refund_services/refund_list_services.dart';
 import 'package:safecart/services/settings_services.dart';
@@ -248,6 +249,8 @@ class MyApp extends StatelessWidget {
             create: (context) => HomeCampaignProductsService()),
         ChangeNotifierProvider<SocialSignInSignUpService>(
             create: (context) => SocialSignInSignUpService()),
+        ChangeNotifierProvider<MakeRefundRequestService>(
+            create: (context) => MakeRefundRequestService()),
       ],
       child: Consumer<RTLService>(builder: (context, rtlProvider, child) {
         return MaterialApp(

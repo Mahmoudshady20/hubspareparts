@@ -96,4 +96,12 @@ class RefundService with ChangeNotifier {
       showToast(AppLocalizations.of(context)!.something_went_wrong, cc.red);
     }
   }
+  Future<bool> hasRefundForOrder(String orderId) async {
+    final refunds = refundModel?.data?.data;
+
+    if (refunds == null) return false;
+
+    return refunds.any((refund) => '#${refund.orderInfo!.id ?? ''}'  == orderId);
+  }
+
 }

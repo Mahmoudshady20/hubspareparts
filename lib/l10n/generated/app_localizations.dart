@@ -2257,6 +2257,13 @@ abstract class AppLocalizations {
 
   String get status_history;
 
+  String get request_refund;
+
+  String get refund_reason;
+
+  String get refund_preferred_options;
+
+  String get additional_information;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

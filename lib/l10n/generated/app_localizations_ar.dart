@@ -1109,4 +1109,16 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get status_history=> 'سجل الحالة';
 
+  @override
+  String get request_refund=> 'طلب استرداد';
+
+  @override
+  String get refund_reason=> 'سبب الاسترجاع';
+
+  @override
+  String get refund_preferred_options=> 'خيار الاسترجاع المفضل';
+
+  @override
+  String get additional_information=>  'اعدادت اضافية';
+
 }

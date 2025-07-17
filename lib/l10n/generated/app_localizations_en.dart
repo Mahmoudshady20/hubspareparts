@@ -1108,4 +1108,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get status_history=> 'Status History';
+
+  @override
+  String get request_refund=> 'Request Refund';
+
+  @override
+  String get refund_reason=> 'Refund Reason';
+
+  @override
+  String get refund_preferred_options=> 'Refund Preferred Options';
+
+  @override get additional_information=> 'Additional Information';
 }
